@@ -26,6 +26,7 @@
 		F36CC0002C92BD8B00BC1298 /* GenreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFFF2C92BD8B00BC1298 /* GenreModel.swift */; };
 		F36CC0022C92C03800BC1298 /* MovieShotSourceListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CC0012C92C03800BC1298 /* MovieShotSourceListModel.swift */; };
 		F36CC0062C92C8CE00BC1298 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CC0052C92C8CE00BC1298 /* MovieTableViewCell.swift */; };
+		F36CC0082C92E9EA00BC1298 /* ImageCacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CC0072C92E9EA00BC1298 /* ImageCacher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		F36CBFFF2C92BD8B00BC1298 /* GenreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreModel.swift; sourceTree = "<group>"; };
 		F36CC0012C92C03800BC1298 /* MovieShotSourceListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieShotSourceListModel.swift; sourceTree = "<group>"; };
 		F36CC0052C92C8CE00BC1298 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
+		F36CC0072C92E9EA00BC1298 /* ImageCacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			children = (
 				F36CBFDE2C91C1D100BC1298 /* Colors.swift */,
 				F36CBFE42C91C57B00BC1298 /* UserDefaultManager.swift */,
+				F36CC0072C92E9EA00BC1298 /* ImageCacher.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -157,18 +160,10 @@
 		F36CBFEE2C91D27800BC1298 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				F36CBFF32C92A80500BC1298 /* MovieService */,
+				F36CBFF62C92A9CD00BC1298 /* MoviesService.swift */,
 				F36CBFE62C91C93C00BC1298 /* AuthService.swift */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		F36CBFF32C92A80500BC1298 /* MovieService */ = {
-			isa = PBXGroup;
-			children = (
-				F36CBFF62C92A9CD00BC1298 /* MoviesService.swift */,
-			);
-			path = MovieService;
 			sourceTree = "<group>";
 		};
 		F36CBFF82C92B56500BC1298 /* Model */ = {
@@ -298,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F36CBFFA2C92B57600BC1298 /* MovieListModel.swift in Sources */,
+				F36CC0082C92E9EA00BC1298 /* ImageCacher.swift in Sources */,
 				F36CBFE92C91C9B700BC1298 /* MoviesViewController.swift in Sources */,
 				F36CBFE32C91C4BF00BC1298 /* AuthPresenter.swift in Sources */,
 				F36CC0022C92C03800BC1298 /* MovieShotSourceListModel.swift in Sources */,

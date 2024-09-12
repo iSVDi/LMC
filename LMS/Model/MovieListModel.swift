@@ -17,6 +17,7 @@ struct MovieListModel: Codable {
 }
 
 // MARK: - Item
+// TODO: add another names and return one of them
 struct MovieListItemModel: Codable {
     let kinopoiskID: Int
     let nameOriginal: String?

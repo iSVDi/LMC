@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieTableViewCell: UITableViewCell {
 
@@ -15,6 +16,7 @@ class MovieTableViewCell: UITableViewCell {
     private let genreLabel = UILabel()
     private let yearContriesLabel = UILabel()
     private let ratingLabel = UILabel()
+    private let imageDownloader = MovieImageDownloader()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,9 +28,24 @@ class MovieTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        movieImageView.image = nil
+    }
+    
     func setData(_ data: MovieListItemModel) {
-        // TODO: add kingfisher
-//        movieImageView.image
+        imageDownloader.downloadImage(imageURL: data.posterURLPreview) { [weak self] res in
+            switch res {
+            case let .success(value):
+                
+                guard data.posterURLPreview == value.stringUrl else {
+                    return
+                }
+                self?.movieImageView.image = value.image
+            case let .failure(error): break
+                //TODO: handle
+            }
+        }
+        
         nameLabel.text = data.nameOriginal
         genreLabel.text = data.genres
             .map{$0.genre}
@@ -54,6 +71,8 @@ class MovieTableViewCell: UITableViewCell {
         }
         
         movieImageView.leftToSuperview()
+        
+        movieImageView.size(CGSize(width: 100, height: 100))
         mainStack.setCustomSpacing(10, after: movieImageView)
         detailsStack.rightToSuperview()
         
