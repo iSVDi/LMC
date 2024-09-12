@@ -8,8 +8,12 @@
 import UIKit
 import TinyConstraints
 
-class AuthViewController: AppNavigationController {
-    
+protocol AuthViewControllerDelegate: AnyObject {
+    func presentController(_ controller: UINavigationController)
+    func showAlert()
+}
+
+class AuthViewController: UIViewController, AuthViewControllerDelegate {
     private let label = UILabel()
     private let loginTextField = UITextField()
     private let passwordTextField = UITextField()
@@ -21,7 +25,21 @@ class AuthViewController: AppNavigationController {
         setupLayout()
         setupView()
     }
-        
+    
+    // MARK: - AuthViewControllerDelegate
+    
+    func presentController(_ controller: UINavigationController) {
+        present(controller, animated: true)
+    }
+    //TODO: localize?
+    func showAlert() {
+        let alertController = UIAlertController(title: "Ошибка", message: "Неправильный логин или пароль", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Хорошо", style: .default))
+        present(alertController, animated: true)
+    }
+    
+    //MARK: - private helpers
+    
     private func setupLayout() {
         let stack = UIStackView()
         
@@ -57,7 +75,7 @@ class AuthViewController: AppNavigationController {
         label.text = "KinoPoisk"
         label.textColor = AppColors.appColor
         label.font = UIFont(name: label.font.fontName, size: 50)
-    
+        
         setupTextField(field: loginTextField, placeholder: "Логин")
         setupTextField(field: passwordTextField, placeholder: "Пароль")
         
@@ -79,7 +97,8 @@ class AuthViewController: AppNavigationController {
         field.textColor = AppColors.appWhite
     }
     
-    //MARK: handlers
+    //MARK: - handlers
+    
     @objc
     private func loginButtonHandler() {
         guard let login = loginTextField.text,
@@ -87,7 +106,8 @@ class AuthViewController: AppNavigationController {
             //TODO: handle?
             return
         }
-        presenter.saveUser(login: login, password: password)
+        presenter.signIn(login: login, password: password)
     }
     
 }
+

@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let authService = AuthService()
         let controller = authService.getController()
-        window?.rootViewController = controller
+        window?.rootViewController = UINavigationController(rootViewController: controller)
         return true
     }
     

@@ -17,7 +17,7 @@
 		F36CBFE52C91C57B00BC1298 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFE42C91C57B00BC1298 /* UserDefaultManager.swift */; };
 		F36CBFE72C91C93C00BC1298 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFE62C91C93C00BC1298 /* AuthService.swift */; };
 		F36CBFE92C91C9B700BC1298 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFE82C91C9B700BC1298 /* MoviesViewController.swift */; };
-		F36CBFEC2C91CD4400BC1298 /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFEB2C91CD4400BC1298 /* AppNavigationController.swift */; };
+		F36CBFF22C92A56700BC1298 /* MoviesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFF12C92A56700BC1298 /* MoviesPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +35,7 @@
 		F36CBFE42C91C57B00BC1298 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		F36CBFE62C91C93C00BC1298 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		F36CBFE82C91C9B700BC1298 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
-		F36CBFEB2C91CD4400BC1298 /* AppNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
+		F36CBFF12C92A56700BC1298 /* MoviesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				F36CBFDD2C91C1C800BC1298 /* Common */,
-				F36CBFED2C91D25200BC1298 /* CustomViews */,
 				F36CBFEE2C91D27800BC1298 /* Service */,
 				F36CBFE02C91C42200BC1298 /* Modules */,
 				F36CBFC72C91B1A600BC1298 /* AppDelegate.swift */,
@@ -131,16 +130,9 @@
 			isa = PBXGroup;
 			children = (
 				F36CBFE82C91C9B700BC1298 /* MoviesViewController.swift */,
+				F36CBFF12C92A56700BC1298 /* MoviesPresenter.swift */,
 			);
 			path = Movies;
-			sourceTree = "<group>";
-		};
-		F36CBFED2C91D25200BC1298 /* CustomViews */ = {
-			isa = PBXGroup;
-			children = (
-				F36CBFEB2C91CD4400BC1298 /* AppNavigationController.swift */,
-			);
-			path = CustomViews;
 			sourceTree = "<group>";
 		};
 		F36CBFEE2C91D27800BC1298 /* Service */ = {
@@ -268,9 +260,9 @@
 				F36CBFE92C91C9B700BC1298 /* MoviesViewController.swift in Sources */,
 				F36CBFE32C91C4BF00BC1298 /* AuthPresenter.swift in Sources */,
 				F36CBFDF2C91C1D100BC1298 /* Colors.swift in Sources */,
+				F36CBFF22C92A56700BC1298 /* MoviesPresenter.swift in Sources */,
 				F36CBFC82C91B1A600BC1298 /* AppDelegate.swift in Sources */,
 				F36CBFE72C91C93C00BC1298 /* AuthService.swift in Sources */,
-				F36CBFEC2C91CD4400BC1298 /* AppNavigationController.swift in Sources */,
 				F36CBFDC2C91B58200BC1298 /* AuthViewController.swift in Sources */,
 				F36CBFE52C91C57B00BC1298 /* UserDefaultManager.swift in Sources */,
 			);
