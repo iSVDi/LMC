@@ -25,6 +25,7 @@
 		F36CBFFE2C92BD8100BC1298 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFFD2C92BD8100BC1298 /* CountryModel.swift */; };
 		F36CC0002C92BD8B00BC1298 /* GenreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFFF2C92BD8B00BC1298 /* GenreModel.swift */; };
 		F36CC0022C92C03800BC1298 /* MovieShotSourceListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CC0012C92C03800BC1298 /* MovieShotSourceListModel.swift */; };
+		F36CC0062C92C8CE00BC1298 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CC0052C92C8CE00BC1298 /* MovieTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		F36CBFFD2C92BD8100BC1298 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
 		F36CBFFF2C92BD8B00BC1298 /* GenreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreModel.swift; sourceTree = "<group>"; };
 		F36CC0012C92C03800BC1298 /* MovieShotSourceListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieShotSourceListModel.swift; sourceTree = "<group>"; };
+		F36CC0052C92C8CE00BC1298 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 			children = (
 				F36CBFE82C91C9B700BC1298 /* MoviesViewController.swift */,
 				F36CBFF12C92A56700BC1298 /* MoviesPresenter.swift */,
+				F36CC0052C92C8CE00BC1298 /* MovieTableViewCell.swift */,
 				F36CBFF42C92A96B00BC1298 /* MoviesRepository.swift */,
 			);
 			path = Movies;
@@ -300,6 +303,7 @@
 				F36CC0022C92C03800BC1298 /* MovieShotSourceListModel.swift in Sources */,
 				F36CBFDF2C91C1D100BC1298 /* Colors.swift in Sources */,
 				F36CBFFE2C92BD8100BC1298 /* CountryModel.swift in Sources */,
+				F36CC0062C92C8CE00BC1298 /* MovieTableViewCell.swift in Sources */,
 				F36CBFF72C92A9CD00BC1298 /* MoviesService.swift in Sources */,
 				F36CBFFC2C92BC7900BC1298 /* MovieDetailsModel.swift in Sources */,
 				F36CBFF22C92A56700BC1298 /* MoviesPresenter.swift in Sources */,

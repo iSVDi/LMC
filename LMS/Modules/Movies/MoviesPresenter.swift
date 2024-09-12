@@ -10,16 +10,16 @@ import UIKit
 class MoviesPresenter {
     private weak var moviesViewControllerDelegate: MoviesViewControllerDelegate?
     private let movieRepository = MoviesRepository()
-    
+    private(set) var movieList = MovieListModel()
     
     init(moviesViewControllerDelegate: MoviesViewControllerDelegate) {
         self.moviesViewControllerDelegate = moviesViewControllerDelegate
     }
     
     func handleViewDidLoad() {
-        movieRepository.getMovies { movieList in
-            
-            //TODO: update ViewController
+        movieRepository.getMovies { [weak self] movieList in
+            self?.movieList = movieList
+            self?.moviesViewControllerDelegate?.reloadTableView()
         }
     }
     

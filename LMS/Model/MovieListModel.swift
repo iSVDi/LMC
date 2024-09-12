@@ -10,6 +10,10 @@ import Foundation
 // MARK: - MovieList
 struct MovieListModel: Codable {
     let items: [MovieListItemModel]
+    
+    init() {
+        items = []
+    }
 }
 
 // MARK: - Item
