@@ -62,8 +62,7 @@ class MovieTableViewCell: UITableViewCell {
         let detailsStack = UIStackView()
         detailsStack.axis = .vertical
         
-        mainStack.backgroundColor = .red
-        detailsStack.backgroundColor = .blue
+        
         
         [movieImageView, detailsStack].forEach { subview in
             mainStack.addArrangedSubview(subview)
@@ -86,7 +85,13 @@ class MovieTableViewCell: UITableViewCell {
     }
     
     private func setupViews() {
-        //TODO: implement
+        backgroundColor = AppColors.appClear
+        [nameLabel, genreLabel, yearContriesLabel, ratingLabel].forEach { label in
+            label.textColor = AppColors.appWhite
+        }
+        ratingLabel.textAlignment = .right
+        ratingLabel.textColor = AppColors.appColor
+        
     }
     
     

@@ -19,7 +19,6 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
         self.navigationItem.setHidesBackButton(true, animated: false)
         setupViews()
         setupLayout()
@@ -44,6 +43,14 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     }
     
     private func setupViews() {
+        
+        let textAttributes = [NSAttributedString.Key.foregroundColor:AppColors.appColor]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        title = "KinoPoisk" //TODO: localize
+        view.backgroundColor = AppColors.appBlack
+        
+        
+        
         let rightButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"),
                                           style: .plain,
                                           target: self,
@@ -52,6 +59,7 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         
         tableView.dataSource = self
         tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "\(MovieTableViewCell.self)")
+        tableView.backgroundColor = AppColors.appBlack
     }
   
     // MARK: - handlers

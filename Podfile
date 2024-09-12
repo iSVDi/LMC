@@ -8,5 +8,6 @@ target 'LMS' do
   pod "Moya"
   pod "TinyConstraints"
   pod 'Kingfisher'
+  pod 'SwiftGen'
 
 end

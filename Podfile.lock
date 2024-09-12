@@ -5,11 +5,13 @@ PODS:
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
+  - SwiftGen (6.6.3)
   - TinyConstraints (4.0.2)
 
 DEPENDENCIES:
   - Kingfisher
   - Moya
+  - SwiftGen
   - TinyConstraints
 
 SPEC REPOS:
@@ -17,14 +19,16 @@ SPEC REPOS:
     - Alamofire
     - Kingfisher
     - Moya
+    - SwiftGen
     - TinyConstraints
 
 SPEC CHECKSUMS:
   Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
   Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  SwiftGen: 4993cbf71cbc4886f775e26f8d5c3a1188ec9f99
   TinyConstraints: 7b7ccc0c485bb3bb47082138ff28bc33cd49897f
 
-PODFILE CHECKSUM: 7e2e536edf4360b810626cd418cf893a27c4ffb3
+PODFILE CHECKSUM: 1770bf8914693e6e7ff62714d83eef864351c326
 
 COCOAPODS: 1.15.2

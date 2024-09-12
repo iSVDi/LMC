@@ -67,7 +67,7 @@ class AuthViewController: UIViewController, AuthViewControllerDelegate {
     
     //TODO: localize?
     private func setupView() {
-        view.backgroundColor = .black
+        view.backgroundColor = AppColors.appBlack
         
         loginButton.backgroundColor = AppColors.appColor
         loginButton.setTitle("Войти", for: .normal)

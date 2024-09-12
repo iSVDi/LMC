@@ -12,4 +12,6 @@ class AppColors {
     static let appColor = UIColor(red: 68/256, green: 222/256, blue: 208/256, alpha: 1)
     static let appGray = UIColor.gray
     static let appWhite = UIColor.white
+    static let appBlack = UIColor.black
+    static let appClear = UIColor.clear
 }
