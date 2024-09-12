@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.9.1)
+  - Kingfisher (7.11.0)
   - Moya (15.0.0):
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
@@ -7,20 +8,23 @@ PODS:
   - TinyConstraints (4.0.2)
 
 DEPENDENCIES:
+  - Kingfisher
   - Moya
   - TinyConstraints
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Kingfisher
     - Moya
     - TinyConstraints
 
 SPEC CHECKSUMS:
   Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
+  Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   TinyConstraints: 7b7ccc0c485bb3bb47082138ff28bc33cd49897f
 
-PODFILE CHECKSUM: 58ae36f6ac5733d995fa985dbda30521ed53809c
+PODFILE CHECKSUM: 7e2e536edf4360b810626cd418cf893a27c4ffb3
 
 COCOAPODS: 1.15.2

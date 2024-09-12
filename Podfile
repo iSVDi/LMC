@@ -6,6 +6,7 @@ target 'LMS' do
   use_frameworks!
 
   pod "Moya"
-  pod "TinyConstraints" 
+  pod "TinyConstraints"
+  pod 'Kingfisher'
 
 end
