@@ -11,6 +11,7 @@ import UIKit
 protocol MoviesViewControllerDelegate: AnyObject {
     func exitWith(_ controller: UINavigationController)
     func reloadTableView()
+    func presentController(_ controller: UIViewController)
 }
 
 class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
@@ -33,6 +34,10 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     
     func reloadTableView() {
         tableView.reloadData()
+    }
+    
+    func presentController(_ controller: UIViewController) {
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     // MARK: - Private methods
@@ -92,5 +97,10 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         120
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        presenter.handleMovieTapWith(indexPath.row)
     }
 }
