@@ -21,6 +21,7 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         view.backgroundColor = .red
         self.navigationItem.setHidesBackButton(true, animated: false)
         setupNavigationBar()
+        presenter.handleViewDidLoad()
     }
     
     func exitWith(_ controller: UINavigationController) {
