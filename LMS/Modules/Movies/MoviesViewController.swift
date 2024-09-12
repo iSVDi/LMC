@@ -58,12 +58,14 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         navigationItem.setRightBarButton(rightButton, animated: false)
         
         tableView.dataSource = self
+        tableView.delegate = self
+        
         tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "\(MovieTableViewCell.self)")
         tableView.backgroundColor = AppColors.appBlack
     }
-  
+    
     // MARK: - handlers
-
+    
     @objc
     private func rightBarButtonHandler() {
         presenter.exitButtonTapped()
@@ -72,7 +74,7 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
 
 //MARK: - UITableViewDataSource
 
-extension MoviesViewController: UITableViewDataSource {
+extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
@@ -84,7 +86,11 @@ extension MoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(MovieTableViewCell.self)") as? MovieTableViewCell
         cell?.setData(presenter.movieList.items[indexPath.row])
+       
         return cell ?? UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        120
+    }
 }

@@ -58,21 +58,18 @@ class MovieTableViewCell: UITableViewCell {
     
     private func setupLayout() {
         let mainStack = UIStackView()
-        mainStack.axis = .horizontal
         let detailsStack = UIStackView()
+        mainStack.axis = .horizontal
         detailsStack.axis = .vertical
-        
-        
-        
+        detailsStack.distribution = .fillEqually
         [movieImageView, detailsStack].forEach { subview in
             mainStack.addArrangedSubview(subview)
             subview.verticalToSuperview()
         }
         
         movieImageView.leftToSuperview()
-        
         movieImageView.size(CGSize(width: 100, height: 100))
-        mainStack.setCustomSpacing(10, after: movieImageView)
+        mainStack.setCustomSpacing(15, after: movieImageView)
         detailsStack.rightToSuperview()
         
         [nameLabel, genreLabel, yearContriesLabel, ratingLabel].forEach {subview in
@@ -81,7 +78,8 @@ class MovieTableViewCell: UITableViewCell {
         }
         
         contentView.addSubview(mainStack)
-        mainStack.edgesToSuperview()
+        mainStack.edgesToSuperview(excluding: .bottom)
+        mainStack.height(100)
     }
     
     private func setupViews() {
@@ -91,6 +89,13 @@ class MovieTableViewCell: UITableViewCell {
         }
         ratingLabel.textAlignment = .right
         ratingLabel.textColor = AppColors.appColor
+        
+        nameLabel.font = FontFamily.Roboto.bold.font(size: 20)
+        genreLabel.font = FontFamily.Roboto.bold.font(size: 15)
+        genreLabel.textColor = AppColors.appGray
+        yearContriesLabel.textColor = AppColors.appGray
+        yearContriesLabel.font = FontFamily.Roboto.bold.font(size: 15)
+        ratingLabel.font = FontFamily.Roboto.bold.font(size: 20)
         
     }
     
