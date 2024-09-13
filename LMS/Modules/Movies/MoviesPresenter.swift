@@ -64,6 +64,10 @@ class MoviesPresenter {
         
     }
     
+    func handleRefresh() {
+        handleSortByRating()
+    }
+    
     func exitButtonTapped() {
         let controller = AuthViewController()
         let navigation = UINavigationController(rootViewController: controller)

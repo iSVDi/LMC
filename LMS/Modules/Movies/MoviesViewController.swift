@@ -19,7 +19,8 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     private let tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
     private let searchTextField = UITextField()
     private let yearPicker = UIPickerView()
-    
+    private let refreshControl = UIRefreshControl()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setHidesBackButton(true, animated: false)
@@ -36,6 +37,7 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     
     func reloadTableView() {
         tableView.reloadData()
+        refreshControl.endRefreshing()
     }
     
     func presentController(_ controller: UIViewController) {
@@ -81,6 +83,11 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "\(MovieTableViewCell.self)")
         tableView.backgroundColor = AppColors.appBlack
         tableView.tableHeaderView = getSortingView()
+        
+        
+        refreshControl.tintColor = AppColors.appColor
+          refreshControl.addTarget(self, action: #selector(refreshHandler), for: .valueChanged)
+          tableView.addSubview(refreshControl) // not required when using UITableViewController
     }
     
     private func getSortingView() -> UIView {
@@ -142,11 +149,15 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         )
         let searchImage = UIImage(systemName: "magnifyingglass") //TODO: localize
         let searchImageView = UIImageView(image: searchImage)
+        searchImageView.tintColor = AppColors.appColor
         
-        searchImageView.width(20)
-        searchTextField.rightView = searchImageView
+        let imageWrapper = UIView()
+        imageWrapper.addSubview(searchImageView)
+        searchImageView.edgesToSuperview(insets: .right(16))
+        
+        searchTextField.rightView = imageWrapper
         searchTextField.rightViewMode = .always
-        searchTextField.textColor = .red
+        searchTextField.textColor = AppColors.appWhite
         searchTextField.addTarget(self, action: #selector(textFieldDidChangeValueHandler), for: .editingChanged)
         
     }
@@ -168,6 +179,12 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         guard let searchText = textField.text else { return }
         presenter.handleFilterBySearch(searchText)
     }
+    
+    @objc
+    private func refreshHandler() {
+        presenter.handleRefresh()
+    }
+    
 }
 
 //MARK: - UITableViewDataSource
