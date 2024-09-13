@@ -61,6 +61,9 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
                                           target: self,
                                           action: #selector(rightBarButtonHandler))
         navigationItem.setRightBarButton(rightButton, animated: false)
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        backButton.tintColor = AppColors.appWhite
+        navigationItem.backBarButtonItem = backButton
         
         tableView.dataSource = self
         tableView.delegate = self

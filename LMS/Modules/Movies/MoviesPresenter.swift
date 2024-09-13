@@ -32,6 +32,7 @@ class MoviesPresenter {
     
     func handleMovieTapWith(_ id: Int) {
         let movieId = movieList.items[id].kinopoiskID
+        
         let movieDetailsViewController = MovieDetailsViewController()
         let movieDetailsPresenter = MovieDetailsPresenter(movieID: movieId,
                                                           movieDetailsDelegate: movieDetailsViewController)

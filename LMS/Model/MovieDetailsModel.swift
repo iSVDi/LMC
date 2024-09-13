@@ -17,12 +17,13 @@ struct MovieDetailsModel: Codable {
     let startYear, endYear: Int
     let ratingKinopoisk: Double
     let coverURL: String
+    let webUrl: String
     
     
     enum CodingKeys: String, CodingKey {
         case kinopoiskID = "kinopoiskId"
         case nameOriginal
-        case description, countries, genres, startYear, endYear, ratingKinopoisk
+        case description, countries, genres, startYear, endYear, ratingKinopoisk, webUrl
         case coverURL = "coverUrl"
     }
 }

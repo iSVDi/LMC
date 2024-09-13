@@ -31,14 +31,13 @@ class MovieDetailsRepository {
     func getShots(movieId: Int, completionHandler: @escaping (MovieShotSourceListModel) -> Void) {
         dataProvider.request(.getMovieShots(id: movieId)) { res in
             switch res {
-                
             case let .success(response):
                 guard let shotList =
                         try? JSONDecoder().decode(MovieShotSourceListModel.self, from: response.data) else {
                     // TODO: handle
                     return
                 }
-                
+                completionHandler(shotList)
             case let .failure(error):
                 print()
                 // TODO: handle

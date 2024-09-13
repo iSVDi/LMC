@@ -9,10 +9,12 @@ import UIKit
 
 protocol MovieDetailsDelegate: AnyObject {
     func setMovieDetails(_ movieDetails: MovieDetailsModel)
-    func setShots(_ shots: [UIImage])
+    func setShots(_ shots: [UIImage?])
 }
 
 class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
+    private let shotStackHeight: CGFloat = 140
+    
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
     private let ratingLabel = UILabel()
@@ -22,6 +24,8 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
     private let yearsCounryLabel = UILabel()
     private let shotTitleLabel = UILabel()
     private let shotHScrollView = UIScrollView()
+    private let linkButton = UIButton()
+    
     private let movieImageDownloader = MovieImageDownloader()
     private var presenter: MovieDetailsPresenter?
     
@@ -58,17 +62,19 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         shotTitleLabel.text = "Кадры" //TODO: localize
     }
     
-    func setShots(_ shots: [UIImage]) {
+    func setShots(_ shots: [UIImage?]) {
         let imageViews = shots.map { image in
             let shotImageView = UIImageView()
             shotImageView.image = image
-            shotImageView.size(.init(width: 100, height: 50))
+            shotImageView.contentMode = .scaleAspectFit
+            shotImageView.widthToHeight(of: shotImageView, multiplier: 1.1)
             return shotImageView
         }
-        shotHScrollView.stack(imageViews, axis: .horizontal)
+        shotHScrollView.stack(imageViews, axis: .horizontal, height: shotStackHeight, spacing: 10)
     }
 
     private func setupLayout() {
+        // TODO: replace stack on scroll view for small devices?
         let mainStack = UIStackView()
         mainStack.axis = .vertical
         
@@ -79,8 +85,9 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         
         [imageSection, descriptionSection, shotsSection].forEach { subview in
             mainStack.addArrangedSubview(subview)
-            
         }
+        
+        mainStack.setCustomSpacing(20, after: descriptionSection)
         
         view.addSubview(mainStack)
         mainStack.edgesToSuperview(excluding: .bottom)
@@ -94,7 +101,8 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         }
         imageView.edgesToSuperview()
         imageView.heightToWidth(of: imageView)
-        titleSection.edgesToSuperview(excluding: .top, insets: .horizontal(16))
+        titleSection.horizontalToSuperview(insets: .horizontal(16))
+        titleSection.bottomToSuperview(offset: -10)
         return wrapper
     }
     
@@ -113,9 +121,22 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
     private func getDescriptionSection() -> UIView {
         let sectionStack = UIStackView()
         sectionStack.axis = .vertical
-        [descriptionTitleLabel, descritionLabel, genraLabel, yearsCounryLabel].forEach { label in
-            sectionStack.addArrangedSubview(label)
-            label.horizontalToSuperview(insets: .horizontal(16))
+        sectionStack.spacing = 10
+        sectionStack.alignment = .center
+        let titleButtonStack = UIStackView()
+        titleButtonStack.distribution = .fill
+        titleButtonStack.axis = .horizontal
+        [descriptionTitleLabel, linkButton].forEach { subview in
+            titleButtonStack.addArrangedSubview(subview)
+            subview.verticalToSuperview()
+        }
+        descriptionTitleLabel.leftToSuperview()
+        linkButton.rightToSuperview()
+        
+        [titleButtonStack, descritionLabel, genraLabel, yearsCounryLabel].forEach { subview in
+
+            sectionStack.addArrangedSubview(subview)
+            subview.horizontalToSuperview(insets: .horizontal(16))
         }
         
         return sectionStack
@@ -128,19 +149,55 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
             stack.addArrangedSubview(subview)
             subview.horizontalToSuperview(insets: .horizontal(16))
         }
-        
+        shotHScrollView.height(shotStackHeight)
+
         return stack
     }
+
+//    nameLabel.font = FontFamily.Roboto.bold.font(size: 20)
+//    genreLabel.font = FontFamily.Roboto.bold.font(size: 15)
+//    genreLabel.textColor = AppColors.appGray
+//    yearContriesLabel.textColor = AppColors.appGray
+//    yearContriesLabel.font = FontFamily.Roboto.bold.font(size: 15)
+//    ratingLabel.font = FontFamily.Roboto.bold.font(size: 20)
     
     private func setupViews() {
         imageView.contentMode = .scaleAspectFit
-        descritionLabel.numberOfLines = 0
         
-        [titleLabel, descriptionTitleLabel, descritionLabel, genraLabel, yearsCounryLabel, shotTitleLabel].forEach { label in
+        [titleLabel, descriptionTitleLabel, descritionLabel, shotTitleLabel].forEach { label in
             label.textColor = AppColors.appWhite
         }
-        
+        genraLabel.textColor = AppColors.appGray
+        yearsCounryLabel.textColor = AppColors.appGray
         ratingLabel.textColor = AppColors.appColor
+        
+        let linkImage = UIImage(systemName: "link") //TODO: localize
+        linkButton.setImage(linkImage, for: .normal)
+        linkButton.tintColor = AppColors.appColor
+        linkButton.addTarget(self, action: #selector(linkButtonHandler), for: .touchUpInside)
+        
+        titleLabel.font = FontFamily.Roboto.bold.font(size: 25)
+        ratingLabel.font = FontFamily.Roboto.bold.font(size: 25)
+        
+        descriptionTitleLabel.font = FontFamily.Roboto.bold.font(size: 30)
+        descritionLabel.font = FontFamily.Roboto.bold.font(size: 17)
+        descritionLabel.numberOfLines = 4
+        descritionLabel.adjustsFontSizeToFitWidth = true
+        
+        genraLabel.font = FontFamily.Roboto.bold.font(size: 17)
+        yearsCounryLabel.font = FontFamily.Roboto.bold.font(size: 17)
+        shotTitleLabel.font = FontFamily.Roboto.bold.font(size: 30)
+        
+    }
+    
+//    MARK: - handlers
+    @objc
+    private func linkButtonHandler() {
+        guard let stringUrl = presenter?.webUrlString else {
+            return //TODO: handle
+        }
+        let url = URL(string: stringUrl)!
+        UIApplication.shared.open(url)
     }
     
 
