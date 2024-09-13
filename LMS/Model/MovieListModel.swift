@@ -9,19 +9,16 @@ import Foundation
 
 // MARK: - MovieList
 struct MovieListModel: Codable {
-    let total: Int
     let totalPages: Int
     let items: [MovieListItemModel]
     
     init() {
         items = []
-        total = 0
         totalPages = 1
     }
 }
 
 // MARK: - Item
-// TODO: add another names and return one of them
 struct MovieListItemModel: Codable {
     let kinopoiskID: Int
     private let nameOriginal: String?

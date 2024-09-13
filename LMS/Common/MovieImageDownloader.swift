@@ -17,7 +17,6 @@ class MovieImageDownloader {
                        completionHandler: @escaping(Result<(image: UIImage?, stringUrl: String), Error>) -> Void ) {
         
         guard !cacher.isCached(forKey: imageURL) else {
-            print("cache " + imageURL)// TODO: remove
             cacher.retrieveImage(forKey: imageURL) { res in
                 switch res {
                     
@@ -29,8 +28,6 @@ class MovieImageDownloader {
             }
             return
         }
-        
-        print("download " + imageURL) // TODO: remove
         
         downloader.downloadImage(with: URL(string: imageURL)!) { [weak self] res in
             switch res {

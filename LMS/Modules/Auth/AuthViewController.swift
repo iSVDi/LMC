@@ -103,7 +103,7 @@ class AuthViewController: UIViewController, AuthViewControllerDelegate {
     private func loginButtonHandler() {
         guard let login = loginTextField.text,
               let password = passwordTextField.text else {
-            //TODO: handle?
+            showAlert()
             return
         }
         presenter.signIn(login: login, password: password)

@@ -42,12 +42,17 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
     
     func setMovieDetails(_ movieDetails: MovieDetailsModel) {
         titleLabel.text = movieDetails.nameOriginal
-        ratingLabel.text = "\(movieDetails.ratingKinopoisk)"
+        ratingLabel.text = movieDetails.ratingKinopoisk != nil ? "\(movieDetails.ratingKinopoisk!)" : ""
         descriptionTitleLabel.text = "Описание" // TODO: localize
         descritionLabel.text = movieDetails.description
         genraLabel.text = movieDetails.genres.map{$0.genre}.joined(separator: ", ")
         
-        let years = "\(movieDetails.startYear) - \(movieDetails.endYear), "
+        var years = ""
+        if let startYear = movieDetails.startYear{
+            years = "\(startYear) - "
+            years += movieDetails.endYear != nil ? "\(movieDetails.endYear!), " : ", "
+        }
+        
         let countries = movieDetails.countries.map{$0.country}.joined(separator: ", ")
         yearsCounryLabel.text = years + countries
         shotTitleLabel.text = "Кадры" //TODO: localize
@@ -78,23 +83,16 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
     }
 
     private func setupLayout() {
-        // TODO: replace stack on scroll view for small devices?
-        let mainStack = UIStackView()
-        mainStack.axis = .vertical
-        
+        let mainScroll = UIScrollView()
         let imageSection = getImageSection()
         let descriptionSection = getDescriptionSection()
         let shotsSection = getShotsSection()
+        mainScroll.stack([imageSection, descriptionSection, shotsSection], axis: .vertical, spacing: 20)
         
+        view.addSubview(mainScroll)
+        mainScroll.contentInsetAdjustmentBehavior = .never
+        mainScroll.edgesToSuperview()
         
-        [imageSection, descriptionSection, shotsSection].forEach { subview in
-            mainStack.addArrangedSubview(subview)
-        }
-        
-        mainStack.setCustomSpacing(20, after: descriptionSection)
-        
-        view.addSubview(mainStack)
-        mainStack.edgesToSuperview(excluding: .bottom)
     }
     
     private func getImageSection() -> UIView {
@@ -104,6 +102,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
             wrapper.addSubview(subview)
         }
         imageView.edgesToSuperview()
+        imageView.width(view.frame.width)
         imageView.heightToWidth(of: imageView)
         titleSection.horizontalToSuperview(insets: .horizontal(16))
         titleSection.bottomToSuperview(offset: -10)
@@ -113,6 +112,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
     private func getTitleSection() -> UIView {
         let titleRatingStack = UIStackView()
         titleRatingStack.axis = .horizontal
+        titleRatingStack.distribution = .fillProportionally
         [titleLabel, ratingLabel].forEach { subview in
             titleRatingStack.addArrangedSubview(subview)
             subview.verticalToSuperview()
@@ -128,7 +128,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         sectionStack.spacing = 10
         sectionStack.alignment = .center
         let titleButtonStack = UIStackView()
-        titleButtonStack.distribution = .fill
+        titleButtonStack.distribution = .fillProportionally
         titleButtonStack.axis = .horizontal
         [descriptionTitleLabel, linkButton].forEach { subview in
             titleButtonStack.addArrangedSubview(subview)
@@ -159,6 +159,8 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
     }
 
     private func setupViews() {
+        navigationController?.navigationBar.standardAppearance.configureWithTransparentBackground()
+        navigationController?.navigationBar.scrollEdgeAppearance?.configureWithTransparentBackground()
         imageView.contentMode = .scaleAspectFit
         
         [titleLabel, descriptionTitleLabel, descritionLabel, shotTitleLabel].forEach { label in
@@ -167,6 +169,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         genraLabel.textColor = AppColors.appGray
         yearsCounryLabel.textColor = AppColors.appGray
         ratingLabel.textColor = AppColors.appColor
+        ratingLabel.textAlignment = .right
         
         let linkImage = UIImage(systemName: "link") //TODO: localize
         linkButton.setImage(linkImage, for: .normal)

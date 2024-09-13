@@ -15,8 +15,6 @@ class MovieDetailsRepository {
             switch res {
                 
             case let .success(response):
-                
-                //TODO: Handle wrong work
                 guard let movieDetail = try? JSONDecoder().decode(MovieDetailsModel.self, from: response.data) else {
                     print()
                     return //TODO: handle
