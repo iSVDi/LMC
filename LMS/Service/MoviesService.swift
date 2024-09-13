@@ -13,7 +13,7 @@ enum MoviesOrder: String {
 }
 
 enum MoviesService {
-    case getMovies(order: MoviesOrder, year: Int)
+    case getMovies(order: MoviesOrder, year: Int, page: Int)
     case getMovieDetails(id: Int)
     case getMovieShots(id: Int)
 }
@@ -25,7 +25,7 @@ extension MoviesService: TargetType {
     
     var path: String {
         switch self {
-        case .getMovies(_, _):
+        case .getMovies(_, _, _):
             return("/films")
         case .getMovieDetails(let id):
             return("/films/\(id)")
@@ -40,8 +40,12 @@ extension MoviesService: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .getMovies(let order, let year):
-            let params = ["order" : order.rawValue, "yearFrom": "\(year)", "yearTo": "\(year)"]
+        case .getMovies(let order, let year, let page):
+            let params = ["order" : order.rawValue,
+                          "yearFrom": "\(year)",
+                          "yearTo": "\(year)",
+                          "page": "\(page)"
+            ]
             return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
         case .getMovieDetails(_):
             return .requestPlain

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A892F6150507148EB60887E /* Pods_LMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63DD96B8EFB21F707E863D74 /* Pods_LMS.framework */; };
+		F35BFB1A2C9458A00037FF57 /* MovieStepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35BFB192C9458A00037FF57 /* MovieStepperView.swift */; };
 		F36CBFC82C91B1A600BC1298 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFC72C91B1A600BC1298 /* AppDelegate.swift */; };
 		F36CBFD12C91B1A700BC1298 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F36CBFD02C91B1A700BC1298 /* Assets.xcassets */; };
 		F36CBFD42C91B1A700BC1298 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = F36CBFD32C91B1A700BC1298 /* Base */; };
@@ -50,6 +51,7 @@
 		63DD96B8EFB21F707E863D74 /* Pods_LMS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LMS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B857FD6C7F689D24C8211A9D /* Pods-LMS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LMS.debug.xcconfig"; path = "Target Support Files/Pods-LMS/Pods-LMS.debug.xcconfig"; sourceTree = "<group>"; };
 		BBE30349A9C32CDB6995A872 /* Pods-LMS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LMS.release.xcconfig"; path = "Target Support Files/Pods-LMS/Pods-LMS.release.xcconfig"; sourceTree = "<group>"; };
+		F35BFB192C9458A00037FF57 /* MovieStepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStepperView.swift; sourceTree = "<group>"; };
 		F36CBFC42C91B1A600BC1298 /* LMS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LMS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F36CBFC72C91B1A600BC1298 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F36CBFD02C91B1A700BC1298 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				F36CBFF12C92A56700BC1298 /* MoviesPresenter.swift */,
 				F36CC0052C92C8CE00BC1298 /* MovieTableViewCell.swift */,
 				F36CBFF42C92A96B00BC1298 /* MoviesRepository.swift */,
+				F35BFB192C9458A00037FF57 /* MovieStepperView.swift */,
 			);
 			path = Movies;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				F36CBFF52C92A96B00BC1298 /* MoviesRepository.swift in Sources */,
 				F36FAA0B2C93494A0004799A /* MovieDetailsPresenter.swift in Sources */,
 				F36CBFE52C91C57B00BC1298 /* UserDefaultManager.swift in Sources */,
+				F35BFB1A2C9458A00037FF57 /* MovieStepperView.swift in Sources */,
 				F36CC0422C9306C900BC1298 /* Fonts.swift in Sources */,
 				F36CC0002C92BD8B00BC1298 /* GenreModel.swift in Sources */,
 			);

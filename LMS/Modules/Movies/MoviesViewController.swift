@@ -20,12 +20,13 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     private let searchTextField = UITextField()
     private let yearPicker = UIPickerView()
     private let refreshControl = UIRefreshControl()
-
+    private var stepperView: MovieStepperView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setHidesBackButton(true, animated: false)
-        setupViews()
         setupLayout()
+        setupViews()
         presenter.handleViewDidLoad()
     }
     
@@ -38,6 +39,7 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     func reloadTableView() {
         tableView.reloadData()
         refreshControl.endRefreshing()
+        stepperView?.setPage(presenter.currentPage)
     }
     
     func presentController(_ controller: UIViewController) {
@@ -78,16 +80,23 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         yearPicker.selectRow(presenter.selectedYearId, inComponent: 0, animated: false)
         yearPicker.tintColor = AppColors.appColor
         
+        stepperView = MovieStepperView(backHander: { [weak self] in
+            self?.presenter.stepBack()
+        }, forwardHander: { [weak self] in
+            self?.presenter.stepForward()
+        })
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "\(MovieTableViewCell.self)")
         tableView.backgroundColor = AppColors.appBlack
         tableView.tableHeaderView = getSortingView()
-        
+        tableView.tableFooterView = getStepperView()
         
         refreshControl.tintColor = AppColors.appColor
-          refreshControl.addTarget(self, action: #selector(refreshHandler), for: .valueChanged)
-          tableView.addSubview(refreshControl) // not required when using UITableViewController
+        refreshControl.addTarget(self, action: #selector(refreshHandler), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+        
     }
     
     private func getSortingView() -> UIView {
@@ -159,8 +168,16 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         searchTextField.rightViewMode = .always
         searchTextField.textColor = AppColors.appWhite
         searchTextField.addTarget(self, action: #selector(textFieldDidChangeValueHandler), for: .editingChanged)
-        
     }
+    
+    private func getStepperView() -> UIView {
+        let wrapper = UIView()
+        wrapper.addSubview(stepperView ?? UIView())
+        stepperView?.edgesToSuperview(insets: .horizontal(16), usingSafeArea: true)
+        wrapper.frame.size.height = 50
+        return wrapper
+    }
+
     
     // MARK: - handlers
     
@@ -187,7 +204,7 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     
 }
 
-//MARK: - UITableViewDataSource
+// MARK: - UITableViewDataSource
 
 extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -215,7 +232,7 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
-
+// MARK: - UIPickerViewDataSource, UIPickerViewDelegate
 extension MoviesViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1

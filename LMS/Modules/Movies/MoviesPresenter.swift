@@ -13,6 +13,7 @@ class MoviesPresenter {
     private var movieList = MovieListModel()
     private(set) var filteredMovieList: [MovieListItemModel] = []
     private(set) var selectedYearId: Int = 2
+    private(set) var currentPage = 1
     
     private var searchRequest = ""
     private(set) var years = Array((1950...2026).reversed())
@@ -26,7 +27,7 @@ class MoviesPresenter {
     }
     
     func updateMovie(order: MoviesOrder, year: Int) {
-        movieRepository.getMovies(order: order, year: year) { [weak self] movieList in
+        movieRepository.getMovies(order: order, year: year, page: currentPage) { [weak self] movieList in
             guard let welf = self else {
                 return
             }
@@ -67,6 +68,24 @@ class MoviesPresenter {
     func handleRefresh() {
         handleSortByRating()
     }
+    
+    func stepForward() {
+        guard currentPage < movieList.totalPages else {
+            return //TODO: handle
+        }
+        currentPage += 1
+        updateMovie(order: .rating, year: years[selectedYearId])
+        
+    }
+    
+    func stepBack() {
+        guard currentPage > 1  else {
+            return //TODO: handle
+        }
+        currentPage -= 1
+        updateMovie(order: .rating, year: years[selectedYearId])
+    }
+    
     
     func exitButtonTapped() {
         let controller = AuthViewController()
