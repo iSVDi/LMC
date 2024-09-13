@@ -13,7 +13,7 @@ enum MoviesOrder: String {
 }
 
 enum MoviesService {
-    case getMovies(order: MoviesOrder)
+    case getMovies(order: MoviesOrder, year: Int)
     case getMovieDetails(id: Int)
     case getMovieShots(id: Int)
 }
@@ -25,7 +25,7 @@ extension MoviesService: TargetType {
     
     var path: String {
         switch self {
-        case .getMovies(let order):
+        case .getMovies(_, _):
             return("/films")
         case .getMovieDetails(let id):
             return("/films/\(id)")
@@ -40,22 +40,23 @@ extension MoviesService: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .getMovies(let order):
-            return .requestParameters(parameters: ["order" : order.rawValue], encoding: URLEncoding.queryString)
-        case .getMovieDetails(let id):
+        case .getMovies(let order, let year):
+            let params = ["order" : order.rawValue, "yearFrom": "\(year)", "yearTo": "\(year)"]
+            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+        case .getMovieDetails(_):
             return .requestPlain
-        case .getMovieShots(let id):
+        case .getMovieShots(_):
             return .requestPlain
         }
     }
     
     var headers: [String : String]? {
         return [
-            "X-API-KEY": "ea499c08-37e5-4a7d-976d-916cf7cdde35",
+//            "X-API-KEY": "ea499c08-37e5-4a7d-976d-916cf7cdde35",
+            "X-API-KEY": "8b7f7ac2-57f0-4895-886e-cd3e1abdf953",
             "Content-Type": "application/json",
             
         ]
     }
-    
     
 }

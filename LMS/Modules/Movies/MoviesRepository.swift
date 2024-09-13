@@ -9,8 +9,8 @@ import Moya
 class MoviesRepository {
     private let moviesDataProvider = MoyaProvider<MoviesService>()
     
-    func getMovies(complitionHandler: @escaping(MovieListModel) -> Void) {
-        moviesDataProvider.request(.getMovies(order: .rating)) { result in
+    func getMovies(order: MoviesOrder, year: Int, complitionHandler: @escaping(MovieListModel) -> Void) {
+        moviesDataProvider.request(.getMovies(order: order, year: year)) { result in
             switch result {
             case let .success(response):
                 guard let movieList = try? JSONDecoder().decode(MovieListModel.self, from: response.data) else {

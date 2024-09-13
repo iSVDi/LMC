@@ -10,14 +10,14 @@ import Foundation
 // MARK: - MoviewDetailsModel
 struct MovieDetailsModel: Codable {
     let kinopoiskID: Int
-    let nameOriginal: String
-    let description: String
+    let nameOriginal: String?
+    let description: String?
     let countries: [CountryModel]
     let genres: [GenreModel]
-    let startYear, endYear: Int
-    let ratingKinopoisk: Double
-    let coverURL: String
-    let webUrl: String
+    let startYear, endYear: Int?
+    let ratingKinopoisk: Double?
+    let coverURL: String?
+    let webUrl: String?
     
     
     enum CodingKeys: String, CodingKey {

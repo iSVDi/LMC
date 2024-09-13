@@ -46,14 +46,14 @@ class MovieTableViewCell: UITableViewCell {
             }
         }
         
-        nameLabel.text = data.nameOriginal
+        nameLabel.text = data.getName
         genreLabel.text = data.genres
             .map{$0.genre}
             .joined(separator: ", ")
         yearContriesLabel.text = "\(data.year), " + data.countries
             .map{$0.country}
             .joined(separator: ", ")
-        ratingLabel.text = "\(data.ratingKinopoisk)"
+        ratingLabel.text = data.ratingKinopoisk != nil ? "\(data.ratingKinopoisk!)" : ""
     }
     
     private func setupLayout() {
@@ -98,7 +98,5 @@ class MovieTableViewCell: UITableViewCell {
         ratingLabel.font = FontFamily.Roboto.bold.font(size: 20)
         
     }
-    
-    
     
 }

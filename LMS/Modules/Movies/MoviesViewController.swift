@@ -17,6 +17,8 @@ protocol MoviesViewControllerDelegate: AnyObject {
 class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     private lazy var presenter = MoviesPresenter(moviesViewControllerDelegate: self)
     private let tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
+    private let searchTextField = UITextField()
+    private let yearPicker = UIPickerView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,28 +50,105 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     }
     
     private func setupViews() {
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor : AppColors.appColor
+        ]
+        navigationBarAppearance.backgroundColor = AppColors.appBlack
+        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
         
-        let textAttributes = [NSAttributedString.Key.foregroundColor:AppColors.appColor]
-        navigationController?.navigationBar.titleTextAttributes = textAttributes
         title = "KinoPoisk" //TODO: localize
         view.backgroundColor = AppColors.appBlack
-        
-        
         
         let rightButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"),
                                           style: .plain,
                                           target: self,
                                           action: #selector(rightBarButtonHandler))
+        rightButton.tintColor = AppColors.appColor
         navigationItem.setRightBarButton(rightButton, animated: false)
         let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         backButton.tintColor = AppColors.appWhite
         navigationItem.backBarButtonItem = backButton
         
+        setupSearchTextField()
+        yearPicker.dataSource = self
+        yearPicker.delegate = self
+        yearPicker.selectRow(presenter.selectedYearId, inComponent: 0, animated: false)
+        yearPicker.tintColor = AppColors.appColor
+        
         tableView.dataSource = self
         tableView.delegate = self
-        
         tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "\(MovieTableViewCell.self)")
         tableView.backgroundColor = AppColors.appBlack
+        tableView.tableHeaderView = getSortingView()
+    }
+    
+    private func getSortingView() -> UIView {
+        let mainStack = UIStackView()
+        mainStack.axis = .vertical
+        mainStack.distribution = .equalSpacing
+        mainStack.alignment = .center
+        
+        mainStack.height(100)
+        mainStack.spacing = 10
+        mainStack.width(.greatestFiniteMagnitude)
+        
+        let sortButtonSearchFieldStack = UIStackView()
+        sortButtonSearchFieldStack.axis = .horizontal
+        sortButtonSearchFieldStack.alignment = .fill
+        
+        let sortButton = UIButton()
+        let image = UIImage(systemName: "arrow.up.arrow.down")
+        sortButton.setImage(image, for: .normal)
+        sortButton.tintColor = AppColors.appColor
+        sortButton.addTarget(self, action: #selector(sortButtonHandler), for: .touchUpInside)
+        
+        [sortButton, searchTextField].forEach { subview in
+            sortButtonSearchFieldStack.addArrangedSubview(subview)
+            subview.verticalToSuperview()
+        }
+        sortButton.width(50)
+        
+        sortButtonSearchFieldStack.height(50)
+        sortButtonSearchFieldStack.width(.greatestFiniteMagnitude)
+        sortButton.leftToSuperview()
+        searchTextField.rightToSuperview()
+        
+        [sortButtonSearchFieldStack, yearPicker].forEach { subview in
+            mainStack.addArrangedSubview(subview)
+        }
+        
+        let wrapper = UIView()
+        wrapper.addSubview(mainStack)
+        mainStack.edgesToSuperview(insets: .horizontal(16))
+        wrapper.width(view.frame.width)
+        wrapper.height(150)
+        return wrapper
+    }
+    
+    private func setupSearchTextField() {
+        searchTextField.layer.borderWidth = 2
+        searchTextField.layer.borderColor = AppColors.appGray.cgColor
+        
+        let leftPaddingView = UIView()
+        leftPaddingView.width(16)
+        searchTextField.leftView = leftPaddingView
+        searchTextField.leftViewMode = .always
+        searchTextField.textColor = AppColors.appWhite
+        
+        searchTextField.attributedPlaceholder = NSAttributedString(
+            string: "keyword", //TODO: localize
+            attributes: [NSAttributedString.Key.foregroundColor: AppColors.appGray]
+        )
+        let searchImage = UIImage(systemName: "magnifyingglass") //TODO: localize
+        let searchImageView = UIImageView(image: searchImage)
+        
+        searchImageView.width(20)
+        searchTextField.rightView = searchImageView
+        searchTextField.rightViewMode = .always
+        searchTextField.textColor = .red
+        searchTextField.addTarget(self, action: #selector(textFieldDidChangeValueHandler), for: .editingChanged)
+        
     }
     
     // MARK: - handlers
@@ -77,6 +156,17 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     @objc
     private func rightBarButtonHandler() {
         presenter.exitButtonTapped()
+    }
+    
+    @objc
+    private func sortButtonHandler() {
+        presenter.handleSortByRating()
+    }
+    
+    @objc
+    private func textFieldDidChangeValueHandler(textField: UITextField) {
+        guard let searchText = textField.text else { return }
+        presenter.handleFilterBySearch(searchText)
     }
 }
 
@@ -88,13 +178,13 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.movieList.items.count
+        presenter.filteredMovieList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(MovieTableViewCell.self)") as? MovieTableViewCell
-        cell?.setData(presenter.movieList.items[indexPath.row])
-       
+        cell?.setData(presenter.filteredMovieList[indexPath.row])
+        
         return cell ?? UITableViewCell()
     }
     
@@ -106,4 +196,29 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         presenter.handleMovieTapWith(indexPath.row)
     }
+    
+}
+
+extension MoviesViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return presenter.years.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        presenter.handleSelectYearFilter(row)
+    }
+    
+    
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        return NSAttributedString(string: "\(presenter.years[row])",
+                                  attributes: [NSAttributedString.Key.foregroundColor: AppColors.appWhite])
+    }
+    
+    
+    
 }

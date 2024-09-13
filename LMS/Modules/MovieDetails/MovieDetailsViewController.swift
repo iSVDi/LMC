@@ -41,15 +41,6 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
     }
     
     func setMovieDetails(_ movieDetails: MovieDetailsModel) {
-        movieImageDownloader.downloadImage(imageURL: movieDetails.coverURL) { [weak self] res in
-            switch res {
-            case .success((let image, _)):
-                self?.imageView.image = image
-            case .failure(_): break
-                //TODO: handle
-            }
-        }
-        
         titleLabel.text = movieDetails.nameOriginal
         ratingLabel.text = "\(movieDetails.ratingKinopoisk)"
         descriptionTitleLabel.text = "Описание" // TODO: localize
@@ -60,6 +51,19 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         let countries = movieDetails.countries.map{$0.country}.joined(separator: ", ")
         yearsCounryLabel.text = years + countries
         shotTitleLabel.text = "Кадры" //TODO: localize
+        
+        guard let imageURL = movieDetails.coverURL else {
+            return
+        }
+        
+        movieImageDownloader.downloadImage(imageURL: imageURL) { [weak self] res in
+            switch res {
+            case .success((let image, _)):
+                self?.imageView.image = image
+            case .failure(_): break
+                //TODO: handle
+            }
+        }
     }
     
     func setShots(_ shots: [UIImage?]) {
@@ -154,13 +158,6 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         return stack
     }
 
-//    nameLabel.font = FontFamily.Roboto.bold.font(size: 20)
-//    genreLabel.font = FontFamily.Roboto.bold.font(size: 15)
-//    genreLabel.textColor = AppColors.appGray
-//    yearContriesLabel.textColor = AppColors.appGray
-//    yearContriesLabel.font = FontFamily.Roboto.bold.font(size: 15)
-//    ratingLabel.font = FontFamily.Roboto.bold.font(size: 20)
-    
     private func setupViews() {
         imageView.contentMode = .scaleAspectFit
         
@@ -181,8 +178,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         
         descriptionTitleLabel.font = FontFamily.Roboto.bold.font(size: 30)
         descritionLabel.font = FontFamily.Roboto.bold.font(size: 17)
-        descritionLabel.numberOfLines = 4
-        descritionLabel.adjustsFontSizeToFitWidth = true
+        descritionLabel.numberOfLines = 0
         
         genraLabel.font = FontFamily.Roboto.bold.font(size: 17)
         yearsCounryLabel.font = FontFamily.Roboto.bold.font(size: 17)
