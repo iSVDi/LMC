@@ -12,34 +12,24 @@ class MovieDetailsRepository {
     
     func getMovieDetail(movieID: Int, completionHandler: @escaping (MovieDetailsModel) -> Void) {
         dataProvider.request(.getMovieDetails(id: movieID)) { res in
-            switch res {
-                
-            case let .success(response):
+            if case let .success(response) = res {
                 guard let movieDetail = try? JSONDecoder().decode(MovieDetailsModel.self, from: response.data) else {
-                    print()
-                    return //TODO: handle
+                    return
                 }
                 completionHandler(movieDetail)
-            case let .failure(error):
-                print(error.localizedDescription)
-                //TODO: handle
             }
+            
         }
     }
     
     func getShots(movieId: Int, completionHandler: @escaping (MovieShotSourceListModel) -> Void) {
         dataProvider.request(.getMovieShots(id: movieId)) { res in
-            switch res {
-            case let .success(response):
+            if case let .success(response) = res {
                 guard let shotList =
                         try? JSONDecoder().decode(MovieShotSourceListModel.self, from: response.data) else {
-                    // TODO: handle
                     return
                 }
                 completionHandler(shotList)
-            case let .failure(error):
-                print()
-                // TODO: handle
             }
         }
     }

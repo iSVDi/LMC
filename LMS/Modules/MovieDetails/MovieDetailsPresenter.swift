@@ -43,11 +43,8 @@ class MovieDetailsPresenter {
             dispatchGroup.enter()
             self?.movieImageDownloader.downloadImage(imageURL: shotStringUrl) { (res: Result<(image: UIImage?, stringUrl: String), Error>) in
                 defer { dispatchGroup.leave() }
-                switch res {
-                case let .success((image, _)):
+                if case let .success((image, _)) = res {
                     images.append(image)
-                case let .failure(error):
-                    print() //TODO: handle
                 }
             }
         }

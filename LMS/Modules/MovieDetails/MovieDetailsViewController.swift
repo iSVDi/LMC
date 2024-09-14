@@ -63,12 +63,10 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         }
         
         movieImageDownloader.downloadImage(imageURL: imageURL) { [weak self] res in
-            switch res {
-            case .success((let image, _)):
-                self?.imageView.image = image
-            case .failure(_): break
-                //TODO: handle
+            if case let .success((resImage, _)) = res {
+                self?.imageView.image = resImage
             }
+            
         }
     }
     
@@ -82,7 +80,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         }
         shotHScrollView.stack(imageViews, axis: .horizontal, height: shotStackHeight, spacing: 10)
     }
-
+    
     private func setupLayout() {
         let mainScroll = UIScrollView()
         let imageSection = getImageSection()
@@ -139,7 +137,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         linkButton.rightToSuperview()
         
         [titleButtonStack, descritionLabel, genraLabel, yearsCounryLabel].forEach { subview in
-
+            
             sectionStack.addArrangedSubview(subview)
             subview.horizontalToSuperview(insets: .horizontal(16))
         }
@@ -155,10 +153,10 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
             subview.horizontalToSuperview(insets: .horizontal(16))
         }
         shotHScrollView.height(shotStackHeight)
-
+        
         return stack
     }
-
+    
     private func setupViews() {
         navigationController?.navigationBar.standardAppearance.configureWithTransparentBackground()
         navigationController?.navigationBar.scrollEdgeAppearance?.configureWithTransparentBackground()
@@ -189,15 +187,15 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         
     }
     
-//    MARK: - handlers
+    //    MARK: - handlers
     @objc
     private func linkButtonHandler() {
         guard let stringUrl = presenter?.webUrlString else {
-            return //TODO: handle
-        }
+            return
+}
         let url = URL(string: stringUrl)!
         UIApplication.shared.open(url)
     }
     
-
+    
 }

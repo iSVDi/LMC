@@ -71,7 +71,7 @@ class MoviesPresenter {
     
     func stepForward() {
         guard currentPage < movieList.totalPages else {
-            return //TODO: handle
+            return
         }
         currentPage += 1
         updateMovie(order: .rating, year: years[selectedYearId])
@@ -80,7 +80,7 @@ class MoviesPresenter {
     
     func stepBack() {
         guard currentPage > 1  else {
-            return //TODO: handle
+            return
         }
         currentPage -= 1
         updateMovie(order: .rating, year: years[selectedYearId])

@@ -43,7 +43,6 @@ class MovieTableViewCell: UITableViewCell {
                 }
                 self?.movieImageView.image = value.image
             case let .failure(error): break
-                //TODO: handle
             }
         }
         
