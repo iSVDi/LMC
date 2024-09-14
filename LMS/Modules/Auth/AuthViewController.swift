@@ -80,6 +80,9 @@ class AuthViewController: UIViewController, AuthViewControllerDelegate {
         setupTextField(field: passwordTextField, placeholder: AppStrings.passwordTitle)
         
         loginButton.addTarget(self, action: #selector(loginButtonHandler), for: .touchUpInside)
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchHandler))
+        view.addGestureRecognizer(gestureRecognizer)
     }
     
     private func setupTextField(field: UITextField, placeholder: String) {
@@ -107,6 +110,11 @@ class AuthViewController: UIViewController, AuthViewControllerDelegate {
             return
         }
         presenter.signIn(login: login, password: password)
+    }
+    
+    @objc
+    private func touchHandler() {
+        view.endEditing(true)
     }
     
 }

@@ -8,14 +8,16 @@
 import Foundation
 
 // MARK: - MoviewDetailsModel
-//TODO: add "nameRu", "nameEn", "nameOriginal", "year" fields
 struct MovieDetailsModel: Codable {
     let kinopoiskID: Int
-    let nameOriginal: String?
+    private let nameRu: String?
+    private let nameEn: String?
+    private let nameOriginal: String?
     let description: String?
     let countries: [CountryModel]
     let genres: [GenreModel]
-    let startYear, endYear: Int?
+    private let startYear, endYear: Int?
+    private let year: Int?
     let ratingKinopoisk: Double?
     let coverURL: String?
     let webUrl: String?
@@ -23,8 +25,27 @@ struct MovieDetailsModel: Codable {
     
     enum CodingKeys: String, CodingKey {
         case kinopoiskID = "kinopoiskId"
-        case nameOriginal
-        case description, countries, genres, startYear, endYear, ratingKinopoisk, webUrl
+        case nameOriginal, nameRu, nameEn
+        case description, countries, genres, startYear, endYear, year, ratingKinopoisk, webUrl
         case coverURL = "coverUrl"
+    }
+    
+    func getName() -> String {
+        return nameOriginal ?? nameEn ?? nameRu ?? ""
+    }
+    
+    func getYearTitle() -> String {
+        if let startYear = startYear, let endYear = endYear {
+            if (startYear == endYear) {
+                return "\(startYear), "
+            }
+            return "\(startYear) - \(endYear), "
+        } else if let startYear = startYear {
+            return "\(startYear) -, "
+        }
+        else if let year = year {
+            return "\(year), "
+        }
+        return ""
     }
 }

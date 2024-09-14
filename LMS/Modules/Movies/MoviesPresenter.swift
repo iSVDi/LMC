@@ -101,7 +101,7 @@ class MoviesPresenter {
         let movieDetailsPresenter = MovieDetailsPresenter(movieID: movieId,
                                                           movieDetailsDelegate: movieDetailsViewController)
         movieDetailsViewController.setPresent(movieDetailsPresenter)
-        moviesViewControllerDelegate?.presentController(movieDetailsViewController)
+        moviesViewControllerDelegate?.pushController(movieDetailsViewController)
     }
     
 }

@@ -28,12 +28,14 @@ class MovieDetailsPresenter {
         repository.getShots(movieId: movieID) { [weak self] shotList in
             let imageUrlList = shotList.items.map{$0.previewURL}
             self?.loadImages(imageUrlList: imageUrlList) { [weak self] images in
-                self?.movieDetailsDelegate?.setShots(images)
+                if !images.isEmpty {
+                    self?.movieDetailsDelegate?.setShots(images)
+                }
+                
             }
         }
         
     }
-    
     
     private func loadImages(imageUrlList: [String], completion: @escaping ([UIImage?]) -> Void) {
         var images: [UIImage?] = []

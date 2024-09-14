@@ -20,7 +20,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
     private let ratingLabel = UILabel()
     private let descriptionTitleLabel = UILabel()
     private let descritionLabel = UILabel()
-    private let genraLabel = UILabel()
+    private let genreLabel = UILabel()
     private let yearsCounryLabel = UILabel()
     private let shotTitleLabel = UILabel()
     private let shotHScrollView = UIScrollView()
@@ -40,20 +40,14 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         self.presenter = presenter
     }
     
-    //TODO: refactoring: move to another method here or add in MovieDetailsModel for prepare data
     func setMovieDetails(_ movieDetails: MovieDetailsModel) {
-        titleLabel.text = movieDetails.nameOriginal
+        titleLabel.text = movieDetails.getName()
         ratingLabel.text = movieDetails.ratingKinopoisk != nil ? "\(movieDetails.ratingKinopoisk!)" : ""
         descriptionTitleLabel.text = AppStrings.descriptionTitle
         descritionLabel.text = movieDetails.description
-        genraLabel.text = movieDetails.genres.map{$0.genre}.joined(separator: ", ")
+        genreLabel.text = movieDetails.genres.map{$0.genre}.joined(separator: ", ")
         
-        var years = ""
-        if let startYear = movieDetails.startYear{
-            years = "\(startYear) - "
-            years += movieDetails.endYear != nil ? "\(movieDetails.endYear!), " : ", "
-        }
-        
+        let years = movieDetails.getYearTitle()
         let countries = movieDetails.countries.map{$0.country}.joined(separator: ", ")
         yearsCounryLabel.text = years + countries
         shotTitleLabel.text = AppStrings.shotsTitle
@@ -66,7 +60,6 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
             if case let .success((resImage, _)) = res {
                 self?.imageView.image = resImage
             }
-            
         }
     }
     
@@ -78,6 +71,8 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
             shotImageView.widthToHeight(of: shotImageView, multiplier: 1.1)
             return shotImageView
         }
+        shotTitleLabel.isHidden = false
+        shotHScrollView.isHidden = false
         shotHScrollView.stack(imageViews, axis: .horizontal, height: shotStackHeight, spacing: 10)
     }
     
@@ -92,6 +87,8 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         mainScroll.contentInsetAdjustmentBehavior = .never
         mainScroll.edgesToSuperview()
         
+        shotTitleLabel.isHidden = true
+        shotHScrollView.isHidden = true
     }
     
     private func getImageSection() -> UIView {
@@ -136,7 +133,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         descriptionTitleLabel.leftToSuperview()
         linkButton.rightToSuperview()
         
-        [titleButtonStack, descritionLabel, genraLabel, yearsCounryLabel].forEach { subview in
+        [titleButtonStack, descritionLabel, genreLabel, yearsCounryLabel].forEach { subview in
             
             sectionStack.addArrangedSubview(subview)
             subview.horizontalToSuperview(insets: .horizontal(16))
@@ -165,7 +162,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         [titleLabel, descriptionTitleLabel, descritionLabel, shotTitleLabel].forEach { label in
             label.textColor = AppColors.appWhite
         }
-        genraLabel.textColor = AppColors.appGray
+        genreLabel.textColor = AppColors.appGray
         yearsCounryLabel.textColor = AppColors.appGray
         ratingLabel.textColor = AppColors.appColor
         ratingLabel.textAlignment = .right
@@ -181,9 +178,11 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         descritionLabel.font = AppFonts.Roboto.bold.font(size: 17)
         descritionLabel.numberOfLines = 0
         
-        genraLabel.font = AppFonts.Roboto.bold.font(size: 17)
+        genreLabel.font = AppFonts.Roboto.bold.font(size: 17)
         yearsCounryLabel.font = AppFonts.Roboto.bold.font(size: 17)
         shotTitleLabel.font = AppFonts.Roboto.bold.font(size: 30)
+        
+        [titleLabel, ratingLabel, descritionLabel, genreLabel, yearsCounryLabel].forEach {$0.adjustsFontSizeToFitWidth = true}
         
     }
     

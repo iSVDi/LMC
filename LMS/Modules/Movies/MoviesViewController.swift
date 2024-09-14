@@ -11,7 +11,7 @@ import UIKit
 protocol MoviesViewControllerDelegate: AnyObject {
     func exitWith(_ controller: UINavigationController)
     func reloadTableView()
-    func presentController(_ controller: UIViewController)
+    func pushController(_ controller: UIViewController)
 }
 
 //TODO: remove generated file from github
@@ -44,7 +44,7 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         stepperView?.setPage(presenter.currentPage)
     }
     
-    func presentController(_ controller: UIViewController) {
+    func pushController(_ controller: UIViewController) {
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -98,6 +98,10 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         refreshControl.tintColor = AppColors.appColor
         refreshControl.addTarget(self, action: #selector(refreshHandler), for: .valueChanged)
         tableView.addSubview(refreshControl)
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchHandler))
+        gestureRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(gestureRecognizer)
         
     }
     
@@ -201,6 +205,11 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     @objc
     private func refreshHandler() {
         presenter.handleRefresh()
+    }
+    
+    @objc
+    private func touchHandler() {
+        view.endEditing(true)
     }
     
 }
