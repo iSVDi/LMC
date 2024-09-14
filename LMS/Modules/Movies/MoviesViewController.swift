@@ -14,6 +14,8 @@ protocol MoviesViewControllerDelegate: AnyObject {
     func presentController(_ controller: UIViewController)
 }
 
+//TODO: remove generated file from github
+//TODO: handle strange transition between list and details movie
 class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     private lazy var presenter = MoviesPresenter(moviesViewControllerDelegate: self)
     private let tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
@@ -61,10 +63,10 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         navigationBarAppearance.backgroundColor = AppColors.appBlack
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
         
-        title = "KinoPoisk" //TODO: localize
+        title = AppStrings.kinopoiskTitle
         view.backgroundColor = AppColors.appBlack
         
-        let rightButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"),
+        let rightButton = UIBarButtonItem(image: AppImage.exit.systemImage(),
                                           style: .plain,
                                           target: self,
                                           action: #selector(rightBarButtonHandler))
@@ -114,8 +116,7 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         sortButtonSearchFieldStack.alignment = .fill
         
         let sortButton = UIButton()
-        let image = UIImage(systemName: "arrow.up.arrow.down")
-        sortButton.setImage(image, for: .normal)
+        sortButton.setImage(AppImage.sort.systemImage(), for: .normal)
         sortButton.tintColor = AppColors.appColor
         sortButton.addTarget(self, action: #selector(sortButtonHandler), for: .touchUpInside)
         
@@ -153,11 +154,11 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         searchTextField.textColor = AppColors.appWhite
         
         searchTextField.attributedPlaceholder = NSAttributedString(
-            string: "keyword", //TODO: localize
+            string: AppStrings.searchPlaceholder,
             attributes: [NSAttributedString.Key.foregroundColor: AppColors.appGray]
         )
-        let searchImage = UIImage(systemName: "magnifyingglass") //TODO: localize
-        let searchImageView = UIImageView(image: searchImage)
+        
+        let searchImageView = UIImageView(image: AppImage.search.systemImage())
         searchImageView.tintColor = AppColors.appColor
         
         let imageWrapper = UIView()

@@ -40,10 +40,11 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         self.presenter = presenter
     }
     
+    //TODO: refactoring: move to another method here or add in MovieDetailsModel for prepare data
     func setMovieDetails(_ movieDetails: MovieDetailsModel) {
         titleLabel.text = movieDetails.nameOriginal
         ratingLabel.text = movieDetails.ratingKinopoisk != nil ? "\(movieDetails.ratingKinopoisk!)" : ""
-        descriptionTitleLabel.text = "Описание" // TODO: localize
+        descriptionTitleLabel.text = AppStrings.descriptionTitle
         descritionLabel.text = movieDetails.description
         genraLabel.text = movieDetails.genres.map{$0.genre}.joined(separator: ", ")
         
@@ -55,7 +56,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         
         let countries = movieDetails.countries.map{$0.country}.joined(separator: ", ")
         yearsCounryLabel.text = years + countries
-        shotTitleLabel.text = "Кадры" //TODO: localize
+        shotTitleLabel.text = AppStrings.shotsTitle
         
         guard let imageURL = movieDetails.coverURL else {
             return
@@ -171,21 +172,20 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         ratingLabel.textColor = AppColors.appColor
         ratingLabel.textAlignment = .right
         
-        let linkImage = UIImage(systemName: "link") //TODO: localize
-        linkButton.setImage(linkImage, for: .normal)
+        linkButton.setImage(AppImage.link.systemImage(), for: .normal)
         linkButton.tintColor = AppColors.appColor
         linkButton.addTarget(self, action: #selector(linkButtonHandler), for: .touchUpInside)
         
-        titleLabel.font = FontFamily.Roboto.bold.font(size: 25)
-        ratingLabel.font = FontFamily.Roboto.bold.font(size: 25)
+        titleLabel.font = AppFonts.Roboto.bold.font(size: 25)
+        ratingLabel.font = AppFonts.Roboto.bold.font(size: 25)
         
-        descriptionTitleLabel.font = FontFamily.Roboto.bold.font(size: 30)
-        descritionLabel.font = FontFamily.Roboto.bold.font(size: 17)
+        descriptionTitleLabel.font = AppFonts.Roboto.bold.font(size: 30)
+        descritionLabel.font = AppFonts.Roboto.bold.font(size: 17)
         descritionLabel.numberOfLines = 0
         
-        genraLabel.font = FontFamily.Roboto.bold.font(size: 17)
-        yearsCounryLabel.font = FontFamily.Roboto.bold.font(size: 17)
-        shotTitleLabel.font = FontFamily.Roboto.bold.font(size: 30)
+        genraLabel.font = AppFonts.Roboto.bold.font(size: 17)
+        yearsCounryLabel.font = AppFonts.Roboto.bold.font(size: 17)
+        shotTitleLabel.font = AppFonts.Roboto.bold.font(size: 30)
         
     }
     

@@ -1,5 +1,5 @@
 //
-//  Colors.swift
+//  AppColors.swift
 //  LMS
 //
 //  Created by Daniil on 11.09.2024.

@@ -31,10 +31,11 @@ class AuthViewController: UIViewController, AuthViewControllerDelegate {
     func presentController(_ controller: UINavigationController) {
         present(controller, animated: true)
     }
-    //TODO: localize?
+    
     func showAlert() {
-        let alertController = UIAlertController(title: "Ошибка", message: "Неправильный логин или пароль", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Хорошо", style: .default))
+        let alertController = UIAlertController(title: AppStrings.errorTitle,
+                                                message: AppStrings.wronAuthMessage, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: AppStrings.okTitle, style: .default))
         present(alertController, animated: true)
     }
     
@@ -65,19 +66,18 @@ class AuthViewController: UIViewController, AuthViewControllerDelegate {
         loginButton.height(50)
     }
     
-    //TODO: localize?
     private func setupView() {
         view.backgroundColor = AppColors.appBlack
         
         loginButton.backgroundColor = AppColors.appColor
-        loginButton.setTitle("Войти", for: .normal)
+        loginButton.setTitle(AppStrings.signInTitle, for: .normal)
         
-        label.text = "KinoPoisk"
+        label.text = AppStrings.kinopoiskTitle
         label.textColor = AppColors.appColor
         label.font = UIFont(name: label.font.fontName, size: 50)
         
-        setupTextField(field: loginTextField, placeholder: "Логин")
-        setupTextField(field: passwordTextField, placeholder: "Пароль")
+        setupTextField(field: loginTextField, placeholder: AppStrings.loginTitle)
+        setupTextField(field: passwordTextField, placeholder: AppStrings.passwordTitle)
         
         loginButton.addTarget(self, action: #selector(loginButtonHandler), for: .touchUpInside)
     }

@@ -19,7 +19,7 @@ internal typealias Font = FontConvertible.Font
 // MARK: - Fonts
 
 // swiftlint:disable identifier_name line_length type_body_length
-internal enum FontFamily {
+internal enum AppFonts {
   internal enum Roboto {
     internal static let black = FontConvertible(name: "Roboto-Black", family: "Roboto", path: "Roboto-Black.ttf")
     internal static let blackItalic = FontConvertible(name: "Roboto-BlackItalic", family: "Roboto", path: "Roboto-BlackItalic.ttf")

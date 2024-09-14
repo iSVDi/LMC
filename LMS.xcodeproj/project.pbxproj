@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		5A892F6150507148EB60887E /* Pods_LMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63DD96B8EFB21F707E863D74 /* Pods_LMS.framework */; };
+		F33547EB2C95527100658091 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F33547E92C95527100658091 /* Localizable.strings */; };
+		F33547EE2C9558ED00658091 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = F33547ED2C9558ED00658091 /* swiftgen.yml */; };
+		F33547F22C955D1D00658091 /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33547F12C955D1D00658091 /* AppImages.swift */; };
+		F33548042C95673400658091 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33548022C95673300658091 /* AppFonts.swift */; };
+		F33548052C95673400658091 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33548032C95673400658091 /* AppStrings.swift */; };
 		F35BFB1A2C9458A00037FF57 /* MovieStepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35BFB192C9458A00037FF57 /* MovieStepperView.swift */; };
 		F36CBFC82C91B1A600BC1298 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFC72C91B1A600BC1298 /* AppDelegate.swift */; };
 		F36CBFD12C91B1A700BC1298 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F36CBFD02C91B1A700BC1298 /* Assets.xcassets */; };
-		F36CBFD42C91B1A700BC1298 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = F36CBFD32C91B1A700BC1298 /* Base */; };
 		F36CBFDC2C91B58200BC1298 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFDB2C91B58200BC1298 /* AuthViewController.swift */; };
-		F36CBFDF2C91C1D100BC1298 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFDE2C91C1D100BC1298 /* Colors.swift */; };
+		F36CBFDF2C91C1D100BC1298 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFDE2C91C1D100BC1298 /* AppColors.swift */; };
 		F36CBFE32C91C4BF00BC1298 /* AuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFE22C91C4BF00BC1298 /* AuthPresenter.swift */; };
 		F36CBFE52C91C57B00BC1298 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFE42C91C57B00BC1298 /* UserDefaultManager.swift */; };
 		F36CBFE72C91C93C00BC1298 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFE62C91C93C00BC1298 /* AuthService.swift */; };
@@ -28,7 +32,6 @@
 		F36CC0022C92C03800BC1298 /* MovieShotSourceListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CC0012C92C03800BC1298 /* MovieShotSourceListModel.swift */; };
 		F36CC0062C92C8CE00BC1298 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CC0052C92C8CE00BC1298 /* MovieTableViewCell.swift */; };
 		F36CC0082C92E9EA00BC1298 /* MovieImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CC0072C92E9EA00BC1298 /* MovieImageDownloader.swift */; };
-		F36CC01A2C93022500BC1298 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = F36CC0192C93022500BC1298 /* swiftgen.yml */; };
 		F36CC0352C93069C00BC1298 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F36CC0282C93069C00BC1298 /* Roboto-Black.ttf */; };
 		F36CC0362C93069C00BC1298 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F36CC0292C93069C00BC1298 /* Roboto-BlackItalic.ttf */; };
 		F36CC0372C93069C00BC1298 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F36CC02A2C93069C00BC1298 /* Roboto-Bold.ttf */; };
@@ -41,7 +44,6 @@
 		F36CC03E2C93069C00BC1298 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F36CC0312C93069C00BC1298 /* Roboto-Regular.ttf */; };
 		F36CC03F2C93069C00BC1298 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F36CC0322C93069C00BC1298 /* Roboto-Thin.ttf */; };
 		F36CC0402C93069C00BC1298 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F36CC0332C93069C00BC1298 /* Roboto-ThinItalic.ttf */; };
-		F36CC0422C9306C900BC1298 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CC0412C9306C900BC1298 /* Fonts.swift */; };
 		F36FAA092C9343AD0004799A /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FAA082C9343AD0004799A /* MovieDetailsViewController.swift */; };
 		F36FAA0B2C93494A0004799A /* MovieDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FAA0A2C93494A0004799A /* MovieDetailsPresenter.swift */; };
 		F36FAA0D2C9349910004799A /* MovieDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FAA0C2C9349910004799A /* MovieDetailsRepository.swift */; };
@@ -51,14 +53,19 @@
 		63DD96B8EFB21F707E863D74 /* Pods_LMS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LMS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B857FD6C7F689D24C8211A9D /* Pods-LMS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LMS.debug.xcconfig"; path = "Target Support Files/Pods-LMS/Pods-LMS.debug.xcconfig"; sourceTree = "<group>"; };
 		BBE30349A9C32CDB6995A872 /* Pods-LMS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LMS.release.xcconfig"; path = "Target Support Files/Pods-LMS/Pods-LMS.release.xcconfig"; sourceTree = "<group>"; };
+		F33547EA2C95527100658091 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F33547EC2C95527E00658091 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F33547ED2C9558ED00658091 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
+		F33547F12C955D1D00658091 /* AppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImages.swift; sourceTree = "<group>"; };
+		F33548022C95673300658091 /* AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
+		F33548032C95673400658091 /* AppStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		F35BFB192C9458A00037FF57 /* MovieStepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStepperView.swift; sourceTree = "<group>"; };
 		F36CBFC42C91B1A600BC1298 /* LMS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LMS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F36CBFC72C91B1A600BC1298 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F36CBFD02C91B1A700BC1298 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F36CBFD32C91B1A700BC1298 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F36CBFD52C91B1A700BC1298 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F36CBFDB2C91B58200BC1298 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
-		F36CBFDE2C91C1D100BC1298 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		F36CBFDE2C91C1D100BC1298 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		F36CBFE22C91C4BF00BC1298 /* AuthPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPresenter.swift; sourceTree = "<group>"; };
 		F36CBFE42C91C57B00BC1298 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		F36CBFE62C91C93C00BC1298 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -73,7 +80,6 @@
 		F36CC0012C92C03800BC1298 /* MovieShotSourceListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieShotSourceListModel.swift; sourceTree = "<group>"; };
 		F36CC0052C92C8CE00BC1298 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		F36CC0072C92E9EA00BC1298 /* MovieImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieImageDownloader.swift; sourceTree = "<group>"; };
-		F36CC0192C93022500BC1298 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = swiftgen.yml; path = LMS/Generated/swiftgen.yml; sourceTree = SOURCE_ROOT; };
 		F36CC0282C93069C00BC1298 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		F36CC0292C93069C00BC1298 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
 		F36CC02A2C93069C00BC1298 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -86,7 +92,6 @@
 		F36CC0312C93069C00BC1298 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		F36CC0322C93069C00BC1298 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		F36CC0332C93069C00BC1298 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
-		F36CC0412C9306C900BC1298 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		F36FAA082C9343AD0004799A /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		F36FAA0A2C93494A0004799A /* MovieDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsPresenter.swift; sourceTree = "<group>"; };
 		F36FAA0C2C9349910004799A /* MovieDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsRepository.swift; sourceTree = "<group>"; };
@@ -121,6 +126,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F33547F32C955FEC00658091 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				F33548022C95673300658091 /* AppFonts.swift */,
+				F33548032C95673400658091 /* AppStrings.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		F36CBFBB2C91B1A600BC1298 = {
 			isa = PBXGroup;
 			children = (
@@ -142,7 +156,7 @@
 		F36CBFC62C91B1A600BC1298 /* LMS */ = {
 			isa = PBXGroup;
 			children = (
-				F36CC01B2C9302E900BC1298 /* Generated */,
+				F33547F32C955FEC00658091 /* Generated */,
 				F36CBFF82C92B56500BC1298 /* Model */,
 				F36CBFDD2C91C1C800BC1298 /* Common */,
 				F36CBFEE2C91D27800BC1298 /* Service */,
@@ -156,9 +170,10 @@
 		F36CBFDD2C91C1C800BC1298 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				F36CBFDE2C91C1D100BC1298 /* Colors.swift */,
+				F36CBFDE2C91C1D100BC1298 /* AppColors.swift */,
 				F36CBFE42C91C57B00BC1298 /* UserDefaultManager.swift */,
 				F36CC0072C92E9EA00BC1298 /* MovieImageDownloader.swift */,
+				F33547F12C955D1D00658091 /* AppImages.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -218,21 +233,13 @@
 		F36CC0092C92FC2F00BC1298 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F33547ED2C9558ED00658091 /* swiftgen.yml */,
 				F36CC0342C93069C00BC1298 /* Fonts */,
 				F36CBFD52C91B1A700BC1298 /* Info.plist */,
-				F36CBFD22C91B1A700BC1298 /* LaunchScreen.storyboard */,
 				F36CBFD02C91B1A700BC1298 /* Assets.xcassets */,
+				F33547E92C95527100658091 /* Localizable.strings */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		F36CC01B2C9302E900BC1298 /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-				F36CC0192C93022500BC1298 /* swiftgen.yml */,
-				F36CC0412C9306C900BC1298 /* Fonts.swift */,
-			);
-			path = Generated;
 			sourceTree = "<group>";
 		};
 		F36CC0342C93069C00BC1298 /* Fonts */ = {
@@ -308,6 +315,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = F36CBFBB2C91B1A600BC1298;
 			productRefGroup = F36CBFC52C91B1A600BC1298 /* Products */;
@@ -327,16 +335,16 @@
 				F36CC0402C93069C00BC1298 /* Roboto-ThinItalic.ttf in Resources */,
 				F36CC03F2C93069C00BC1298 /* Roboto-Thin.ttf in Resources */,
 				F36CBFD12C91B1A700BC1298 /* Assets.xcassets in Resources */,
-				F36CBFD42C91B1A700BC1298 /* Base in Resources */,
+				F33547EE2C9558ED00658091 /* swiftgen.yml in Resources */,
 				F36CC03B2C93069C00BC1298 /* Roboto-LightItalic.ttf in Resources */,
 				F36CC0372C93069C00BC1298 /* Roboto-Bold.ttf in Resources */,
 				F36CC03D2C93069C00BC1298 /* Roboto-MediumItalic.ttf in Resources */,
 				F36CC0362C93069C00BC1298 /* Roboto-BlackItalic.ttf in Resources */,
-				F36CC01A2C93022500BC1298 /* swiftgen.yml in Resources */,
 				F36CC0392C93069C00BC1298 /* Roboto-Italic.ttf in Resources */,
 				F36CC0382C93069C00BC1298 /* Roboto-BoldItalic.ttf in Resources */,
 				F36CC03C2C93069C00BC1298 /* Roboto-Medium.ttf in Resources */,
 				F36CC03E2C93069C00BC1298 /* Roboto-Regular.ttf in Resources */,
+				F33547EB2C95527100658091 /* Localizable.strings in Resources */,
 				F36CC0352C93069C00BC1298 /* Roboto-Black.ttf in Resources */,
 				F36CC03A2C93069C00BC1298 /* Roboto-Light.ttf in Resources */,
 			);
@@ -392,12 +400,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				F36CBFFA2C92B57600BC1298 /* MovieListModel.swift in Sources */,
+				F33547F22C955D1D00658091 /* AppImages.swift in Sources */,
+				F33548042C95673400658091 /* AppFonts.swift in Sources */,
 				F36CC0082C92E9EA00BC1298 /* MovieImageDownloader.swift in Sources */,
 				F36FAA092C9343AD0004799A /* MovieDetailsViewController.swift in Sources */,
 				F36CBFE92C91C9B700BC1298 /* MoviesViewController.swift in Sources */,
+				F33548052C95673400658091 /* AppStrings.swift in Sources */,
 				F36CBFE32C91C4BF00BC1298 /* AuthPresenter.swift in Sources */,
 				F36CC0022C92C03800BC1298 /* MovieShotSourceListModel.swift in Sources */,
-				F36CBFDF2C91C1D100BC1298 /* Colors.swift in Sources */,
+				F36CBFDF2C91C1D100BC1298 /* AppColors.swift in Sources */,
 				F36CBFFE2C92BD8100BC1298 /* CountryModel.swift in Sources */,
 				F36CC0062C92C8CE00BC1298 /* MovieTableViewCell.swift in Sources */,
 				F36CBFF72C92A9CD00BC1298 /* MoviesService.swift in Sources */,
@@ -411,7 +422,6 @@
 				F36FAA0B2C93494A0004799A /* MovieDetailsPresenter.swift in Sources */,
 				F36CBFE52C91C57B00BC1298 /* UserDefaultManager.swift in Sources */,
 				F35BFB1A2C9458A00037FF57 /* MovieStepperView.swift in Sources */,
-				F36CC0422C9306C900BC1298 /* Fonts.swift in Sources */,
 				F36CC0002C92BD8B00BC1298 /* GenreModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,12 +429,13 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		F36CBFD22C91B1A700BC1298 /* LaunchScreen.storyboard */ = {
+		F33547E92C95527100658091 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F36CBFD32C91B1A700BC1298 /* Base */,
+				F33547EA2C95527100658091 /* en */,
+				F33547EC2C95527E00658091 /* ru */,
 			);
-			name = LaunchScreen.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -435,6 +446,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -498,6 +510,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

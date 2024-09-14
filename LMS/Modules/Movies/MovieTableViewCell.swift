@@ -32,6 +32,7 @@ class MovieTableViewCell: UITableViewCell {
         movieImageView.image = nil
     }
     
+    //TODO: refactoring
     func setData(_ data: MovieListItemModel) {
         imageDownloader.downloadImage(imageURL: data.posterURLPreview) { [weak self] res in
             switch res {
@@ -90,12 +91,12 @@ class MovieTableViewCell: UITableViewCell {
         ratingLabel.textAlignment = .right
         ratingLabel.textColor = AppColors.appColor
         
-        nameLabel.font = FontFamily.Roboto.bold.font(size: 20)
-        genreLabel.font = FontFamily.Roboto.bold.font(size: 15)
+        nameLabel.font = AppFonts.Roboto.bold.font(size: 20)
+        genreLabel.font = AppFonts.Roboto.bold.font(size: 15)
         genreLabel.textColor = AppColors.appGray
         yearContriesLabel.textColor = AppColors.appGray
-        yearContriesLabel.font = FontFamily.Roboto.bold.font(size: 15)
-        ratingLabel.font = FontFamily.Roboto.bold.font(size: 20)
+        yearContriesLabel.font = AppFonts.Roboto.bold.font(size: 15)
+        ratingLabel.font = AppFonts.Roboto.bold.font(size: 20)
         
     }
     

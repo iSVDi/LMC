@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: - MoviewDetailsModel
+//TODO: add "nameRu", "nameEn", "nameOriginal", "year" fields
 struct MovieDetailsModel: Codable {
     let kinopoiskID: Int
     let nameOriginal: String?

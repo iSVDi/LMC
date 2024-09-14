@@ -1,8 +1,21 @@
 fonts:
-  inputs: LMS/Resources/Fonts
-  outputs:
-    templateName: swift5
-    output: LMS/Generated/Fonts.swift
+    inputs: Fonts
+    outputs:
+        templateName: swift5
+        output: ../Generated/AppFonts.swift
+        params:
+            enumName: AppFonts
+  
+
+strings:
+    inputs:
+     - ru.lproj
+    outputs:
+     - templateName: structured-swift5
+       output: ../Generated/AppStrings.swift
+       params:
+            enumName: AppStrings
+   
 ## Note: all of the config entries below are just examples with placeholders. Be sure to edit and adjust to your needs when uncommenting.
 
 ## In case your config entries all use a common input/output parent directory, you can specify those here.
@@ -61,10 +74,3 @@ fonts:
 ##
 ## For more info, use `swiftgen config doc` to open the full documentation on GitHub.
 ## https://github.com/SwiftGen/SwiftGen/tree/6.6.3/Documentation/
-
-#fonts:
-# inputs: LMS/Resources/Fonts
-# outputs:
-#    templateName: swift5
-#    output: LMS/Generated/Fonts.swift
-

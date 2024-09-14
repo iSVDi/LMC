@@ -19,6 +19,7 @@ struct MovieListModel: Codable {
 }
 
 // MARK: - Item
+//TODO: check all fields are added
 struct MovieListItemModel: Codable {
     let kinopoiskID: Int
     private let nameOriginal: String?
