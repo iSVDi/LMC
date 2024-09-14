@@ -25,6 +25,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
     private let shotTitleLabel = UILabel()
     private let shotHScrollView = UIScrollView()
     private let linkButton = UIButton()
+    private var activityView = UIActivityIndicatorView()
     
     private let movieImageDownloader = MovieImageDownloader()
     private var presenter: MovieDetailsPresenter?
@@ -51,6 +52,9 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         let countries = movieDetails.countries.map{$0.country}.joined(separator: ", ")
         yearsCounryLabel.text = years + countries
         shotTitleLabel.text = AppStrings.shotsTitle
+        
+        setupSubviewsIsHidden(false)
+        activityView.stopAnimating()
         
         guard let imageURL = movieDetails.coverURL else {
             return
@@ -89,6 +93,9 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         
         shotTitleLabel.isHidden = true
         shotHScrollView.isHidden = true
+        
+        view.addSubview(activityView)
+        activityView.edgesToSuperview()
     }
     
     private func getImageSection() -> UIView {
@@ -113,8 +120,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
             titleRatingStack.addArrangedSubview(subview)
             subview.verticalToSuperview()
         }
-        titleLabel.leftToSuperview()
-        ratingLabel.rightToSuperview()
+
         return titleRatingStack
     }
     
@@ -145,16 +151,25 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
     private func getShotsSection() -> UIView {
         let stack = UIStackView()
         stack.axis = .vertical
+
         [shotTitleLabel, shotHScrollView].forEach { subview in
             stack.addArrangedSubview(subview)
-            subview.horizontalToSuperview(insets: .horizontal(16))
+            subview.horizontalToSuperview()
         }
         shotHScrollView.height(shotStackHeight)
         
-        return stack
+        let wrapper = UIView()
+        wrapper.addSubview(stack)
+        stack.edgesToSuperview(insets: .horizontal(16))
+        return wrapper
     }
     
     private func setupViews() {
+        view.backgroundColor = AppColors.appBlack
+        activityView.color = AppColors.appColor
+        activityView.startAnimating()
+        setupSubviewsIsHidden(true)
+        
         navigationController?.navigationBar.standardAppearance.configureWithTransparentBackground()
         navigationController?.navigationBar.scrollEdgeAppearance?.configureWithTransparentBackground()
         imageView.contentMode = .scaleAspectFit
@@ -186,6 +201,13 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         
     }
     
+    /// * change visibility all subviews except shotTitleLabel, shotHScrollView
+    private func setupSubviewsIsHidden(_ isHidden: Bool) {
+        [imageView, titleLabel,ratingLabel,descriptionTitleLabel,descritionLabel,genreLabel,yearsCounryLabel, linkButton].forEach { subview in
+            subview.isHidden = isHidden
+        }
+    }
+    
     //    MARK: - handlers
     @objc
     private func linkButtonHandler() {
@@ -195,6 +217,5 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         let url = URL(string: stringUrl)!
         UIApplication.shared.open(url)
     }
-    
     
 }

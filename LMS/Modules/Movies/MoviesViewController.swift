@@ -15,7 +15,6 @@ protocol MoviesViewControllerDelegate: AnyObject {
 }
 
 //TODO: remove generated file from github
-//TODO: handle strange transition between list and details movie
 class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     private lazy var presenter = MoviesPresenter(moviesViewControllerDelegate: self)
     private let tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
@@ -23,6 +22,7 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     private let yearPicker = UIPickerView()
     private let refreshControl = UIRefreshControl()
     private var stepperView: MovieStepperView?
+    private var activityView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +42,8 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         tableView.reloadData()
         refreshControl.endRefreshing()
         stepperView?.setPage(presenter.currentPage)
+        tableView.isHidden = false
+        activityView.stopAnimating()
     }
     
     func pushController(_ controller: UIViewController) {
@@ -53,6 +55,8 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     private func setupLayout() {
         view.addSubview(tableView)
         tableView.edgesToSuperview(usingSafeArea: true)
+        view.addSubview(activityView)
+        activityView.edgesToSuperview()
     }
     
     private func setupViews() {
@@ -94,6 +98,7 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         tableView.backgroundColor = AppColors.appBlack
         tableView.tableHeaderView = getSortingView()
         tableView.tableFooterView = getStepperView()
+        tableView.isHidden = true
         
         refreshControl.tintColor = AppColors.appColor
         refreshControl.addTarget(self, action: #selector(refreshHandler), for: .valueChanged)
@@ -103,6 +108,8 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         gestureRecognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(gestureRecognizer)
         
+        activityView.color = AppColors.appColor
+        activityView.startAnimating()
     }
     
     private func getSortingView() -> UIView {
@@ -110,11 +117,8 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         mainStack.axis = .vertical
         mainStack.distribution = .equalSpacing
         mainStack.alignment = .center
-        
-        mainStack.height(100)
         mainStack.spacing = 10
-        mainStack.width(.greatestFiniteMagnitude)
-        
+
         let sortButtonSearchFieldStack = UIStackView()
         sortButtonSearchFieldStack.axis = .horizontal
         sortButtonSearchFieldStack.alignment = .fill
@@ -131,13 +135,14 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         sortButton.width(50)
         
         sortButtonSearchFieldStack.height(50)
-        sortButtonSearchFieldStack.width(.greatestFiniteMagnitude)
         sortButton.leftToSuperview()
         searchTextField.rightToSuperview()
         
         [sortButtonSearchFieldStack, yearPicker].forEach { subview in
             mainStack.addArrangedSubview(subview)
         }
+        
+        sortButtonSearchFieldStack.horizontalToSuperview()
         
         let wrapper = UIView()
         wrapper.addSubview(mainStack)
@@ -173,12 +178,13 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         searchTextField.rightViewMode = .always
         searchTextField.textColor = AppColors.appWhite
         searchTextField.addTarget(self, action: #selector(textFieldDidChangeValueHandler), for: .editingChanged)
+        searchTextField.addTarget(self, action: #selector(touchHandler), for: .editingDidEndOnExit)
     }
     
     private func getStepperView() -> UIView {
         let wrapper = UIView()
         wrapper.addSubview(stepperView ?? UIView())
-        stepperView?.edgesToSuperview(insets: .horizontal(16), usingSafeArea: true)
+        stepperView?.edgesToSuperview()
         wrapper.frame.size.height = 50
         return wrapper
     }
