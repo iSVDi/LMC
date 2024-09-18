@@ -28,12 +28,12 @@ class MoviesPresenter {
             presentAuthController(animated: false)
             return
         }
-        updateMovie(order: .rating, year: years[selectedYearId])
+        updateMoviesWithLoading()
     }
     
     private func presentAuthController(animated: Bool) {
         let controller = AuthViewController() { [weak self] in
-            self?.authDismissedHander()
+            self?.updateMoviesWithLoading()
         }
         
         controller.modalPresentationStyle = .fullScreen
@@ -41,7 +41,8 @@ class MoviesPresenter {
         rootViewController?.present(controller, animated: animated)
     }
     
-    private func authDismissedHander() {
+    private func updateMoviesWithLoading() {
+        moviesViewControllerDelegate?.setLoading(true)
         updateMovie(order: .rating, year: years[selectedYearId])
     }
     
@@ -52,12 +53,14 @@ class MoviesPresenter {
             }
             welf.movieList = movieList
             welf.filteredMovieList = movieList.items
+            welf.moviesViewControllerDelegate?.setLoading(false)
             welf.handleFilterBySearch(welf.searchRequest)
         }
     }
     
     func handleSelectYearFilter(_ id: Int) {
         selectedYearId = id
+        currentPage = 1
         updateMovie(order: .year, year: years[id])
     }
     
@@ -85,6 +88,7 @@ class MoviesPresenter {
     }
     
     func handleRefresh() {
+        currentPage = 1
         handleSortByRating()
     }
     

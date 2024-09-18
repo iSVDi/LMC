@@ -12,6 +12,7 @@ protocol MoviesViewControllerDelegate: AnyObject {
     func presentController(_ controller: UIViewController)
     func reloadTableView()
     func pushController(_ controller: UIViewController)
+    func setLoading(_ state: Bool)
 }
 
 //TODO: remove generated file from github
@@ -21,14 +22,21 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     private let searchTextField = UITextField()
     private let yearPicker = UIPickerView()
     private let refreshControl = UIRefreshControl()
-    private var stepperView: MovieStepperView?
+    private lazy var stepperView: MovieStepperView = MovieStepperView { [weak self] in
+        self?.presenter.stepBack()
+    } forwardHander: { [weak self] in
+        self?.presenter.stepForward()
+    }
+
     private var activityView = UIActivityIndicatorView()
+    
+    private let stepperHeight: CGFloat = 50
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setHidesBackButton(true, animated: false)
-        setupLayout()
         setupViews()
+        setupLayout()
         presenter.handleViewDidLoad()
     }
     
@@ -40,21 +48,29 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     
     func reloadTableView() {
         tableView.reloadData()
+        stepperView.setPage(presenter.currentPage)
         refreshControl.endRefreshing()
-        stepperView?.setPage(presenter.currentPage)
-        tableView.isHidden = false
-        activityView.stopAnimating()
     }
     
     func pushController(_ controller: UIViewController) {
         navigationController?.pushViewController(controller, animated: true)
     }
     
+    func setLoading(_ isPresented: Bool) {
+        isPresented ? activityView.startAnimating() : activityView.stopAnimating()
+        tableView.isHidden = isPresented
+        stepperView.isHidden = isPresented
+    }
+    
     // MARK: - Private methods
     
     private func setupLayout() {
+        
         view.addSubview(tableView)
-        tableView.edgesToSuperview(usingSafeArea: true)
+        view.addSubview(stepperView)
+        tableView.edgesToSuperview(insets: .bottom(stepperHeight), usingSafeArea: true)
+        stepperView.edgesToSuperview(excluding: .top, usingSafeArea: true)
+        stepperView.topToBottom(of: tableView)
         view.addSubview(activityView)
         activityView.edgesToSuperview()
     }
@@ -86,19 +102,11 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         yearPicker.selectRow(presenter.selectedYearId, inComponent: 0, animated: false)
         yearPicker.tintColor = AppColors.appColor
         
-        stepperView = MovieStepperView(backHander: { [weak self] in
-            self?.presenter.stepBack()
-        }, forwardHander: { [weak self] in
-            self?.presenter.stepForward()
-        })
-        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "\(MovieTableViewCell.self)")
         tableView.backgroundColor = AppColors.appBlack
         tableView.tableHeaderView = getSortingView()
-        tableView.tableFooterView = getStepperView()
-        tableView.isHidden = true
         
         refreshControl.tintColor = AppColors.appColor
         refreshControl.addTarget(self, action: #selector(refreshHandler), for: .valueChanged)
@@ -109,7 +117,6 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         view.addGestureRecognizer(gestureRecognizer)
         
         activityView.color = AppColors.appColor
-        activityView.startAnimating()
     }
     
     private func getSortingView() -> UIView {
@@ -180,15 +187,6 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         searchTextField.addTarget(self, action: #selector(textFieldDidChangeValueHandler), for: .editingChanged)
         searchTextField.addTarget(self, action: #selector(touchHandler), for: .editingDidEndOnExit)
     }
-    
-    private func getStepperView() -> UIView {
-        let wrapper = UIView()
-        wrapper.addSubview(stepperView ?? UIView())
-        stepperView?.edgesToSuperview()
-        wrapper.frame.size.height = 50
-        return wrapper
-    }
-
     
     // MARK: - handlers
     
