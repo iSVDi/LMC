@@ -13,12 +13,9 @@ class MoviesPresenter {
     private let userDefaultManager = UserDefaultManager()
     private var movieList = MovieListModel()
     private(set) var filteredMovieList: [MovieListItemModel] = []
-    private(set) var selectedYearId: Int = 0
     private(set) var currentPage = 1
-    private let moviesPerPage = 20
     private var descOrder = true
     private var searchRequest = ""
-    private(set) var years = Array((1950...2024).reversed())
     
     init(moviesViewControllerDelegate: MoviesViewControllerDelegate) {
         self.moviesViewControllerDelegate = moviesViewControllerDelegate
@@ -28,7 +25,7 @@ class MoviesPresenter {
         return currentPage + 1 <= movieList.totalPages
     }
     
-    private var getLastMovieCellId: Int { return (20 * currentPage) - 1 }
+    private var getLastMovieCellId: Int { return movieList.items.count - 1 }
     
     //MARK: - Interface
     
@@ -39,20 +36,7 @@ class MoviesPresenter {
         }
         updateMoviesWithLoading()
     }
-    
-    func handleSelectYearFilter(_ id: Int) {
-        selectedYearId = id
-        loadFirstPage()
-    }
-    
-    
-    func handleSortByRating() {
-        descOrder.toggle()
-        movieList.items.reverse()
-        filteredMovieList.reverse()
-        moviesViewControllerDelegate?.reloadTableView()
-    }
-    
+        
     func handleFilterBySearch(_ search: String) {
         searchRequest = search
         guard !search.isEmpty else {
@@ -77,7 +61,6 @@ class MoviesPresenter {
         
     func exitButtonTapped() {
         currentPage = 1
-        selectedYearId = 0
         userDefaultManager.setBool(value: true, key: .isNeedSignIn)
         presentAuthController(animated: true)
     }
@@ -97,7 +80,8 @@ class MoviesPresenter {
             return
         }
         currentPage += 1
-        updateMovie(year: years[selectedYearId])
+        //TODO: set correct year
+        updateMovie(year: 2024)
     }
     
     //MARK: - Private methods
@@ -114,7 +98,8 @@ class MoviesPresenter {
     
     private func updateMoviesWithLoading() {
         moviesViewControllerDelegate?.setLoading(true)
-        updateMovie(year: years[selectedYearId])
+        //TODO: set correct year
+        updateMovie(year: 2024)
     }
     
     private func updateMovie(year: Int) {
@@ -151,7 +136,8 @@ class MoviesPresenter {
     
     private func loadFirstPage() {
         currentPage = 1
-        updateMovie(year: years[selectedYearId])
+        //TODO: set correct year
+        updateMovie(year: 2024)
     }
     
 }
