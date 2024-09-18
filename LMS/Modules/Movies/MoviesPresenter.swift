@@ -124,7 +124,7 @@ class MoviesPresenter {
             }
             
             if welf.currentPage > 1 {
-                var sortedNewMovies = movieList.items.sorted { a, b in
+                let sortedNewMovies = movieList.items.sorted { a, b in
                     if welf.descOrder {
                         return a.ratingKinopoisk > b.ratingKinopoisk
                     }
