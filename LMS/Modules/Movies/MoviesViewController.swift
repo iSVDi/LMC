@@ -15,22 +15,15 @@ protocol MoviesViewControllerDelegate: AnyObject {
     func setLoading(_ state: Bool)
 }
 
-//TODO: remove generated file from github
 class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     private lazy var presenter = MoviesPresenter(moviesViewControllerDelegate: self)
     private let tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
     private let searchTextField = UITextField()
     private let yearPicker = UIPickerView()
     private let refreshControl = UIRefreshControl()
-    private lazy var stepperView: MovieStepperView = MovieStepperView { [weak self] in
-        self?.presenter.stepBack()
-    } forwardHander: { [weak self] in
-        self?.presenter.stepForward()
-    }
-
     private var activityView = UIActivityIndicatorView()
     
-    private let stepperHeight: CGFloat = 50
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +41,8 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     
     func reloadTableView() {
         tableView.reloadData()
-        stepperView.setPage(presenter.currentPage)
         refreshControl.endRefreshing()
+        yearPicker.selectRow(presenter.selectedYearId, inComponent: 0, animated: false)
     }
     
     func pushController(_ controller: UIViewController) {
@@ -59,7 +52,6 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     func setLoading(_ isPresented: Bool) {
         isPresented ? activityView.startAnimating() : activityView.stopAnimating()
         tableView.isHidden = isPresented
-        stepperView.isHidden = isPresented
     }
     
     // MARK: - Private methods
@@ -67,10 +59,7 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     private func setupLayout() {
         
         view.addSubview(tableView)
-        view.addSubview(stepperView)
-        tableView.edgesToSuperview(insets: .bottom(stepperHeight), usingSafeArea: true)
-        stepperView.edgesToSuperview(excluding: .top, usingSafeArea: true)
-        stepperView.topToBottom(of: tableView)
+        tableView.edgesToSuperview(usingSafeArea: true)
         view.addSubview(activityView)
         activityView.edgesToSuperview()
     }
@@ -244,6 +233,26 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         presenter.handleMovieTapWith(indexPath.row)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        presenter.handleWillDisplayTableViewCell(with: indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard presenter.isNeedDisplayLoadingFooterView else {
+            return nil
+        }
+        
+        let loaderView = UIActivityIndicatorView()
+        loaderView.color = AppColors.appColor
+        loaderView.startAnimating()
+        let wrapper = UIView()
+        wrapper.addSubview(loaderView)
+        loaderView.edgesToSuperview()
+        return wrapper
+    }
+    
+    
     
 }
 // MARK: - UIPickerViewDataSource, UIPickerViewDelegate

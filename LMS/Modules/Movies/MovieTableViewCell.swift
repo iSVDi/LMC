@@ -52,7 +52,7 @@ class MovieTableViewCell: UITableViewCell {
         yearContriesLabel.text = "\(data.year), " + data.countries
             .map{$0.country}
             .joined(separator: ", ")
-        ratingLabel.text = data.ratingKinopoisk != nil ? "\(data.ratingKinopoisk!)" : ""
+        ratingLabel.text = "\(data.ratingKinopoisk)"
     }
     
     private func setupLayout() {

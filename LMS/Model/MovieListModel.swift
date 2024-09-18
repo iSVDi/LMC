@@ -10,7 +10,7 @@ import Foundation
 // MARK: - MovieList
 struct MovieListModel: Codable {
     let totalPages: Int
-    let items: [MovieListItemModel]
+    var items: [MovieListItemModel]
     
     init() {
         items = []
@@ -26,7 +26,7 @@ struct MovieListItemModel: Codable {
     private let nameEn: String?
     let countries: [CountryModel]
     let genres: [GenreModel]
-    let ratingKinopoisk: Double?
+    let ratingKinopoisk: Double
     let year: Int
     let posterURLPreview: String
     enum CodingKeys: String, CodingKey {
