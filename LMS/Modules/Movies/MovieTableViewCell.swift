@@ -90,10 +90,15 @@ class MovieTableViewCell: UITableViewCell {
         ratingLabel.textColor = AppColors.appColor
         
         nameLabel.font = AppFonts.Roboto.bold.font(size: 20)
+        nameLabel.adjustsFontSizeToFitWidth = true
         genreLabel.font = AppFonts.Roboto.bold.font(size: 15)
         genreLabel.textColor = AppColors.appGray
+        genreLabel.adjustsFontSizeToFitWidth = true
+        genreLabel.numberOfLines = 3
         yearContriesLabel.textColor = AppColors.appGray
         yearContriesLabel.font = AppFonts.Roboto.bold.font(size: 15)
+        yearContriesLabel.adjustsFontSizeToFitWidth = true
+        yearContriesLabel.numberOfLines = 3
         ratingLabel.font = AppFonts.Roboto.bold.font(size: 20)
         movieImageView.contentMode = .scaleAspectFit
         
