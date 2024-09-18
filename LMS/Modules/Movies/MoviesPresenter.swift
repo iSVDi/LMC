@@ -97,7 +97,7 @@ class MoviesPresenter {
             return
         }
         currentPage += 1
-        updateMovie(order: .rating, year: years[selectedYearId])
+        updateMovie(year: years[selectedYearId])
     }
     
     //MARK: - Private methods
@@ -114,11 +114,11 @@ class MoviesPresenter {
     
     private func updateMoviesWithLoading() {
         moviesViewControllerDelegate?.setLoading(true)
-        updateMovie(order: .rating, year: years[selectedYearId])
+        updateMovie(year: years[selectedYearId])
     }
     
-    private func updateMovie(order: MoviesOrder, year: Int) {
-        movieRepository.getMovies(order: order, year: year, page: currentPage) { [weak self] movieList in
+    private func updateMovie(year: Int) {
+        movieRepository.getMovies(year: year, page: currentPage) { [weak self] movieList in
             guard let welf = self else {
                 return
             }
@@ -151,7 +151,7 @@ class MoviesPresenter {
     
     private func loadFirstPage() {
         currentPage = 1
-        updateMovie(order: .rating, year: years[selectedYearId])
+        updateMovie(year: years[selectedYearId])
     }
     
 }

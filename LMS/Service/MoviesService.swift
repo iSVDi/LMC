@@ -9,11 +9,10 @@ import Moya
 
 enum MoviesOrder: String {
     case rating = "RATING"
-    case year = "YEAR"
 }
 
 enum MoviesService {
-    case getMovies(order: MoviesOrder, year: Int, page: Int)
+    case getMovies(year: Int, page: Int)
     case getMovieDetails(id: Int)
     case getMovieShots(id: Int)
 }
@@ -25,7 +24,7 @@ extension MoviesService: TargetType {
     
     var path: String {
         switch self {
-        case .getMovies(_, _, _):
+        case .getMovies(_, _):
             return("/films")
         case .getMovieDetails(let id):
             return("/films/\(id)")
@@ -40,8 +39,8 @@ extension MoviesService: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .getMovies(let order, let year, let page):
-            let params = ["order" : order.rawValue,
+        case .getMovies(let year, let page):
+            let params = ["order" : MoviesOrder.rating.rawValue,
                           "yearFrom": "\(year)",
                           "yearTo": "\(year)",
                           "page": "\(page)"
