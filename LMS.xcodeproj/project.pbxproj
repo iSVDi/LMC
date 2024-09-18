@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5A892F6150507148EB60887E /* Pods_LMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63DD96B8EFB21F707E863D74 /* Pods_LMS.framework */; };
+		A5D9F7B62C9ABEC1001D39A2 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D9F7B32C9ABEC1001D39A2 /* AppFonts.swift */; };
+		A5D9F7B72C9ABEC1001D39A2 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D9F7B42C9ABEC1001D39A2 /* AppStrings.swift */; };
 		F33547EB2C95527100658091 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F33547E92C95527100658091 /* Localizable.strings */; };
 		F33547EE2C9558ED00658091 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = F33547ED2C9558ED00658091 /* swiftgen.yml */; };
 		F33547F22C955D1D00658091 /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33547F12C955D1D00658091 /* AppImages.swift */; };
@@ -49,6 +51,8 @@
 
 /* Begin PBXFileReference section */
 		63DD96B8EFB21F707E863D74 /* Pods_LMS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LMS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5D9F7B32C9ABEC1001D39A2 /* AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
+		A5D9F7B42C9ABEC1001D39A2 /* AppStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		B857FD6C7F689D24C8211A9D /* Pods-LMS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LMS.debug.xcconfig"; path = "Target Support Files/Pods-LMS/Pods-LMS.debug.xcconfig"; sourceTree = "<group>"; };
 		BBE30349A9C32CDB6995A872 /* Pods-LMS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LMS.release.xcconfig"; path = "Target Support Files/Pods-LMS/Pods-LMS.release.xcconfig"; sourceTree = "<group>"; };
 		F33547EA2C95527100658091 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -113,6 +117,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A5D9F7B52C9ABEC1001D39A2 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				A5D9F7B32C9ABEC1001D39A2 /* AppFonts.swift */,
+				A5D9F7B42C9ABEC1001D39A2 /* AppStrings.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		B09CFA1154F09CEF719D56E9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +156,7 @@
 		F36CBFC62C91B1A600BC1298 /* LMS */ = {
 			isa = PBXGroup;
 			children = (
+				A5D9F7B52C9ABEC1001D39A2 /* Generated */,
 				F36CBFF82C92B56500BC1298 /* Model */,
 				F36CBFDD2C91C1C800BC1298 /* Common */,
 				F36CBFEE2C91D27800BC1298 /* Service */,
@@ -387,9 +401,11 @@
 			files = (
 				F36CBFFA2C92B57600BC1298 /* MovieListModel.swift in Sources */,
 				F33547F22C955D1D00658091 /* AppImages.swift in Sources */,
+				A5D9F7B62C9ABEC1001D39A2 /* AppFonts.swift in Sources */,
 				F36CC0082C92E9EA00BC1298 /* MovieImageDownloader.swift in Sources */,
 				F36FAA092C9343AD0004799A /* MovieDetailsViewController.swift in Sources */,
 				F36CBFE92C91C9B700BC1298 /* MoviesViewController.swift in Sources */,
+				A5D9F7B72C9ABEC1001D39A2 /* AppStrings.swift in Sources */,
 				F36CBFE32C91C4BF00BC1298 /* AuthPresenter.swift in Sources */,
 				F36CC0022C92C03800BC1298 /* MovieShotSourceListModel.swift in Sources */,
 				F36CBFDF2C91C1D100BC1298 /* AppColors.swift in Sources */,

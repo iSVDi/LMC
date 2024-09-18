@@ -120,7 +120,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
             titleRatingStack.addArrangedSubview(subview)
             subview.verticalToSuperview()
         }
-
+        
         return titleRatingStack
     }
     
@@ -151,7 +151,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
     private func getShotsSection() -> UIView {
         let stack = UIStackView()
         stack.axis = .vertical
-
+        
         [shotTitleLabel, shotHScrollView].forEach { subview in
             stack.addArrangedSubview(subview)
             subview.horizontalToSuperview()
@@ -211,10 +211,11 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
     //    MARK: - handlers
     @objc
     private func linkButtonHandler() {
-        guard let stringUrl = presenter?.webUrlString else {
+        guard let stringUrl = presenter?.webUrlString,
+        let url = URL(string: stringUrl) else {
             return
-}
-        let url = URL(string: stringUrl)!
+        }
+        
         UIApplication.shared.open(url)
     }
     
