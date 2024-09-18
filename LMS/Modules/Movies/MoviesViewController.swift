@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol MoviesViewControllerDelegate: AnyObject {
-    func exitWith(_ controller: UINavigationController)
+    func presentController(_ controller: UIViewController)
     func reloadTableView()
     func pushController(_ controller: UIViewController)
 }
@@ -34,7 +34,7 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     
     //MARK: - MoviesViewControllerDelegate
     
-    func exitWith(_ controller: UINavigationController) {
+    func presentController(_ controller: UIViewController) {
         present(controller, animated: true)
     }
     

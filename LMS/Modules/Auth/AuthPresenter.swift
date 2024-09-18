@@ -9,36 +9,33 @@ import Foundation
 import UIKit
 
 class AuthPresenter {
-    private weak var authController: AuthViewControllerDelegate?
+    private weak var authControllerDelegate: AuthViewControllerDelegate?
     private let userDefaultManager = UserDefaultManager()
     
     init(authController: AuthViewControllerDelegate) {
-        self.authController = authController
+        self.authControllerDelegate = authController
     }
     
     func signIn(login: String, password: String) {
-      
         guard let userLogin = userDefaultManager.getString(key: .login),
               let userPassword = userDefaultManager.getString(key: .password) else {
             userDefaultManager.setString(value: login, key: .login)
             userDefaultManager.setString(value: password, key: .password)
-            presentMovies()
+            dismissController()
             return
         }
         
         if (userLogin == login && userPassword == password) {
-            presentMovies()
+            dismissController()
             return
         }
-        authController?.showAlert()
+        authControllerDelegate?.showAlert()
         
     }
     
-    private func presentMovies() {
-        let moviesController = MoviesViewController()
-        let navigation = UINavigationController(rootViewController: moviesController)
-        navigation.modalPresentationStyle = .fullScreen
-        authController?.presentController(navigation)
+    private func dismissController() {
+        userDefaultManager.setBool(value: false, key: .isNeedSignIn)
+        authControllerDelegate?.dismissController()
     }
 
 }

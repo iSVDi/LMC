@@ -17,13 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        let authService = AuthService()
-        let controller = authService.getController()
+        let controller = MoviesViewController()
         window?.rootViewController = UINavigationController(rootViewController: controller)
         return true
     }
-    
-    
     
     
 }

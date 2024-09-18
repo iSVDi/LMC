@@ -10,6 +10,7 @@ import UIKit
 class MoviesPresenter {
     private weak var moviesViewControllerDelegate: MoviesViewControllerDelegate?
     private let movieRepository = MoviesRepository()
+    private let userDefaultManager = UserDefaultManager()
     private var movieList = MovieListModel()
     private(set) var filteredMovieList: [MovieListItemModel] = []
     private(set) var selectedYearId: Int = 2
@@ -23,10 +24,28 @@ class MoviesPresenter {
     }
     
     func handleViewDidLoad() {
+        guard !userDefaultManager.getBool(key: .isNeedSignIn) else {
+            presentAuthController(animated: false)
+            return
+        }
         updateMovie(order: .rating, year: years[selectedYearId])
     }
     
-    func updateMovie(order: MoviesOrder, year: Int) {
+    private func presentAuthController(animated: Bool) {
+        let controller = AuthViewController() { [weak self] in
+            self?.authDismissedHander()
+        }
+        
+        controller.modalPresentationStyle = .fullScreen
+        let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        rootViewController?.present(controller, animated: animated)
+    }
+    
+    private func authDismissedHander() {
+        updateMovie(order: .rating, year: years[selectedYearId])
+    }
+    
+    private func updateMovie(order: MoviesOrder, year: Int) {
         movieRepository.getMovies(order: order, year: year, page: currentPage) { [weak self] movieList in
             guard let welf = self else {
                 return
@@ -88,10 +107,9 @@ class MoviesPresenter {
     
     
     func exitButtonTapped() {
-        let controller = AuthViewController()
-        let navigation = UINavigationController(rootViewController: controller)
-        navigation.modalPresentationStyle = .fullScreen
-        moviesViewControllerDelegate?.exitWith(navigation)
+        //TODO: implement
+        userDefaultManager.setBool(value: true, key: .isNeedSignIn)
+        presentAuthController(animated: true)
     }
     
     func handleMovieTapWith(_ id: Int) {

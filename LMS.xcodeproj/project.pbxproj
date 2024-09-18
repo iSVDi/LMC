@@ -20,7 +20,6 @@
 		F36CBFDF2C91C1D100BC1298 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFDE2C91C1D100BC1298 /* AppColors.swift */; };
 		F36CBFE32C91C4BF00BC1298 /* AuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFE22C91C4BF00BC1298 /* AuthPresenter.swift */; };
 		F36CBFE52C91C57B00BC1298 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFE42C91C57B00BC1298 /* UserDefaultManager.swift */; };
-		F36CBFE72C91C93C00BC1298 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFE62C91C93C00BC1298 /* AuthService.swift */; };
 		F36CBFE92C91C9B700BC1298 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFE82C91C9B700BC1298 /* MoviesViewController.swift */; };
 		F36CBFF22C92A56700BC1298 /* MoviesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFF12C92A56700BC1298 /* MoviesPresenter.swift */; };
 		F36CBFF52C92A96B00BC1298 /* MoviesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFF42C92A96B00BC1298 /* MoviesRepository.swift */; };
@@ -68,7 +67,6 @@
 		F36CBFDE2C91C1D100BC1298 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		F36CBFE22C91C4BF00BC1298 /* AuthPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPresenter.swift; sourceTree = "<group>"; };
 		F36CBFE42C91C57B00BC1298 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
-		F36CBFE62C91C93C00BC1298 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		F36CBFE82C91C9B700BC1298 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		F36CBFF12C92A56700BC1298 /* MoviesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesPresenter.swift; sourceTree = "<group>"; };
 		F36CBFF42C92A96B00BC1298 /* MoviesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRepository.swift; sourceTree = "<group>"; };
@@ -213,7 +211,6 @@
 			isa = PBXGroup;
 			children = (
 				F36CBFF62C92A9CD00BC1298 /* MoviesService.swift */,
-				F36CBFE62C91C93C00BC1298 /* AuthService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -416,7 +413,6 @@
 				F36FAA0D2C9349910004799A /* MovieDetailsRepository.swift in Sources */,
 				F36CBFF22C92A56700BC1298 /* MoviesPresenter.swift in Sources */,
 				F36CBFC82C91B1A600BC1298 /* AppDelegate.swift in Sources */,
-				F36CBFE72C91C93C00BC1298 /* AuthService.swift in Sources */,
 				F36CBFDC2C91B58200BC1298 /* AuthViewController.swift in Sources */,
 				F36CBFF52C92A96B00BC1298 /* MoviesRepository.swift in Sources */,
 				F36FAA0B2C93494A0004799A /* MovieDetailsPresenter.swift in Sources */,

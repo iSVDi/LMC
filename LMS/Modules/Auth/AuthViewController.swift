@@ -9,7 +9,7 @@ import UIKit
 import TinyConstraints
 
 protocol AuthViewControllerDelegate: AnyObject {
-    func presentController(_ controller: UINavigationController)
+    func dismissController()
     func showAlert()
 }
 
@@ -18,6 +18,7 @@ class AuthViewController: UIViewController, AuthViewControllerDelegate {
     private let loginTextField = UITextField()
     private let passwordTextField = UITextField()
     private let loginButton = UIButton()
+    private let dismissHandler: () -> Void
     private lazy var presenter = AuthPresenter(authController: self)
     
     override func viewDidLoad() {
@@ -26,10 +27,23 @@ class AuthViewController: UIViewController, AuthViewControllerDelegate {
         setupView()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        dismissHandler()
+    }
+    
+    init (dismissHandler: @escaping () -> Void) {
+        self.dismissHandler = dismissHandler
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - AuthViewControllerDelegate
     
-    func presentController(_ controller: UINavigationController) {
-        present(controller, animated: true)
+    func dismissController() {
+        dismiss(animated: true)
     }
     
     func showAlert() {
