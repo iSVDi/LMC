@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		5A892F6150507148EB60887E /* Pods_LMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63DD96B8EFB21F707E863D74 /* Pods_LMS.framework */; };
 		A52B37192C9C030300D9D43B /* MovieFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52B37182C9C030300D9D43B /* MovieFilterViewController.swift */; };
+		A5C444732C9C3CBA00A66449 /* LMCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C444722C9C3CBA00A66449 /* LMCApp.swift */; };
+		A5C444752C9C3CBA00A66449 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C444742C9C3CBA00A66449 /* ContentView.swift */; };
+		A5C444772C9C3CBC00A66449 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C444762C9C3CBC00A66449 /* Assets.xcassets */; };
+		A5C4447A2C9C3CBC00A66449 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C444792C9C3CBC00A66449 /* Preview Assets.xcassets */; };
 		A5D9F7B62C9ABEC1001D39A2 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D9F7B32C9ABEC1001D39A2 /* AppFonts.swift */; };
 		A5D9F7B72C9ABEC1001D39A2 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D9F7B42C9ABEC1001D39A2 /* AppStrings.swift */; };
 		F33547EB2C95527100658091 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F33547E92C95527100658091 /* Localizable.strings */; };
@@ -51,6 +55,11 @@
 /* Begin PBXFileReference section */
 		63DD96B8EFB21F707E863D74 /* Pods_LMS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LMS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52B37182C9C030300D9D43B /* MovieFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFilterViewController.swift; sourceTree = "<group>"; };
+		A5C444702C9C3CBA00A66449 /* LMC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LMC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5C444722C9C3CBA00A66449 /* LMCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMCApp.swift; sourceTree = "<group>"; };
+		A5C444742C9C3CBA00A66449 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A5C444762C9C3CBC00A66449 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A5C444792C9C3CBC00A66449 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A5D9F7B32C9ABEC1001D39A2 /* AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		A5D9F7B42C9ABEC1001D39A2 /* AppStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		B857FD6C7F689D24C8211A9D /* Pods-LMS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LMS.debug.xcconfig"; path = "Target Support Files/Pods-LMS/Pods-LMS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -96,6 +105,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A5C4446D2C9C3CBA00A66449 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F36CBFC12C91B1A600BC1298 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -123,6 +139,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A5C444712C9C3CBA00A66449 /* LMC */ = {
+			isa = PBXGroup;
+			children = (
+				A5C444722C9C3CBA00A66449 /* LMCApp.swift */,
+				A5C444742C9C3CBA00A66449 /* ContentView.swift */,
+				A5C444762C9C3CBC00A66449 /* Assets.xcassets */,
+				A5C444782C9C3CBC00A66449 /* Preview Content */,
+			);
+			path = LMC;
+			sourceTree = "<group>";
+		};
+		A5C444782C9C3CBC00A66449 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A5C444792C9C3CBC00A66449 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		A5D9F7B52C9ABEC1001D39A2 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				F36CBFC62C91B1A600BC1298 /* LMS */,
+				A5C444712C9C3CBA00A66449 /* LMC */,
 				F36CBFC52C91B1A600BC1298 /* Products */,
 				B09CFA1154F09CEF719D56E9 /* Pods */,
 				A57602EA117C6C71185E90DA /* Frameworks */,
@@ -155,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				F36CBFC42C91B1A600BC1298 /* LMS.app */,
+				A5C444702C9C3CBA00A66449 /* LMC.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -279,6 +316,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A5C4446F2C9C3CBA00A66449 /* LMC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5C444912C9C3CBC00A66449 /* Build configuration list for PBXNativeTarget "LMC" */;
+			buildPhases = (
+				A5C4446C2C9C3CBA00A66449 /* Sources */,
+				A5C4446D2C9C3CBA00A66449 /* Frameworks */,
+				A5C4446E2C9C3CBA00A66449 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LMC;
+			productName = LMC;
+			productReference = A5C444702C9C3CBA00A66449 /* LMC.app */;
+			productType = "com.apple.product-type.application";
+		};
 		F36CBFC32C91B1A600BC1298 /* LMS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F36CBFD82C91B1A700BC1298 /* Build configuration list for PBXNativeTarget "LMS" */;
@@ -308,6 +362,9 @@
 				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
+					A5C4446F2C9C3CBA00A66449 = {
+						CreatedOnToolsVersion = 15.4;
+					};
 					F36CBFC32C91B1A600BC1298 = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -328,11 +385,21 @@
 			projectRoot = "";
 			targets = (
 				F36CBFC32C91B1A600BC1298 /* LMS */,
+				A5C4446F2C9C3CBA00A66449 /* LMC */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A5C4446E2C9C3CBA00A66449 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5C4447A2C9C3CBC00A66449 /* Preview Assets.xcassets in Resources */,
+				A5C444772C9C3CBC00A66449 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F36CBFC22C91B1A600BC1298 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -400,6 +467,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A5C4446C2C9C3CBA00A66449 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5C444752C9C3CBA00A66449 /* ContentView.swift in Sources */,
+				A5C444732C9C3CBA00A66449 /* LMCApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F36CBFC02C91B1A600BC1298 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -445,6 +521,68 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A5C444922C9C3CBC00A66449 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"LMC/Preview Content\"";
+				DEVELOPMENT_TEAM = RBRFGT8CHB;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = daniil.LMC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A5C444932C9C3CBC00A66449 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"LMC/Preview Content\"";
+				DEVELOPMENT_TEAM = RBRFGT8CHB;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = daniil.LMC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		F36CBFD62C91B1A700BC1298 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -625,6 +763,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A5C444912C9C3CBC00A66449 /* Build configuration list for PBXNativeTarget "LMC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5C444922C9C3CBC00A66449 /* Debug */,
+				A5C444932C9C3CBC00A66449 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F36CBFBF2C91B1A600BC1298 /* Build configuration list for PBXProject "LMS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
