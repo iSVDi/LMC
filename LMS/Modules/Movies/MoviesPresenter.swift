@@ -102,12 +102,13 @@ class MoviesPresenter {
         updateMovie(year: 2024)
     }
     
+    
     private func updateMovie(year: Int) {
         movieRepository.getMovies(year: year, page: currentPage) { [weak self] movieList in
             guard let welf = self else {
                 return
             }
-            
+            //TODO: set empty array, if first page, instead check
             if welf.currentPage > 1 {
                 let sortedNewMovies = movieList.items.sorted { a, b in
                     if welf.descOrder {

@@ -166,8 +166,11 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
     
     @objc
     private func sortButtonHandler() {
-        //        TODO: implement open filter view
-        print("sortButtonHandler()")
+        let filterController = MovieFilterViewController() { [weak self] filter in
+            //TODO: implement
+            print(filter)
+        }
+        pushController(filterController)
     }
     
     @objc

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A892F6150507148EB60887E /* Pods_LMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63DD96B8EFB21F707E863D74 /* Pods_LMS.framework */; };
+		A52B37192C9C030300D9D43B /* MovieFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52B37182C9C030300D9D43B /* MovieFilterViewController.swift */; };
 		A5D9F7B62C9ABEC1001D39A2 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D9F7B32C9ABEC1001D39A2 /* AppFonts.swift */; };
 		A5D9F7B72C9ABEC1001D39A2 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D9F7B42C9ABEC1001D39A2 /* AppStrings.swift */; };
 		F33547EB2C95527100658091 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F33547E92C95527100658091 /* Localizable.strings */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		63DD96B8EFB21F707E863D74 /* Pods_LMS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LMS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A52B37182C9C030300D9D43B /* MovieFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFilterViewController.swift; sourceTree = "<group>"; };
 		A5D9F7B32C9ABEC1001D39A2 /* AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		A5D9F7B42C9ABEC1001D39A2 /* AppStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		B857FD6C7F689D24C8211A9D /* Pods-LMS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LMS.debug.xcconfig"; path = "Target Support Files/Pods-LMS/Pods-LMS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,6 +107,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A52B37172C9C02F700D9D43B /* MovieFilter */ = {
+			isa = PBXGroup;
+			children = (
+				A52B37182C9C030300D9D43B /* MovieFilterViewController.swift */,
+			);
+			path = MovieFilter;
+			sourceTree = "<group>";
+		};
 		A57602EA117C6C71185E90DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +187,7 @@
 		F36CBFE02C91C42200BC1298 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A52B37172C9C02F700D9D43B /* MovieFilter */,
 				F36FAA072C93433B0004799A /* MovieDetails */,
 				F36CBFEA2C91C9C500BC1298 /* Movies */,
 				F36CBFE12C91C42900BC1298 /* Auth */,
@@ -400,6 +411,7 @@
 				F36FAA092C9343AD0004799A /* MovieDetailsViewController.swift in Sources */,
 				F36CBFE92C91C9B700BC1298 /* MoviesViewController.swift in Sources */,
 				A5D9F7B72C9ABEC1001D39A2 /* AppStrings.swift in Sources */,
+				A52B37192C9C030300D9D43B /* MovieFilterViewController.swift in Sources */,
 				F36CBFE32C91C4BF00BC1298 /* AuthPresenter.swift in Sources */,
 				F36CC0022C92C03800BC1298 /* MovieShotSourceListModel.swift in Sources */,
 				F36CBFDF2C91C1D100BC1298 /* AppColors.swift in Sources */,
