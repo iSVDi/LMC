@@ -36,8 +36,8 @@ extension MoviesService: TargetType {
     var task: Moya.Task {
         switch self {
         case .getMovies(let filter, let page):
-            var params: [String: Any] = ["order" : filter.getOrder(),
-                                         "page": page]
+            let orderParam = getOrderParamFrom(filter)
+            var params: [String: Any] = ["order" : orderParam, "page": page]
             if case let .year(year) = filter {
                 params["yearFrom"] = year
                 params["yearTo"] = year
@@ -47,6 +47,15 @@ extension MoviesService: TargetType {
             return .requestPlain
         case .getMovieShots(_):
             return .requestPlain
+        }
+    }
+    
+    private func getOrderParamFrom(_ filter: MovieFilterDTO) -> String {
+        switch filter {
+        case .year(_):
+            return "YEAR"
+        case .rating:
+            return "RATING"
         }
     }
     

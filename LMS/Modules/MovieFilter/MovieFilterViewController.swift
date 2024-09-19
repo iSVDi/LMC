@@ -10,17 +10,7 @@ import TinyConstraints
 
 enum MovieFilterDTO {
     case year(year: Int)
-    case rating
-    
-func getOrder() -> String {
-        switch self {
-        case .year(_):
-            return "YEAR"
-        case .rating:
-            return "RATING"
-        }
-    }
-    
+    case rating    
 }
 
 class MovieFilterViewController: UIViewController {
@@ -101,6 +91,7 @@ class MovieFilterViewController: UIViewController {
     }
     
     private func setupViews() {
+        view.backgroundColor = AppColors.appBlack
         title = AppStrings.filterTitle
         yearLabel.text = AppStrings.yearTitle
         ratingLabel.text = AppStrings.ratingTitle

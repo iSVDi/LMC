@@ -201,7 +201,6 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDelegate {
         
     }
     
-    /// * change visibility all subviews except shotTitleLabel, shotHScrollView
     private func setupSubviewsIsHidden(_ isHidden: Bool) {
         [imageView, titleLabel,ratingLabel,descriptionTitleLabel,descritionLabel,genreLabel,yearsCounryLabel, linkButton].forEach { subview in
             subview.isHidden = isHidden

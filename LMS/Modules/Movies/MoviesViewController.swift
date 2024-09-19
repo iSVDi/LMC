@@ -106,7 +106,7 @@ class MoviesViewController: UIViewController, MoviesViewControllerDelegate {
         mainStack.alignment = .fill
         
         let sortButton = UIButton()
-        sortButton.setImage(AppImage.sort.systemImage(), for: .normal)
+        sortButton.setImage(AppImage.filter.systemImage(), for: .normal)
         sortButton.tintColor = AppColors.appColor
         sortButton.addTarget(self, action: #selector(sortButtonHandler), for: .touchUpInside)
         

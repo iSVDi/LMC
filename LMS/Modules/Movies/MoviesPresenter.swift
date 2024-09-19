@@ -11,8 +11,9 @@ class MoviesPresenter {
     private weak var moviesViewControllerDelegate: MoviesViewControllerDelegate?
     private let movieRepository = MoviesRepository()
     private let userDefaultManager = UserDefaultManager()
-    private var movieList = MovieListModel()
+    private var movieList: [MovieListItemModel] = []
     private(set) var filteredMovieList: [MovieListItemModel] = []
+    private var totalPages = 0
     private(set) var currentPage = 1
     private var searchRequest = ""
     private var filterDTO: MovieFilterDTO = .rating
@@ -21,10 +22,10 @@ class MoviesPresenter {
     }
     
     var isNeedDisplayLoadingFooterView: Bool {
-        return currentPage + 1 <= movieList.totalPages
+        return currentPage + 1 <= totalPages
     }
     
-    private var getLastMovieCellId: Int { return movieList.items.count - 1 }
+    private var getLastMovieCellId: Int { return movieList.count - 1 }
     
     //MARK: - Interface
     
@@ -39,12 +40,12 @@ class MoviesPresenter {
     func handleFilterBySearch(_ search: String) {
         searchRequest = search
         guard !search.isEmpty else {
-            filteredMovieList = movieList.items
+            filteredMovieList = movieList
             moviesViewControllerDelegate?.reloadTableView()
             return
         }
         
-        filteredMovieList = movieList.items.filter { model in
+        filteredMovieList = movieList.filter { model in
             let lowerCasedSearch = search.lowercased()
             return model.getName.lowercased().contains(lowerCasedSearch) ||
             model.genres.contains(where: {$0.genre.lowercased().contains(lowerCasedSearch)}) ||
@@ -66,7 +67,7 @@ class MoviesPresenter {
     }
     
     func handleMovieTapWith(_ id: Int) {
-        let movieId = movieList.items[id].kinopoiskID
+        let movieId = movieList[id].kinopoiskID
         
         let movieDetailsViewController = MovieDetailsViewController()
         let movieDetailsPresenter = MovieDetailsPresenter(movieID: movieId,
@@ -112,15 +113,8 @@ class MoviesPresenter {
             guard let self else {
                 return
             }
-            
-            if self.currentPage > 1 {
-                self.movieList.items.append(contentsOf: movieList.items)
-            } else {
-                self.movieList = movieList
-            }
-            
-            
-            self.filteredMovieList = movieList.items
+            self.movieList.append(contentsOf: movieList.items)
+            self.totalPages = movieList.totalPages
             self.moviesViewControllerDelegate?.setLoading(false)
             self.handleFilterBySearch(self.searchRequest)
         }
@@ -128,6 +122,7 @@ class MoviesPresenter {
     
     private func loadFirstPage() {
         currentPage = 1
+        movieList = []
         updateMovie()
     }
     

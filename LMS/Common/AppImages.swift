@@ -11,7 +11,7 @@ enum AppImage: String {
     case link = "link"
     case search = "magnifyingglass"
     case exit = "rectangle.portrait.and.arrow.right"
-    case sort = "arrow.up.arrow.down"
+    case filter = "slider.vertical.3"
     
     func systemImage() -> UIImage? {
         return UIImage(systemName: self.rawValue) ?? nil
