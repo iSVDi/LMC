@@ -14,9 +14,8 @@ class MoviesPresenter {
     private var movieList = MovieListModel()
     private(set) var filteredMovieList: [MovieListItemModel] = []
     private(set) var currentPage = 1
-    private var descOrder = true
     private var searchRequest = ""
-    
+    private var filterDTO: MovieFilterDTO = .rating
     init(moviesViewControllerDelegate: MoviesViewControllerDelegate) {
         self.moviesViewControllerDelegate = moviesViewControllerDelegate
     }
@@ -36,7 +35,7 @@ class MoviesPresenter {
         }
         updateMoviesWithLoading()
     }
-        
+    
     func handleFilterBySearch(_ search: String) {
         searchRequest = search
         guard !search.isEmpty else {
@@ -58,10 +57,11 @@ class MoviesPresenter {
     func handleRefresh() {
         loadFirstPage()
     }
-        
+    
     func exitButtonTapped() {
         currentPage = 1
         userDefaultManager.setBool(value: true, key: .isNeedSignIn)
+        filterDTO = .rating
         presentAuthController(animated: true)
     }
     
@@ -80,8 +80,13 @@ class MoviesPresenter {
             return
         }
         currentPage += 1
-        //TODO: set correct year
-        updateMovie(year: 2024)
+        updateMovie()
+    }
+    
+    func handleDoFilter(filter: MovieFilterDTO) {
+        self.filterDTO = filter
+        moviesViewControllerDelegate?.setLoading(true)
+        loadFirstPage()
     }
     
     //MARK: - Private methods
@@ -98,47 +103,32 @@ class MoviesPresenter {
     
     private func updateMoviesWithLoading() {
         moviesViewControllerDelegate?.setLoading(true)
-        //TODO: set correct year
-        updateMovie(year: 2024)
+        updateMovie()
     }
     
     
-    private func updateMovie(year: Int) {
-        movieRepository.getMovies(year: year, page: currentPage) { [weak self] movieList in
-            guard let welf = self else {
+    private func updateMovie() {
+        movieRepository.getMovies(filter: filterDTO, page: currentPage) { [weak self] movieList in
+            guard let self else {
                 return
             }
-            //TODO: set empty array, if first page, instead check
-            if welf.currentPage > 1 {
-                let sortedNewMovies = movieList.items.sorted { a, b in
-                    if welf.descOrder {
-                        return a.ratingKinopoisk > b.ratingKinopoisk
-                    }
-                    return a.ratingKinopoisk < b.ratingKinopoisk
-                }
-                
-                
-                if welf.descOrder {
-                    welf.movieList.items.append(contentsOf: sortedNewMovies)
-                } else {
-                    welf.movieList.items.insert(contentsOf: sortedNewMovies, at: 0)
-                }
-                
-                
+            
+            if self.currentPage > 1 {
+                self.movieList.items.append(contentsOf: movieList.items)
             } else {
-                welf.movieList = movieList
+                self.movieList = movieList
             }
             
-            welf.filteredMovieList = movieList.items
-            welf.moviesViewControllerDelegate?.setLoading(false)
-            welf.handleFilterBySearch(welf.searchRequest)
+            
+            self.filteredMovieList = movieList.items
+            self.moviesViewControllerDelegate?.setLoading(false)
+            self.handleFilterBySearch(self.searchRequest)
         }
     }
     
     private func loadFirstPage() {
         currentPage = 1
-        //TODO: set correct year
-        updateMovie(year: 2024)
+        updateMovie()
     }
     
 }

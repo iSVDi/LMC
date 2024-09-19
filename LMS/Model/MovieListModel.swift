@@ -26,7 +26,7 @@ struct MovieListItemModel: Codable {
     private let nameEn: String?
     let countries: [CountryModel]
     let genres: [GenreModel]
-    let ratingKinopoisk: Double
+    let ratingKinopoisk: Double?
     let year: Int
     let posterURLPreview: String
     enum CodingKeys: String, CodingKey {
@@ -37,6 +37,13 @@ struct MovieListItemModel: Codable {
     
     var getName: String {
         return nameOriginal ?? nameEn ?? nameRu ?? ""
+    }
+    
+    var getRatingString: String {
+        guard let ratingKinopoisk else {
+            return ""
+        }
+        return "\(ratingKinopoisk)"
     }
     
 }

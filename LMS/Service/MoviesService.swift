@@ -7,12 +7,8 @@
 
 import Moya
 
-enum MoviesOrder: String {
-    case rating = "RATING"
-}
-
 enum MoviesService {
-    case getMovies(year: Int, page: Int)
+    case getMovies(filter: MovieFilterDTO, page: Int)
     case getMovieDetails(id: Int)
     case getMovieShots(id: Int)
 }
@@ -39,12 +35,13 @@ extension MoviesService: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .getMovies(let year, let page):
-            let params = ["order" : MoviesOrder.rating.rawValue,
-                          "yearFrom": "\(year)",
-                          "yearTo": "\(year)",
-                          "page": "\(page)"
-            ]
+        case .getMovies(let filter, let page):
+            var params: [String: Any] = ["order" : filter.getOrder(),
+                                         "page": page]
+            if case let .year(year) = filter {
+                params["yearFrom"] = year
+                params["yearTo"] = year
+            }
             return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
         case .getMovieDetails(_):
             return .requestPlain
@@ -56,7 +53,7 @@ extension MoviesService: TargetType {
     var headers: [String : String]? {
         return [
             "X-API-KEY": "ea499c08-37e5-4a7d-976d-916cf7cdde35",
-//            "X-API-KEY": "8b7f7ac2-57f0-4895-886e-cd3e1abdf953",
+            //            "X-API-KEY": "8b7f7ac2-57f0-4895-886e-cd3e1abdf953",
             "Content-Type": "application/json",
             
         ]

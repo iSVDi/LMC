@@ -15,3 +15,6 @@
 "LoginTitle" = "Логин";
 "PasswordTitle" = "Пароль";
 "OkTitle" = "Хорошо";
+"FilterTitle" = "Фильтр";
+"YearTitle" = "Год";
+"RatingTitle" = "Рейтинг";

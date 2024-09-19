@@ -15,3 +15,6 @@
 "LoginTitle" = "Login";
 "PasswordTitle" = "Password";
 "OkTitle" = "Ok";
+"FilterTitle" = "Filter";
+"YearTitle" = "Year";
+"RatingTitle" = "Rating";

@@ -11,6 +11,16 @@ import TinyConstraints
 enum MovieFilterDTO {
     case year(year: Int)
     case rating
+    
+func getOrder() -> String {
+        switch self {
+        case .year(_):
+            return "YEAR"
+        case .rating:
+            return "RATING"
+        }
+    }
+    
 }
 
 class MovieFilterViewController: UIViewController {
@@ -91,10 +101,9 @@ class MovieFilterViewController: UIViewController {
     }
     
     private func setupViews() {
-        //TODO: localize
-        title = "Фильтр"
-        yearLabel.text = "Год"
-        ratingLabel.text = "Рейтинг"
+        title = AppStrings.filterTitle
+        yearLabel.text = AppStrings.yearTitle
+        ratingLabel.text = AppStrings.ratingTitle
         yearLabel.textColor = AppColors.appColor
         ratingLabel.textColor = AppColors.appColor
         
@@ -147,7 +156,7 @@ extension MovieFilterViewController: UIPickerViewDataSource, UIPickerViewDelegat
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedYearId = row
+        filter = .year(year: years[row])
     }
     
 }
