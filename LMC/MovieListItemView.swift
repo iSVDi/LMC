@@ -1,5 +1,5 @@
 //
-//  MovieListView.swift
+//  MovieListItemView.swift
 //  LMC
 //
 //  Created by daniil on 19.09.2024.
@@ -28,7 +28,7 @@ import SwiftUI
  ratingLabel.font = AppFonts.Roboto.bold.font(size: 20)
  movieImageView.contentMode = .scaleAspectFit
  */
-struct MovieListView: View {
+struct MovieListItemView: View {
     let mock: MovieListItem
     
     init(mock: MovieListItem) {
@@ -59,7 +59,7 @@ struct MovieListView: View {
                     HStack {
                         Spacer()
                         Text("9.2")
-                            .foregroundStyle(Color(UIColor(red: 67/255, green: 222/255, blue: 208/255, alpha: 1)))
+                            .foregroundStyle(Color.appColor)
                             .fontWeight(.bold)
                         .font(.system(size: 20))
                     }
@@ -75,7 +75,7 @@ struct MovieListView: View {
 
 struct MovieListView_Preview: PreviewProvider {
     static var previews: some View {
-        MovieListView(mock: MovieListItem(title: "Попкульт",
+        MovieListItemView(mock: MovieListItem(title: "Попкульт",
                                           genre: "документальный",
                                           year: 2022,
                                           country: "Россия",
