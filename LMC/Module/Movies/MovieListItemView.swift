@@ -20,7 +20,6 @@ struct MovieListItemView: View {
             Color.black
             HStack {
                 if let url = URL(string: mock.posterUrlPreview) {
-                    //TODO: implement caching
                     AsyncImage(url: url) { image in
                         image
                             .resizable()
@@ -32,16 +31,18 @@ struct MovieListItemView: View {
                     .frame(maxWidth: 100, maxHeight: 100)
                 }
                 VStack(alignment: .leading, spacing: 10) {
-                    //TODO: alignment to leading
                     Text(mock.title)
+                        .multilineTextAlignment(.leading)
                         .foregroundStyle(Color.white)
                         .fontWeight(.bold)
                         .font(.system(size: 20))
                     Text(mock.genre)
+                        .multilineTextAlignment(.leading)
                         .foregroundStyle(Color.gray)
                         .fontWeight(.bold)
                         .font(.system(size: 15))
                     Text("\(mock.year), " + mock.country)
+                        .multilineTextAlignment(.leading)
                         .foregroundStyle(Color.gray)
                         .fontWeight(.bold)
                         .font(.system(size: 15))

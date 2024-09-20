@@ -176,6 +176,7 @@ struct MovieDetailsView: View {
             LazyHStack {
                 ForEach(viewModel.shotLinks, id: \.self) { link in
                     if let shotLink = URL(string: link) {
+                        //TODO: implement caching
                         AsyncImage(url: shotLink) { shot in
                             shot
                                 .resizable()
