@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MovieListItemModel: Identifiable {
     let id = UUID()
+    let kinopoiskID: Int
     let title: String
     let genre: String
     let year: Int
@@ -16,7 +17,8 @@ struct MovieListItemModel: Identifiable {
     let rating: Double?
     let posterUrlPreview: String
     
-    init(title: String, genre: String, year: Int, country: String, rating: Double?, posterUrlPreview: String) {
+    init(kinopoiskID: Int, title: String, genre: String, year: Int, country: String, rating: Double?, posterUrlPreview: String) {
+        self.kinopoiskID = kinopoiskID
         self.title = title
         self.genre = genre
         self.year = year

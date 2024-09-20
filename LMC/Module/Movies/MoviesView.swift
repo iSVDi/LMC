@@ -61,10 +61,12 @@ struct MoviesView: View {
             LazyVStack {
                 scrollHeader
                 ForEach(viewModel.filteredMovies) { mock in
-                    MovieListItemView(mock: mock)
-                        .onAppear {
-                            viewModel.handleLastCell(id: mock.id)
-                        }
+                    NavigationLink(destination: MovieDetailsView(movieId: mock.kinopoiskID)) {
+                        MovieListItemView(mock: mock)
+                            .onAppear {
+                                viewModel.handleLastCell(id: mock.id)
+                            }
+                    }
                 }
                 if viewModel.isFooterViewPresented {
                     ProgressView()

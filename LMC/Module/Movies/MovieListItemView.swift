@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+
 struct MovieListItemView: View {
     let mock: MovieListItemModel
     private let imageDownloader = MovieImageDownloader()
@@ -31,6 +32,7 @@ struct MovieListItemView: View {
                     .frame(maxWidth: 100, maxHeight: 100)
                 }
                 VStack(alignment: .leading, spacing: 10) {
+                    //TODO: alignment to leading
                     Text(mock.title)
                         .foregroundStyle(Color.white)
                         .fontWeight(.bold)
@@ -65,7 +67,8 @@ struct MovieListItemView: View {
 
 struct MovieListView_Preview: PreviewProvider {
     static var previews: some View {
-        MovieListItemView(mock: MovieListItemModel(title: "Попкульт",
+        MovieListItemView(mock: MovieListItemModel(kinopoiskID: 0,
+                                                   title: "Попкульт",
                                                    genre: "документальный",
                                                    year: 2022,
                                                    country: "Россия",

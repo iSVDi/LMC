@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - MoviewDetailsModel
-struct MovieDetailsModel: Codable {
+struct MovieDetailsDTO: Codable {
     let kinopoiskID: Int
     private let nameRu: String?
     private let nameEn: String?
@@ -39,7 +39,7 @@ struct MovieDetailsModel: Codable {
             if (startYear == endYear) {
                 return "\(startYear), "
             }
-            return "\(startYear) - \(endYear), "
+            return "\(startYear)-\(endYear), "
         } else if let startYear = startYear {
             return "\(startYear) -, "
         }
@@ -48,4 +48,19 @@ struct MovieDetailsModel: Codable {
         }
         return ""
     }
+    
+    func getModel() -> MovieDetailsModel {
+        let res = MovieDetailsModel(name: getName(),
+                                    description: description ?? "",
+                                    countries: countries.map{$0.country}.joined(separator: ", "),
+                                    genres: genres.map{$0.genre}.joined(separator: ", "),
+                                    years: getYearTitle(),
+                                    ratingKinopoisk: ratingKinopoisk,
+                                    coverURL: coverURL ?? "",
+                                    webUrl: webUrl ?? "")
+        
+        return res
+    }
+    
 }
+

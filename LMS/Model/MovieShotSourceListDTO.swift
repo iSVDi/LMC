@@ -1,5 +1,5 @@
 //
-//  MovieShotSourceListModel.swift
+//  MovieShotSourceListDTO.swift
 //  LMS
 //
 //  Created by Daniil on 12.09.2024.
@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - MovieShotSourceListModel
-struct MovieShotSourceListModel: Codable {
+struct MovieShotSourceListDTO: Codable {
     let items: [MovieImageShotSourceModel]
 }
 

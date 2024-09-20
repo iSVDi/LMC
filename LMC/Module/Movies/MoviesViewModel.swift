@@ -60,7 +60,8 @@ class MoviesViewModel: ObservableObject {
             }
             self.totalPages = dto.totalPages
             let newMovies = dto.items.map { dtoItem in
-                return MovieListItemModel(title: dtoItem.getName,
+                return MovieListItemModel(kinopoiskID: dtoItem.kinopoiskID, 
+                                          title: dtoItem.getName,
                                           genre: dtoItem.genres.map({$0.genre}).joined(separator: ", "),
                                           year: dtoItem.year,
                                           country: dtoItem.countries.map{$0.country}.joined(separator: ", "),
