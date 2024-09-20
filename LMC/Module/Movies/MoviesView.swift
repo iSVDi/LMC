@@ -57,6 +57,12 @@ struct MoviesView: View {
                 scrollHeader
                 ForEach(viewModel.movies) { mock in
                     MovieListItemView(mock: mock)
+                        .onAppear {
+                            viewModel.handleLastCell(id: mock.id)
+                        }
+                }
+                if viewModel.isFooterViewPresented {
+                    ProgressView()
                 }
             }
             .padding(.horizontal)
