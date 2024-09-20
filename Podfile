@@ -11,3 +11,14 @@ target 'LMS' do
   pod 'SwiftGen'
 
 end
+
+target 'LMC' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  pod "Moya"
+  pod "TinyConstraints"
+  pod 'Kingfisher'
+  pod 'SwiftGen'
+
+end

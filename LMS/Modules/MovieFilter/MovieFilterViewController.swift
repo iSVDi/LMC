@@ -8,11 +8,6 @@
 import UIKit
 import TinyConstraints
 
-enum MovieFilterDTO {
-    case year(year: Int)
-    case rating    
-}
-
 class MovieFilterViewController: UIViewController {
     
     private let yearLabel = UILabel()

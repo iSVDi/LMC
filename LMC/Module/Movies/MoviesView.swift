@@ -8,23 +8,9 @@
 import SwiftUI
 
 struct MoviesView: View {
-    private let mockData: [MovieListItem] = [
-        MovieListItem(title: "BTS: Blood Sweat & Tears", genre: "музыка, короткометражка", year: 2016, country: "Корея Южная", rating: 9.2),
-        MovieListItem(title: "Lords of the Lockerroom", genre: "спорт, для взрослых", year: 1999, country: "США", rating: 9.2),
-        MovieListItem(title: "Герои Энвелла", genre: "фантастика, мультфильм, детский", year: 2017, country: "Россия", rating: 9.2),
-        MovieListItem(title: "Попкульт", genre: "документальный", year: 2022, country: "Россия", rating: 9.2),
-        MovieListItem(title: "BTS: Blood Sweat & Tears", genre: "музыка, короткометражка", year: 2016, country: "Корея Южная", rating: 9.2),
-        MovieListItem(title: "Lords of the Lockerroom", genre: "спорт, для взрослых", year: 1999, country: "США", rating: 9.2),
-        MovieListItem(title: "Герои Энвелла", genre: "фантастика, мультфильм, детский", year: 2017, country: "Россия", rating: 9.2),
-        MovieListItem(title: "Попкульт", genre: "документальный", year: 2022, country: "Россия", rating: 9.2),
-        MovieListItem(title: "BTS: Blood Sweat & Tears", genre: "музыка, короткометражка", year: 2016, country: "Корея Южная", rating: 9.2),
-        MovieListItem(title: "Lords of the Lockerroom", genre: "спорт, для взрослых", year: 1999, country: "США", rating: 9.2),
-        MovieListItem(title: "Герои Энвелла", genre: "фантастика, мультфильм, детский", year: 2017, country: "Россия", rating: 9.2),
-        MovieListItem(title: "Попкульт", genre: "документальный", year: 2022, country: "Россия", rating: 9.2),
-    ]
     
     @State private var searchText = ""
-    
+    @StateObject private var viewModel = MoviesViewModel()
     var body: some View {
         NavigationStack {
             ZStack {
@@ -69,7 +55,7 @@ struct MoviesView: View {
         ScrollView {
             LazyVStack {
                 scrollHeader
-                ForEach(mockData) { mock in
+                ForEach(viewModel.movies) { mock in
                     MovieListItemView(mock: mock)
                 }
             }
