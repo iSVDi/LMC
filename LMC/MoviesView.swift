@@ -39,9 +39,8 @@ struct MoviesView: View {
             }
             .toolbarBackground(Color.appBlack, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationBarTitleDisplayMode(.inline)
-        
         
     }
     
@@ -56,28 +55,39 @@ struct MoviesView: View {
     private var exitButton: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             //TODO: move image
-            Image(systemName: "rectangle.portrait.and.arrow.right")
-                .foregroundStyle(Color.appColor)
+            Button(action: {
+                print("exit button handler")
+            }, label: {
+                Image(systemName: "rectangle.portrait.and.arrow.right")
+                    .foregroundStyle(Color.appColor)
+            })
+            
         }
     }
     
     private var moviesScrollView: some View {
         ScrollView {
             LazyVStack {
-//                scrollHeader
+                scrollHeader
                 ForEach(mockData) { mock in
                     MovieListItemView(mock: mock)
                 }
             }
-            .padding()
+            .padding(.horizontal)
         }
         
     }
     
     private var scrollHeader: some View {
         HStack {
-            Image(systemName: "slider.vertical.3")
-                .foregroundColor(Color.appColor)
+            Button(action: {
+                //TODO: implement
+                print("filter button handler ")
+            }, label: {
+                Image(systemName: "slider.vertical.3")
+                    .foregroundColor(Color.appColor)
+            })
+            
             searhField
         }
     }
