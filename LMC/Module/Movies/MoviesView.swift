@@ -11,6 +11,7 @@ struct MoviesView: View {
     
     @State private var searchText = ""
     @StateObject private var viewModel = MoviesViewModel()
+    @State private var isPresentFilterView = false
     var body: some View {
         NavigationStack {
             ZStack {
@@ -40,7 +41,7 @@ struct MoviesView: View {
     
     private var exitButton: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            //TODO: move image
+            //TODO: move image, implement
             Button(action: {
                 print("exit button handler")
             }, label: {
@@ -72,14 +73,15 @@ struct MoviesView: View {
     
     private var scrollHeader: some View {
         HStack {
-            Button(action: {
-                //TODO: implement
-                print("filter button handler ")
-            }, label: {
+            NavigationLink(destination: {
+                MoviesFilterView() { filter in
+                    viewModel.handleNewFilter(filter: filter)
+                }
+            }) {
+                //TODO: move image
                 Image(systemName: "slider.vertical.3")
                     .foregroundColor(Color.appColor)
-            })
-            
+            }
             searhField
         }
     }

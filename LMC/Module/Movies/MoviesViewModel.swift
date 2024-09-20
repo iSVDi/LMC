@@ -30,6 +30,11 @@ class MoviesViewModel: ObservableObject {
         loadMovies()
     }
     
+    func handleNewFilter(filter: MovieFilterDTO) {
+        currentFilter = filter
+        loadFirstPage()
+    }
+    
     private func loadMovies() {
         repository.getMovies(filter: currentFilter, page: currentPage) { [weak self] dto in
             self?.totalPages = dto.totalPages
@@ -44,6 +49,12 @@ class MoviesViewModel: ObservableObject {
             self?.isFooterViewPresented = false
             self?.movies.append(contentsOf: newMovies)
         }
+    }
+    
+    private func loadFirstPage() {
+        currentPage = 1
+        movies = []
+        loadMovies()
     }
 }
 
