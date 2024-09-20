@@ -12,8 +12,10 @@ class MoviesViewModel: ObservableObject {
     private var currentFilter = MovieFilterDTO.rating
     private var totalPages = 1
     private var currentPage = 1
-    @Published var movies: [MovieListItemModel] = []
+    private(set) var movies: [MovieListItemModel] = []
+    @Published var filteredMovies: [MovieListItemModel] = []
     @Published var isFooterViewPresented = false
+    private var searchRequest = ""
     
     init() {
         loadMovies()
@@ -35,9 +37,28 @@ class MoviesViewModel: ObservableObject {
         loadFirstPage()
     }
     
+    func handleSearch(_ request: String) {
+        searchRequest = request
+        guard !request.isEmpty else {
+            filteredMovies = movies
+            return
+        }
+        
+        filteredMovies = movies.filter { model in
+            let lowerCasedSearch = request.lowercased()
+            return model.title.lowercased().contains(lowerCasedSearch) ||
+            model.genre.lowercased().contains(lowerCasedSearch) ||
+            model.country.lowercased().contains(lowerCasedSearch)
+        }
+        
+    }
+    
     private func loadMovies() {
         repository.getMovies(filter: currentFilter, page: currentPage) { [weak self] dto in
-            self?.totalPages = dto.totalPages
+            guard let self else {
+               return
+            }
+            self.totalPages = dto.totalPages
             let newMovies = dto.items.map { dtoItem in
                 return MovieListItemModel(title: dtoItem.getName,
                                           genre: dtoItem.genres.map({$0.genre}).joined(separator: ", "),
@@ -46,8 +67,9 @@ class MoviesViewModel: ObservableObject {
                                           rating: dtoItem.ratingKinopoisk,
                                           posterUrlPreview: dtoItem.posterURLPreview)
             }
-            self?.isFooterViewPresented = false
-            self?.movies.append(contentsOf: newMovies)
+            self.isFooterViewPresented = false
+            self.movies.append(contentsOf: newMovies)
+            self.handleSearch(searchRequest)
         }
     }
     

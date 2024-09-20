@@ -17,7 +17,11 @@ struct MoviesView: View {
             ZStack {
                 Color.appBlack
                     .ignoresSafeArea()
-                moviesScrollView
+                if viewModel.movies.isEmpty {
+                   ProgressView()
+                } else {
+                    moviesScrollView
+                }
             }
             .toolbar {
                 navigationTitle
@@ -56,7 +60,7 @@ struct MoviesView: View {
         ScrollView {
             LazyVStack {
                 scrollHeader
-                ForEach(viewModel.movies) { mock in
+                ForEach(viewModel.filteredMovies) { mock in
                     MovieListItemView(mock: mock)
                         .onAppear {
                             viewModel.handleLastCell(id: mock.id)
@@ -98,6 +102,9 @@ struct MoviesView: View {
                     TextField("",
                               text: $searchText,
                               prompt: Text("Keyword").foregroundColor(Color.appGray))
+                    .onChange(of: searchText, { _, newValue in
+                        viewModel.handleSearch(newValue)
+                    })
                     .foregroundColor(Color.appWhite)
                     
                     Image(systemName: "magnifyingglass")
