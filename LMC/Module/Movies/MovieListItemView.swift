@@ -8,6 +8,7 @@
 import SwiftUI
 struct MovieListItemView: View {
     let mock: MovieListItemModel
+    private let imageDownloader = MovieImageDownloader()
     
     init(mock: MovieListItemModel) {
         self.mock = mock
@@ -17,10 +18,18 @@ struct MovieListItemView: View {
         ZStack {
             Color.black
             HStack {
-                Image("testImage")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: 120, maxHeight: 100)
+                if let url = URL(string: mock.posterUrlPreview) {
+                    //TODO: implement caching
+                    AsyncImage(url: url) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } placeholder: {
+                        ProgressView()
+                        
+                    }
+                    .frame(maxWidth: 100, maxHeight: 100)
+                }
                 VStack(alignment: .leading, spacing: 10) {
                     Text(mock.title)
                         .foregroundStyle(Color.white)
@@ -36,10 +45,14 @@ struct MovieListItemView: View {
                         .font(.system(size: 15))
                     HStack {
                         Spacer()
-                        Text("9.2")
-                            .foregroundStyle(Color.appColor)
-                            .fontWeight(.bold)
-                            .font(.system(size: 20))
+                        if let rating = mock.rating {
+                            Text("\(rating, specifier: "%.1f")")
+                                .foregroundStyle(Color.appColor)
+                                .fontWeight(.bold)
+                                .font(.system(size: 20))
+                        } else {
+                            Text("")
+                        }
                     }
                     .padding(.trailing)
                     
