@@ -8,11 +8,17 @@
 import SwiftUI
 
 class AuthViewModel: ObservableObject {
+    /* CODEREVIEW:
+     Здесь вместо UserDefaultManager будет AuthService
+     */
     private let userDefaultManager = UserDefaultManager()
     @Published var isPresentAlert = false
     @Published private(set) var isNeedDissmiss = false
     
     func handleAuthButton(login: String, password: String) {
+        /* CODEREVIEW:
+         Эту логику нужно будет вынести в AuthService
+         */
         guard let userLogin = userDefaultManager.getString(key: .login),
               let userPassword = userDefaultManager.getString(key: .password) else {
             userDefaultManager.setString(value: login, key: .login)
@@ -22,6 +28,11 @@ class AuthViewModel: ObservableObject {
             return
         }
         
+        /* CODEREVIEW:
+         Давай слегка усложним задачку:
+
+         Сделай так, чтобы писалась конкретная ошибка, что неверно - пароль или логин, или все вместе
+         */
         if (userLogin == login && userPassword == password) {
             dismiss()
             return
@@ -29,6 +40,9 @@ class AuthViewModel: ObservableObject {
         isPresentAlert.toggle()
     }
     
+    /* CODEREVIEW:
+     В методе dismiss отпадет необходимость, когда LMCApp начнет слушать состояние авторизации
+     */
     private func dismiss() {
         userDefaultManager.setBool(value: false, key: .isNeedSignIn)
         isNeedDissmiss = true

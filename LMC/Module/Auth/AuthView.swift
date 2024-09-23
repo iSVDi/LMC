@@ -18,6 +18,14 @@ struct AuthView: View {
             ZStack {
                 Color.appBlack
                     .ignoresSafeArea()
+/* CODEREVIEW:
+Спейсеры обычно нужны, чтобы заполнить динамически пространство между компонентами, чтобы оно было "максимальным"
+ Сверху и снизу здесь такого не требуется. Можно было бы убрать первый и последний спейсеры и вместо этого сделать выравнивание по центру в ZStack
+
+ Для Задания конкретного расстояния предпочтительнее использовать padding с нужным значением
+
+ Также и Spacer() и, к примеру, title - это все вьюхи, расположенные на одном уровне, лучше им иметь одинаковую индентацию
+ */
                 VStack {
                     Spacer()
                         title
@@ -33,6 +41,9 @@ struct AuthView: View {
         }
     }
     
+    /* CODEREVIEW:
+     Вложенные вьюхи лучше делать приватными. Хороший подход - создать приватное расширение на текущую вью и там прописывать все вложенные
+     */
     var title: some View {
         Text("KinoPoisk") //TODO: localize
             .foregroundStyle(Color.appColor)
@@ -42,6 +53,16 @@ struct AuthView: View {
     var textFiels: some View {
         VStack(spacing: 20) {
             //TODO: localize
+            /* CODEREVIEW:
+             Все модификаторы должны переноситься на новую строку для лучшей читабельности
+             Перенеси .foregroundStyle тут и ниже
+
+             Также хорошим UX считается указание типа контента для полей форм
+             Например, username и password
+             Делается это через модификатор .textContentType
+
+             Так система сможет предложить тебе при вводе заполнить логин/пароль из сохраненных
+             */
             TextField("Login", text: $loginText, prompt: Text("Login").foregroundStyle(Color.appGray))
                 .padding(.all, 12)
                 .foregroundStyle(Color.appWhite)
@@ -50,6 +71,12 @@ struct AuthView: View {
                         .stroke(Color.appGray)
                 }
             //TODO: localize
+            /* CODEREVIEW:
+             Пароль стоит делать закрытым маской
+
+             В UIKit для этого использовалось свойство isSecureTextEntry, здесь же для этого есть
+             отдельная вьюха - SecureField
+             */
             TextField("Password", text: $passwordText, prompt: Text("Password").foregroundStyle(Color.appGray))
                 .padding(.all, 12)
                 .foregroundStyle(Color.appWhite)
@@ -62,6 +89,10 @@ struct AuthView: View {
     
     var authButton: some View {
         Button {
+            /* CODEREVIEW:
+             Когда передалаешь на AuthService, убедись, что тут не будет двух вызовов методов, т.к.
+             текущая реализация очень сильно зависит от синхронности кода
+             */
             viewModel.handleAuthButton(login: loginText, password: passwordText)
             if viewModel.isNeedDissmiss {
                 dismiss()
