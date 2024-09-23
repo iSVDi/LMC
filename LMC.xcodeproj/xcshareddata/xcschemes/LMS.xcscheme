@@ -18,7 +18,7 @@
                BlueprintIdentifier = "F36CBFC32C91B1A600BC1298"
                BuildableName = "LMS.app"
                BlueprintName = "LMS"
-               ReferencedContainer = "container:LMS.xcodeproj">
+               ReferencedContainer = "container:LMC.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,7 +47,7 @@
             BlueprintIdentifier = "F36CBFC32C91B1A600BC1298"
             BuildableName = "LMS.app"
             BlueprintName = "LMS"
-            ReferencedContainer = "container:LMS.xcodeproj">
+            ReferencedContainer = "container:LMC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "F36CBFC32C91B1A600BC1298"
             BuildableName = "LMS.app"
             BlueprintName = "LMS"
-            ReferencedContainer = "container:LMS.xcodeproj">
+            ReferencedContainer = "container:LMC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

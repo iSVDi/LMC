@@ -4,7 +4,6 @@
 
 ## User settings
 xcuserdata/
-LMS/Generated/*
 
 ## Obj-C/Swift specific
 *.hmap

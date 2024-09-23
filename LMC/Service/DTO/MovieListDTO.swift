@@ -1,31 +1,32 @@
 //
-//  MovieListModel.swift
-//  LMS
+//  MovieListDTO.swift
+//  LMC
 //
-//  Created by Daniil on 12.09.2024.
+//  Created by daniil on 20.09.2024.
 //
 
 import Foundation
 
-// MARK: - MovieList
-struct MovieListModel: Codable {
+// MARK: - MovieListDTO
+class MovieListDTO: Codable {
     let totalPages: Int
-    var items: [MovieListItemModel]
+    let items: [MovieListItemDTO]
     
-    init() {
-        items = []
-        totalPages = 1
+    init(totalPages: Int, items: [MovieListItemDTO]) {
+        self.totalPages = totalPages
+        self.items = items
     }
 }
 
+
 // MARK: - Item
-struct MovieListItemModel: Codable {
+struct MovieListItemDTO: Codable {
     let kinopoiskID: Int
     private let nameOriginal: String?
     private let nameRu: String?
     private let nameEn: String?
-    let countries: [CountryModel]
-    let genres: [GenreModel]
+    let countries: [CountryDTO]
+    let genres: [GenreDTO]
     let ratingKinopoisk: Double?
     let year: Int
     let posterURLPreview: String
@@ -47,5 +48,6 @@ struct MovieListItemModel: Codable {
     }
     
 }
+
 
 

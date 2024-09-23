@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MovieListItemView: View {
     let mock: MovieListItemModel
-    private let imageDownloader = MovieImageDownloader()
     
     init(mock: MovieListItemModel) {
         self.mock = mock

@@ -14,8 +14,8 @@ struct MovieDetailsDTO: Codable {
     private let nameEn: String?
     private let nameOriginal: String?
     let description: String?
-    let countries: [CountryModel]
-    let genres: [GenreModel]
+    let countries: [CountryDTO]
+    let genres: [GenreDTO]
     private let startYear, endYear: Int?
     private let year: Int?
     let ratingKinopoisk: Double?
