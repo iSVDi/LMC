@@ -45,13 +45,14 @@ struct MoviesView: View {
     
     private var exitButton: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            //TODO: move image, implement
-            Button(action: {
-                print("exit button handler")
-            }, label: {
+            //TODO: move image
+            Button {
+                viewModel.handleExitButton()
+            } label: {
                 Image(systemName: "rectangle.portrait.and.arrow.right")
                     .foregroundStyle(Color.appColor)
-            })
+            }
+            .fullScreenCover(isPresented: $viewModel.isNeedPresentLoginView, content: AuthView.init)
             
         }
     }

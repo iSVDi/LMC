@@ -15,7 +15,9 @@ class MoviesViewModel: ObservableObject {
     private(set) var movies: [MovieListItemModel] = []
     @Published var filteredMovies: [MovieListItemModel] = []
     @Published var isFooterViewPresented = false
+    @Published var isNeedPresentLoginView = false
     private var searchRequest = ""
+    
     
     init() {
         loadMovies()
@@ -51,6 +53,11 @@ class MoviesViewModel: ObservableObject {
             model.country.lowercased().contains(lowerCasedSearch)
         }
         
+    }
+    
+    func handleExitButton() {
+        isNeedPresentLoginView = true
+//        TODO: implement logic of exit
     }
     
     private func loadMovies() {
