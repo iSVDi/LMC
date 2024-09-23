@@ -57,6 +57,7 @@ class MoviesViewModel: ObservableObject {
     
     func handleExitButton() {
         isNeedPresentLoginView = true
+        userDefaultManager.setBool(value: true, key: .isNeedSignIn)
         currentPage = 1
         movies = []
         searchRequest = ""

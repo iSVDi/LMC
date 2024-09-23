@@ -13,7 +13,7 @@ class AuthViewModel: ObservableObject {
      */
     private let userDefaultManager = UserDefaultManager()
     @Published var isPresentAlert = false
-    @Published private(set) var isNeedDissmiss = false
+    @Published private(set) var isNeedDismiss = false
     
     func handleAuthButton(login: String, password: String) {
         /* CODEREVIEW:
@@ -45,7 +45,7 @@ class AuthViewModel: ObservableObject {
      */
     private func dismiss() {
         userDefaultManager.setBool(value: false, key: .isNeedSignIn)
-        isNeedDissmiss = true
+        isNeedDismiss = true
     }
     
 }
