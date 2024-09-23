@@ -11,14 +11,13 @@ struct MoviesView: View {
     
     @State private var searchText = ""
     @StateObject private var viewModel = MoviesViewModel()
-    @State private var isPresentFilterView = false
     var body: some View {
         NavigationStack {
             ZStack {
                 Color.appBlack
                     .ignoresSafeArea()
                 if viewModel.movies.isEmpty {
-                   ProgressView()
+                    ProgressView()
                 } else {
                     moviesScrollView
                 }
@@ -52,7 +51,11 @@ struct MoviesView: View {
                 Image(systemName: "rectangle.portrait.and.arrow.right")
                     .foregroundStyle(Color.appColor)
             }
-            .fullScreenCover(isPresented: $viewModel.isNeedPresentLoginView, content: AuthView.init)
+            .fullScreenCover(isPresented: $viewModel.isNeedPresentLoginView,
+                             onDismiss: {
+                viewModel.handleDismissAuthView()
+            },
+                             content: AuthView.init)
             
         }
     }
@@ -116,12 +119,7 @@ struct MoviesView: View {
                         .padding(.trailing, 16)
                 }
             }
-       
     }
-    
-    
-    
-    
 }
 
 

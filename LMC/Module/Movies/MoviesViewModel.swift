@@ -9,6 +9,7 @@ import SwiftUI
 
 class MoviesViewModel: ObservableObject {
     private let repository = MoviesRepository()
+    private let userDefaultManager = UserDefaultManager()
     private var currentFilter = MovieFilterDTO.rating
     private var totalPages = 1
     private var currentPage = 1
@@ -18,9 +19,8 @@ class MoviesViewModel: ObservableObject {
     @Published var isNeedPresentLoginView = false
     private var searchRequest = ""
     
-    
     init() {
-        loadMovies()
+        prepare()
     }
     
     func handleLastCell(id: UUID) {
@@ -57,7 +57,21 @@ class MoviesViewModel: ObservableObject {
     
     func handleExitButton() {
         isNeedPresentLoginView = true
-//        TODO: implement logic of exit
+        currentPage = 1
+        movies = []
+        searchRequest = ""
+    }
+    
+    func handleDismissAuthView() {
+        loadMovies()
+    }
+    
+    private func prepare() {
+        if userDefaultManager.getBool(key: .isNeedSignIn) {
+            isNeedPresentLoginView.toggle()
+        } else {
+            loadMovies()
+        }
     }
     
     private func loadMovies() {

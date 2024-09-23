@@ -13,6 +13,7 @@
 		A53D97DA2CA14BA800418923 /* MovieDetailsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFFB2C92BC7900BC1298 /* MovieDetailsDTO.swift */; };
 		A53D97DB2CA14BA800418923 /* GenreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFFF2C92BD8B00BC1298 /* GenreDTO.swift */; };
 		A53D97DD2CA14C3200418923 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFE42C91C57B00BC1298 /* UserDefaultManager.swift */; };
+		A53D97E02CA14FFA00418923 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53D97DF2CA14FFA00418923 /* AuthViewModel.swift */; };
 		A5C444732C9C3CBA00A66449 /* LMCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C444722C9C3CBA00A66449 /* LMCApp.swift */; };
 		A5C444752C9C3CBA00A66449 /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C444742C9C3CBA00A66449 /* MoviesView.swift */; };
 		A5C444772C9C3CBC00A66449 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C444762C9C3CBC00A66449 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* Begin PBXFileReference section */
 		31AE5398958A41AD0410B30A /* Pods-LMC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LMC.debug.xcconfig"; path = "Target Support Files/Pods-LMC/Pods-LMC.debug.xcconfig"; sourceTree = "<group>"; };
 		5A9939FD3E56906CB07DBF41 /* Pods-LMC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LMC.release.xcconfig"; path = "Target Support Files/Pods-LMC/Pods-LMC.release.xcconfig"; sourceTree = "<group>"; };
+		A53D97DF2CA14FFA00418923 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		A5C444702C9C3CBA00A66449 /* LMC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LMC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C444722C9C3CBA00A66449 /* LMCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMCApp.swift; sourceTree = "<group>"; };
 		A5C444742C9C3CBA00A66449 /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				A5C444D02CA1304F00A66449 /* AuthView.swift */,
+				A53D97DF2CA14FFA00418923 /* AuthViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				A5C444732C9C3CBA00A66449 /* LMCApp.swift in Sources */,
 				A5C4449E2C9C483F00A66449 /* MovieListItemModel.swift in Sources */,
 				A53D97DD2CA14C3200418923 /* UserDefaultManager.swift in Sources */,
+				A53D97E02CA14FFA00418923 /* AuthViewModel.swift in Sources */,
 				A53D97DA2CA14BA800418923 /* MovieDetailsDTO.swift in Sources */,
 				A5C444D12CA1304F00A66449 /* AuthView.swift in Sources */,
 				A5C444C72C9D886800A66449 /* MovieDetailsViewModel.swift in Sources */,
