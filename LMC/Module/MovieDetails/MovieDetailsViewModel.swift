@@ -10,7 +10,7 @@ import SwiftUI
 class MovieDetailsViewModel: ObservableObject {
     private let repository = MovieDetailsRepository()
     @Published private(set) var details = MovieDetailsModel()
-    @Published private(set) var shotLinks: [String] = ["", "", "", "", "", "", "", "", "", "", "", ""]
+    @Published private(set) var shotLinks: [String] = []
     @Published private(set) var isNeedPresentDetails = false
     @Published private(set) var isNeedPresentShots = false
     

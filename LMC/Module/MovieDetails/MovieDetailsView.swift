@@ -78,12 +78,9 @@ struct MovieDetailsView: View {
         }
     }
     
-    
-    
-    @ViewBuilder
     var headerView: some View {
-        if let imageUrl = URL(string: viewModel.details.coverURL) {
-            ZStack(alignment: .bottom) {
+        ZStack(alignment: .bottom) {
+            if let imageUrl = URL(string: viewModel.details.coverURL) {
                 AsyncImage(url: imageUrl) { image in
                     image
                         .resizable()
@@ -93,14 +90,16 @@ struct MovieDetailsView: View {
                     ProgressView()
                     
                 }
-                nameHStack
-                    .padding(.horizontal, horizontalPadding)
-                    .padding(.bottom, 10)
+                
+            } else {
+                Color.appBlack
             }
             
-        } else {
-            Color.appBlack
+            nameHStack
+                .padding(.horizontal, horizontalPadding)
+                .padding(.bottom, 10)
         }
+       
     }
     
     var nameHStack: some View {
