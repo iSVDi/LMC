@@ -11,7 +11,6 @@ final class AuthDataManager {
     static let shared = AuthDataManager()
     private let userDefaultsManager = UserDefaultsManager()
     private let isNeedSignInSubject: CurrentValueSubject<Bool, Never>
-    private var subscriptions: Set<AnyCancellable> = []
     
     private init() {
         let state = userDefaultsManager.getBool(key: .isNeedSignIn)
@@ -28,8 +27,8 @@ final class AuthDataManager {
         }
     }
     
-    func sink(receiveValue: @escaping ((Bool) -> Void)) {
-        isNeedSignInSubject.sink(receiveValue: receiveValue).store(in: &subscriptions)
+    func sink(receiveValue: @escaping ((Bool) -> Void)) -> AnyCancellable {
+        return isNeedSignInSubject.sink(receiveValue: receiveValue)
     }
     
     func auth(
