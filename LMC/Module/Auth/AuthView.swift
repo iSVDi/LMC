@@ -10,28 +10,30 @@ import SwiftUI
 struct AuthView: View {
     @State private var loginText = ""
     @State private var passwordText = ""
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
+    @StateObject private var viewModel = AuthViewModel()
     
     var body: some View {
         GeometryReader { geometry in
-            ZStack {
+            ZStack(alignment: .center) {
                 Color.appBlack
                     .ignoresSafeArea()
                 VStack {
-                    Spacer()
-                        title
-                    Spacer()
-                        .frame(height: geometry.size.height * 0.1)
-                        textFiels
-                    Spacer()
-                        authButton
-                    Spacer()
+                    title
+                        .padding(.bottom, geometry.size.height * 0.1)
+                    textFiels
+                    authButton
+                        .padding(.top, geometry.size.height * 0.2)
                 }
                 .padding(.horizontal, 16)
             }
         }
     }
-    
+}
+
+//MARK: - Private extension AuthView
+
+private extension AuthView {
     var title: some View {
         Text("KinoPoisk") //TODO: localize
             .foregroundStyle(Color.appColor)
@@ -40,27 +42,34 @@ struct AuthView: View {
     
     var textFiels: some View {
         VStack(spacing: 20) {
-            TextField("Login", text: $loginText, prompt: Text("Login").foregroundStyle(Color.appGray))
-                .padding(.all, 12)
-                .foregroundStyle(Color.appWhite)
-                .background {
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.appGray)
-                }
-            TextField("Password", text: $passwordText, prompt: Text("Password").foregroundStyle(Color.appGray))
-                .padding(.all, 12)
-                .foregroundStyle(Color.appWhite)
-                .background {
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.appGray)
-                }
+            //TODO: localize
+            TextField("Login", text: $loginText, prompt: Text("Login")
+                .foregroundStyle(Color.appGray))
+            .textContentType(.username)
+            .padding(.all, 12)
+            .foregroundStyle(Color.appWhite)
+            .background {
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.appGray)
+            }
+            //TODO: localize
+            SecureField("Password", text: $passwordText, prompt: Text("Password")
+                .foregroundStyle(Color.appGray))
+            .textContentType(.password)
+            .padding(.all, 12)
+            .foregroundStyle(Color.appWhite)
+            .background {
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.appGray)
+            }
         }
     }
     
     var authButton: some View {
         Button {
-            dismiss()
+            viewModel.handleAuthButton(login: loginText, password: passwordText)
         } label: {
+            //TODO: localize
             Text("Войти")
                 .foregroundStyle(Color.appWhite)
                 .padding()
@@ -69,7 +78,11 @@ struct AuthView: View {
                     RoundedRectangle(cornerRadius: 5)
                         .foregroundStyle(Color.appColor)
                 }
-            
+        }
+        .alert(isPresented: $viewModel.isPresentAlert) {
+            //TODO: localize
+            Alert(title: Text("Error"),
+                  message: Text(viewModel.alertMessage))
         }
     }
 }

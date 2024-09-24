@@ -6,7 +6,7 @@
 //
 
 import Moya
-class MovieDetailsRepository {
+final class MovieDetailsRepository {
     private let dataProvider = MoyaProvider<MoviesService>()
     
     func getMovieDetail(movieID: Int, completionHandler: @escaping (MovieDetailsModel) -> Void) {

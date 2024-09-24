@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class MovieDetailsViewModel: ObservableObject {
+final class MovieDetailsViewModel: ObservableObject {
     private let repository = MovieDetailsRepository()
     @Published private(set) var details = MovieDetailsModel()
     @Published private(set) var shotLinks: [String] = ["", "", "", "", "", "", "", "", "", "", "", ""]

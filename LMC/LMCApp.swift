@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct LMCApp: App {
+    @StateObject private var appViewModel = AppViewModel()
     var body: some Scene {
         WindowGroup {
-            MoviesView()
+            if appViewModel.isNeedLogin {
+                AuthView()
+            } else {
+                MoviesView()
+            }
         }
     }
 }
