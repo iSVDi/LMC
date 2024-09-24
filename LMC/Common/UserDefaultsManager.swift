@@ -13,7 +13,7 @@ enum UserDataKeys: String {
     case isNeedSignIn
 }
 
-class UserDefaultsManager {
+final class UserDefaultsManager {
     private let userDefault = UserDefaults()
     
     init() {

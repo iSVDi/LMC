@@ -29,7 +29,6 @@ struct AuthView: View {
             }
         }
     }
-    
 }
 
 //MARK: - Private extension AuthView
@@ -69,7 +68,6 @@ private extension AuthView {
     var authButton: some View {
         Button {
             viewModel.handleAuthButton(login: loginText, password: passwordText)
-            
         } label: {
             //TODO: localize
             Text("Войти")
@@ -80,13 +78,11 @@ private extension AuthView {
                     RoundedRectangle(cornerRadius: 5)
                         .foregroundStyle(Color.appColor)
                 }
-            
         }
         .alert(isPresented: $viewModel.isPresentAlert) {
             //TODO: localize
             Alert(title: Text("Error"),
                   message: Text(viewModel.alertMessage))
-            
         }
     }
 }

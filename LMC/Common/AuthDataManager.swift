@@ -7,7 +7,7 @@
 
 import Combine
 
-class AuthDataManager {
+final class AuthDataManager {
     static let shared = AuthDataManager()
     private let userDefaultsManager = UserDefaultsManager()
     private let isNeedSignInSubject: CurrentValueSubject<Bool, Never>
@@ -32,9 +32,10 @@ class AuthDataManager {
         isNeedSignInSubject.sink(receiveValue: receiveValue).store(in: &subscriptions)
     }
     
-    func auth(login: String,
-              password: String,
-              errorHandler: @escaping (_ message: String)->()) {
+    func auth(
+        login: String,
+        password: String,
+        errorHandler: @escaping (_ message: String) -> Void) {
         
         guard let userLogin = userDefaultsManager.getString(key: .login),
               let userPassword = userDefaultsManager.getString(key: .password) else {
@@ -43,22 +44,22 @@ class AuthDataManager {
             isNeedSignIn = false
             return
         }
-                
+        
         let areLoginsIncorrectMessage = areLoginsIncorrect(userLogin: userLogin, login: login)
         let arePasswordsIncorrectMessage = arePasswordsIncorrect(userPassword: userPassword, password: password)
         
-        guard areLoginsIncorrectMessage != nil || arePasswordsIncorrectMessage != nil else {
+        
+        guard let errorMessage = getErrorMessage(loginIncorrectMessage: areLoginsIncorrectMessage,
+                                                 passwordIncorrectMessage: arePasswordsIncorrectMessage) else {
             isNeedSignIn = false
             return
         }
-        
-        let message = getErrorMessage(loginIncorrectMessage: areLoginsIncorrectMessage,
-                                      passwordIncorrectMessage: arePasswordsIncorrectMessage)
-        errorHandler(message)
+
+        errorHandler(errorMessage)
         
     }
     
-    private func getErrorMessage(loginIncorrectMessage: String?, passwordIncorrectMessage: String?) -> String {
+    private func getErrorMessage(loginIncorrectMessage: String?, passwordIncorrectMessage: String?) -> String? {
         if let loginsMessage = loginIncorrectMessage, let passwordMessage = passwordIncorrectMessage {
             return [loginsMessage, passwordMessage].joined(separator: ". ")
             
@@ -72,22 +73,16 @@ class AuthDataManager {
             return passwordMessage
         }
         
-        return "unknown error"
+        return nil
     }
     
     
     private func areLoginsIncorrect(userLogin: String, login: String) -> String? {
-        if (userLogin != login) {
-            return "Logins are mismatched"
-        }
-        return nil
+        userLogin != login ? "Logins are mismatched" : nil
     }
     
     private func arePasswordsIncorrect(userPassword: String, password: String) -> String? {
-        if (userPassword != password) {
-            return "Passwords are mismatched"
-        }
-        return nil
+        userPassword != password ? "Logins are mismatched" : nil
     }
     
 }
