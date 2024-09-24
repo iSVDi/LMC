@@ -35,7 +35,8 @@ final class AuthDataManager {
     func auth(
         login: String,
         password: String,
-        errorHandler: @escaping (_ message: String) -> Void) {
+        errorHandler: @escaping (_ message: String) -> Void
+    ) {
         
         guard let userLogin = userDefaultsManager.getString(key: .login),
               let userPassword = userDefaultsManager.getString(key: .password) else {
