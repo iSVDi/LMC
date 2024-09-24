@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct MoviesView: View {
-    
     @State private var searchText = ""
     @StateObject private var viewModel = MoviesViewModel()
     var body: some View {
@@ -51,11 +50,6 @@ struct MoviesView: View {
                 Image(systemName: "rectangle.portrait.and.arrow.right")
                     .foregroundStyle(Color.appColor)
             }
-            .fullScreenCover(isPresented: $viewModel.isNeedPresentLoginView,
-                             onDismiss: {
-                viewModel.handleDismissAuthView()
-            },
-                             content: AuthView.init)
             
         }
     }

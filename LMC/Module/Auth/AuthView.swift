@@ -68,14 +68,7 @@ private extension AuthView {
     
     var authButton: some View {
         Button {
-            /* CODEREVIEW:
-             Когда передалаешь на AuthService, убедись, что тут не будет двух вызовов методов, т.к.
-             текущая реализация очень сильно зависит от синхронности кода
-             */
             viewModel.handleAuthButton(login: loginText, password: passwordText)
-            if viewModel.isNeedDismiss {
-                dismiss()
-            }
             
         } label: {
             //TODO: localize
@@ -92,7 +85,7 @@ private extension AuthView {
         .alert(isPresented: $viewModel.isPresentAlert) {
             //TODO: localize
             Alert(title: Text("Error"),
-                  message: Text("Wrong login or password"))
+                  message: Text(viewModel.alertMessage))
             
         }
     }

@@ -9,18 +9,17 @@ import SwiftUI
 
 class MoviesViewModel: ObservableObject {
     private let repository = MoviesRepository()
-    private let userDefaultManager = UserDefaultManager()
+    private let authDataManager = AuthDataManager.shared
     private var currentFilter = MovieFilterDTO.rating
     private var totalPages = 1
     private var currentPage = 1
     private(set) var movies: [MovieListItemModel] = []
     @Published var filteredMovies: [MovieListItemModel] = []
     @Published var isFooterViewPresented = false
-    @Published var isNeedPresentLoginView = false
     private var searchRequest = ""
     
     init() {
-        prepare()
+        loadMovies()
     }
     
     func handleLastCell(id: UUID) {
@@ -56,8 +55,7 @@ class MoviesViewModel: ObservableObject {
     }
     
     func handleExitButton() {
-        isNeedPresentLoginView = true
-        userDefaultManager.setBool(value: true, key: .isNeedSignIn)
+        authDataManager.isNeedSignIn = true
         currentPage = 1
         movies = []
         searchRequest = ""
@@ -66,15 +64,7 @@ class MoviesViewModel: ObservableObject {
     func handleDismissAuthView() {
         loadMovies()
     }
-    
-    private func prepare() {
-        if userDefaultManager.getBool(key: .isNeedSignIn) {
-            isNeedPresentLoginView.toggle()
-        } else {
-            loadMovies()
-        }
-    }
-    
+        
     private func loadMovies() {
         repository.getMovies(filter: currentFilter, page: currentPage) { [weak self] dto in
             guard let self else {

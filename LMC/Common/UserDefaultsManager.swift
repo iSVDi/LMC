@@ -1,5 +1,5 @@
 //
-//  UserDetails.swift
+//  UserDefaultsManager.swift
 //  LMS
 //
 //  Created by Daniil on 11.09.2024.
@@ -13,7 +13,7 @@ enum UserDataKeys: String {
     case isNeedSignIn
 }
 
-class UserDefaultManager {
+class UserDefaultsManager {
     private let userDefault = UserDefaults()
     
     init() {
