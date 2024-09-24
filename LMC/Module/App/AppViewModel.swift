@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class AppViewModel: ObservableObject {
+final class AppViewModel: ObservableObject {
     private let authDataManager = AuthDataManager.shared
     @Published var isNeedLogin: Bool
     

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class MoviesViewModel: ObservableObject {
+final class MoviesViewModel: ObservableObject {
     private let repository = MoviesRepository()
     private let authDataManager = AuthDataManager.shared
     private var currentFilter = MovieFilterDTO.rating

@@ -57,7 +57,6 @@ final class AuthDataManager {
         }
 
         errorHandler(errorMessage)
-        
     }
     
     private func getErrorMessage(loginIncorrectMessage: String?, passwordIncorrectMessage: String?) -> String? {
@@ -76,7 +75,6 @@ final class AuthDataManager {
         
         return nil
     }
-    
     
     private func areLoginsIncorrect(userLogin: String, login: String) -> String? {
         userLogin != login ? "Logins are mismatched" : nil

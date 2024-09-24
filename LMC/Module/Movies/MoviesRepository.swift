@@ -6,12 +6,14 @@
 //
 
 import Moya
-class MoviesRepository {
+final class MoviesRepository {
     private let moviesDataProvider = MoyaProvider<MoviesService>()
     
-    func getMovies(filter: MovieFilterDTO,
-                   page:Int,
-                   complitionHandler: @escaping(MovieListDTO) -> Void) {
+    func getMovies(
+        filter: MovieFilterDTO,
+        page:Int,
+        complitionHandler: @escaping(MovieListDTO) -> Void
+    ) {
         moviesDataProvider.request(.getMovies(filter: filter,
                                               page: page)) { result in
             if case let .success(response) = result {

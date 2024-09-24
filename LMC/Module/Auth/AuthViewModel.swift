@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class AuthViewModel: ObservableObject {
+final class AuthViewModel: ObservableObject {
     private let authDataManager = AuthDataManager.shared
     @Published var isPresentAlert = false
     private(set) var alertMessage = ""
