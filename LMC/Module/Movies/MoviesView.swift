@@ -50,11 +50,11 @@ private extension MoviesView {
     
     var exitButton: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            //TODO: move image
+            
             Button {
                 viewModel.handleExitButton()
             } label: {
-                Image(systemName: "rectangle.portrait.and.arrow.right")
+                AppImage(.exit)
                     .foregroundStyle(Color.appColor)
             }
             
@@ -89,8 +89,7 @@ private extension MoviesView {
                     viewModel.handleNewFilter(filter: filter)
                 }
             }) {
-                //TODO: move image
-                Image(systemName: "slider.vertical.3")
+                AppImage(.filter)
                     .foregroundColor(Color.appColor)
             }
             searchField
@@ -98,7 +97,6 @@ private extension MoviesView {
     }
     
     //TODO: localize
-    //TODO: move image
     var searchField: some View {
         HStack() {
             Spacer(minLength: 16)
@@ -112,7 +110,7 @@ private extension MoviesView {
             })
             .foregroundColor(Color.appWhite)
             
-            Image(systemName: "magnifyingglass")
+            AppImage(.search)
                 .frame(width: 16)
                 .foregroundColor(Color.appColor)
                 .padding(.trailing, 16)

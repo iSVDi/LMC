@@ -42,12 +42,11 @@ struct MoviesFilterView: View {
         
     private var backButton: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
-            //TODO: move image
             Button(action: {
                 completionHander?(getFilter())
                 dismiss()
             }, label: {
-                Image(systemName: "chevron.backward")
+                AppImage(.backward)
                     .foregroundStyle(Color.appWhite)
             })
             

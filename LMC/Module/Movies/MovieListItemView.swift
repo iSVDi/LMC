@@ -28,10 +28,6 @@ struct MovieListItemView: View {
                         .frame(maxWidth: 100, maxHeight: 100)
                 }
                 VStack(alignment: .leading, spacing: 10) {
-                    /* CODEREVIEW:
-                     Стоит тут добавить лимит по строкам, думаю можно 2 ограничиться
-                     Потом эллипс (типа такого многоточия в кон...)
-                     */
                     Text(listItem.title)
                         .multilineTextAlignment(.leading)
                         .lineLimit(1)

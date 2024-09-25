@@ -16,6 +16,7 @@
 		A53D97E02CA14FFA00418923 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53D97DF2CA14FFA00418923 /* AuthViewModel.swift */; };
 		A55214862CA2827F00A11669 /* AuthDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55214852CA2827F00A11669 /* AuthDataManager.swift */; };
 		A55214892CA285B200A11669 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55214882CA285B200A11669 /* AppViewModel.swift */; };
+		A59B3C712CA3FBFA00D0B47D /* AppImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B3C702CA3FBFA00D0B47D /* AppImage.swift */; };
 		A5C444732C9C3CBA00A66449 /* LMCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C444722C9C3CBA00A66449 /* LMCApp.swift */; };
 		A5C444752C9C3CBA00A66449 /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C444742C9C3CBA00A66449 /* MoviesView.swift */; };
 		A5C444772C9C3CBC00A66449 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C444762C9C3CBC00A66449 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		A53D97DF2CA14FFA00418923 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		A55214852CA2827F00A11669 /* AuthDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataManager.swift; sourceTree = "<group>"; };
 		A55214882CA285B200A11669 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		A59B3C702CA3FBFA00D0B47D /* AppImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImage.swift; sourceTree = "<group>"; };
 		A5C444702C9C3CBA00A66449 /* LMC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LMC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C444722C9C3CBA00A66449 /* LMCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMCApp.swift; sourceTree = "<group>"; };
 		A5C444742C9C3CBA00A66449 /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
@@ -110,10 +112,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A59B3C722CA4011000D0B47D /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				A59B3C702CA3FBFA00D0B47D /* AppImage.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 		A5C444712C9C3CBA00A66449 /* LMC */ = {
 			isa = PBXGroup;
 			children = (
 				A5C444A22C9C598700A66449 /* Common */,
+				A59B3C722CA4011000D0B47D /* CustomView */,
 				A5C444CE2C9D8C9E00A66449 /* Service */,
 				A5C4449C2C9C482600A66449 /* Model */,
 				A5C444A72C9D441000A66449 /* Module */,
@@ -366,6 +377,7 @@
 				A5C444A42C9C599900A66449 /* AppColors.swift in Sources */,
 				A5C444B72C9D47A600A66449 /* MoviesRepository.swift in Sources */,
 				A5C444AA2C9D443C00A66449 /* MoviesViewModel.swift in Sources */,
+				A59B3C712CA3FBFA00D0B47D /* AppImage.swift in Sources */,
 				A5C444C02C9D63C400A66449 /* MoviesFilterView.swift in Sources */,
 				A5C444B92C9D485D00A66449 /* MovieListDTO.swift in Sources */,
 				A53D97DB2CA14BA800418923 /* GenreDTO.swift in Sources */,

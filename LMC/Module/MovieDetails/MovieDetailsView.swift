@@ -48,11 +48,10 @@ struct MovieDetailsView: View {
     
     private var backButton: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
-            //TODO: move image
             Button(action: {
                 dismiss()
             }, label: {
-                Image(systemName: "chevron.backward")
+                AppImage(.backward)
                     .foregroundStyle(Color.appWhite)
             })
             
@@ -144,8 +143,7 @@ struct MovieDetailsView: View {
             Spacer()
             if let url = URL(string: details.webUrl) {
                 Link(destination: url, label: {
-                    //TODO: move image
-                    Image(systemName: "link")
+                    AppImage(.link)
                         .foregroundStyle(Color.appColor)
                 })
             }
