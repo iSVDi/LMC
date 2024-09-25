@@ -50,10 +50,6 @@ private extension MoviesView {
     
     var exitButton: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            /* CODEREVIEW:
-             Что за TODO? Актуально?
-             -- + localization?
-             */
             //TODO: move image
             Button {
                 viewModel.handleExitButton()

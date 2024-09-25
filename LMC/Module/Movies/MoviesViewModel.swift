@@ -49,10 +49,7 @@ final class MoviesViewModel: ObservableObject {
             filteredMovies = movies
             return
         }
-        
-        /* CODEREVIEW:
-         А поиск только локальный? В запросе невозможно передать query?
-         */
+    
         filteredMovies = movies.filter { model in
             let lowerCasedSearch = request.lowercased()
             return model.title.lowercased().contains(lowerCasedSearch) ||
@@ -64,15 +61,6 @@ final class MoviesViewModel: ObservableObject {
     
     func handleExitButton() {
         authDataManager.isNeedSignIn = true
-        
-        /* CODEREVIEW:
-         А точно нужно здесь сбрасывать состояние?
-         У тебя же в LMCApp будет использоваться другая вьюха, и эта вью модель в целом должна
-         выгрузиться из памяти.
-         */
-        currentPage = 1
-        movies = []
-        searchRequest = ""
     }
     
     private func loadMovies() {
@@ -82,9 +70,6 @@ final class MoviesViewModel: ObservableObject {
             }
             self.totalPages = dto.totalPages
             let newMovies = dto.items.map {
-                /* CODEREVIEW:
-                 Отформатировать переносы
-                 */
                 MovieListItemModel(
                     kinopoiskID: $0.kinopoiskID,
                     title: $0.getName,
@@ -92,7 +77,8 @@ final class MoviesViewModel: ObservableObject {
                     year: $0.year,
                     country: $0.countries.map{$0.country}.joined(separator: ", "),
                     rating: $0.ratingKinopoisk,
-                    posterUrlPreview: $0.posterURLPreview)
+                    posterUrlPreview: $0.posterURLPreview
+                )
             }
             self.movies.append(contentsOf: newMovies)
             self.handleSearch(searchRequest)

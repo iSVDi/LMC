@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct MovieListItemView: View {
     let listItem: MovieListItemModel
@@ -17,20 +18,14 @@ struct MovieListItemView: View {
     var body: some View {
             HStack {
                 if let url = URL(string: listItem.posterUrlPreview) {
-                    /* CODEREVIEW:
-                     AsyncImage в целом ок, но он не поддерживает кеширование
-                     У тебя в изначальной реализации был Kingfisher, у них есть реализация для SUI
-                     Можно его тоже сюда затащить
-                     */
-                    AsyncImage(url: url) { image in
-                        image
-                            .resizable()
-                            .scaledToFit()
-                    } placeholder: {
-                        ProgressView()
-                        
-                    }
-                    .frame(maxWidth: 100, maxHeight: 100)
+                    
+                    KFImage(url)
+                        .placeholder {
+                            ProgressView()
+                        }
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 100, maxHeight: 100)
                 }
                 VStack(alignment: .leading, spacing: 10) {
                     /* CODEREVIEW:
