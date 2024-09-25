@@ -59,6 +59,17 @@ struct MovieDetailsView: View {
     }
     
     var mainView: some View {
+        /* CODEREVIEW:
+         GeometryReader вносит дополнительную сложность к UI, поэтому его нужно использовать
+         только в тех случаях, когда без него никак
+
+         Здесь, как понимаю, он использовался для того, чтобы сделать постер квадратным?
+         Этого можно достичь добавлением модификатор .aspectRatio со значением 1 (равносильно есть 1:1),
+         что сделает картинку квадратной
+
+         А фрейм самого стека вообще не должен фиксироваться в большинстве случаев -
+         он должен определяться его контентом
+         */
         GeometryReader { geometry in
             ScrollView {
                 VStack {
@@ -112,6 +123,10 @@ struct MovieDetailsView: View {
     var detailsView: some View {
         VStack(alignment: .leading, spacing: 5) {
             descriptionHStack
+            /* CODEREVIEW:
+             Может, давай, если описание пустое, выводить текст "Нет описания" с opacity 0.5?
+             А то выглядит не очень сейчас
+             */
             Text(details.description)
                 .foregroundStyle(Color.appWhite)
                 .font(.system(size: 17))
