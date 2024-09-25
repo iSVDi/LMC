@@ -20,6 +20,7 @@ struct MovieDetailsDTO: Codable {
     private let year: Int?
     let ratingKinopoisk: Double?
     let coverURL: String?
+    let posterURL: String?
     let webUrl: String?
     
     
@@ -28,15 +29,13 @@ struct MovieDetailsDTO: Codable {
         case nameOriginal, nameRu, nameEn
         case description, countries, genres, startYear, endYear, year, ratingKinopoisk, webUrl
         case coverURL = "coverUrl"
+        case posterURL = "posterUrl"
     }
     
     func getName() -> String {
-        /* CODEREVIEW:
-         Пробелы возле фигурных: { $0 } и т.д.
-         */
         let names = [nameOriginal, nameEn, nameRu]
-            .compactMap {$0}
-            .filter {!$0.isEmpty}
+            .compactMap { $0 }
+            .filter { !$0.isEmpty }
         return names.first ?? ""
         
     }
@@ -57,29 +56,15 @@ struct MovieDetailsDTO: Codable {
     }
     
     func getModel() -> MovieDetailsModel {
-        /* CODEREVIEW:
-         Отформатируй аргументы
-
-         Нужно отступать пробел перед и после фигурных скобок: .map { $0.country }
-
-         У деталей фильма помимо coverUrl есть еще posterUrl.
-         Он чаще присутствует. Можно сделать дефолт также на него, чтобы контент показывался:
-         coverURL ?? posterURL ?? ""
-
-         Ну и плюс если у тебя эта модель для UI, может сразу сделаешь её типа URL, а не String?
-         Не придется конвертить во вьюхе
-         */
-        let res = MovieDetailsModel(name: getName(),
+        return MovieDetailsModel(name: getName(),
                                     description: description ?? "",
-                                    countries: countries.map{$0.country}.joined(separator: ", "),
-                                    genres: genres.map{$0.genre}.joined(separator: ", "),
+                                    countries: countries.map{ $0.country }.joined(separator: ", "),
+                                    genres: genres.map{ $0.genre }.joined(separator: ", "),
                                     years: getYearTitle(),
                                     ratingKinopoisk: ratingKinopoisk,
-                                    coverURL: coverURL ?? "",
-                                    webUrl: webUrl ?? "")
-        
-        return res
+                                    coverURL: coverURL ?? posterURL ?? "",
+                                    webUrl: webUrl ?? ""
+        )
     }
     
 }
-

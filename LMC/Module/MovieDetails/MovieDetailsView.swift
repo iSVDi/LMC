@@ -59,22 +59,10 @@ struct MovieDetailsView: View {
     }
     
     var mainView: some View {
-        /* CODEREVIEW:
-         GeometryReader вносит дополнительную сложность к UI, поэтому его нужно использовать
-         только в тех случаях, когда без него никак
-
-         Здесь, как понимаю, он использовался для того, чтобы сделать постер квадратным?
-         Этого можно достичь добавлением модификатор .aspectRatio со значением 1 (равносильно есть 1:1),
-         что сделает картинку квадратной
-
-         А фрейм самого стека вообще не должен фиксироваться в большинстве случаев -
-         он должен определяться его контентом
-         */
-        GeometryReader { geometry in
             ScrollView {
                 VStack {
                     headerView
-                        .frame(width: geometry.size.width, height: geometry.size.width)
+                        .aspectRatio(1, contentMode: .fill)
                     detailsView
                         .padding(.horizontal, horizontalPadding)
                     shotsSection
@@ -82,9 +70,6 @@ struct MovieDetailsView: View {
                         .padding(.top, 20)
                 }
             }
-            .frame(height: geometry.size.height)
-            
-        }
     }
     
     var headerView: some View {
@@ -123,11 +108,8 @@ struct MovieDetailsView: View {
     var detailsView: some View {
         VStack(alignment: .leading, spacing: 5) {
             descriptionHStack
-            /* CODEREVIEW:
-             Может, давай, если описание пустое, выводить текст "Нет описания" с opacity 0.5?
-             А то выглядит не очень сейчас
-             */
-            Text(details.description)
+            Text(details.description.isEmpty ? AppStrings.noDescription : details.description)
+                .opacity(details.description.isEmpty ? 0.5 : 1)
                 .foregroundStyle(Color.appWhite)
                 .font(.system(size: 17))
                 .fontWeight(.semibold)
@@ -161,14 +143,12 @@ struct MovieDetailsView: View {
     
     var shotsSection: some View {
         VStack(alignment: .leading) {
-            if viewModel.isNeedPresentShots {
+            if viewModel.shotLinks.isEmpty {
                 Text(AppStrings.shotsTitle)
                     .foregroundStyle(Color.appWhite)
                     .font(.system(size: 30))
                     .fontWeight(.bold)
                 shotsScrollView
-            } else if viewModel.isNeedPresentShotsProgressView {
-                ProgressView()
             } else {
                 EmptyView()
             }
@@ -195,16 +175,12 @@ struct MovieDetailsView: View {
         .frame(height: 100)
     }
     
-    
-    
-    
     private func getRatingText(rating: Double?) -> String {
         guard let rating else {
             return ""
         }
         return String(format: "%.1f", rating)
     }
-    
     
 }
 
