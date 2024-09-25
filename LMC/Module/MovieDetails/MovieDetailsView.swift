@@ -74,7 +74,7 @@ struct MovieDetailsView: View {
     
     var headerView: some View {
         ZStack(alignment: .bottom) {
-            if let imageUrl = URL(string: viewModel.details.coverURL) {
+            if let imageUrl = viewModel.details.coverURL {
                 KFImage(imageUrl)
                     .placeholder {
                         ProgressView()
@@ -143,7 +143,7 @@ struct MovieDetailsView: View {
     
     var shotsSection: some View {
         VStack(alignment: .leading) {
-            if viewModel.shotLinks.isEmpty {
+            if !viewModel.shotLinks.isEmpty {
                 Text(AppStrings.shotsTitle)
                     .foregroundStyle(Color.appWhite)
                     .font(.system(size: 30))
