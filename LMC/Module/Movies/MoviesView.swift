@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct MoviesView: View {
-    @State private var searchText = ""
     @StateObject private var viewModel = MoviesViewModel()
-    /* CODEREVIEW:
-     Лайнбрейк после списка свойств
-     */
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -27,21 +24,23 @@ struct MoviesView: View {
             .toolbar {
                 navigationTitle
                 exitButton
-                /* CODEREVIEW:
-                 Тут не надо лайнбрейка перед закрывающей скобкой
-                 */
             }
             .toolbarBackground(Color.appBlack, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .navigationBarTitleDisplayMode(.inline)
         }
-        
     }
+}
+
+#Preview {
+    NavigationStack{
+        MoviesView()
+    }
+}
+
+private extension MoviesView {
     
-    /* CODEREVIEW:
-     Можно вынести в приватное расширение, чтобы не писать каждый раз private
-     */
-    private var navigationTitle: some ToolbarContent {
+    var navigationTitle: some ToolbarContent {
         ToolbarItem(placement: .principal) {
             //TODO: localize
             Text("KinoPoisk")
@@ -49,10 +48,11 @@ struct MoviesView: View {
         }
     }
     
-    private var exitButton: some ToolbarContent {
+    var exitButton: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             /* CODEREVIEW:
              Что за TODO? Актуально?
+             -- + localization?
              */
             //TODO: move image
             Button {
@@ -65,29 +65,20 @@ struct MoviesView: View {
         }
     }
     
-    private var moviesScrollView: some View {
+    var moviesScrollView: some View {
         ScrollView {
             LazyVStack {
                 scrollHeader
-                ForEach(viewModel.filteredMovies) { mock in
-                    NavigationLink(destination: MovieDetailsView(movieId: mock.kinopoiskID)) {
-                        MovieListItemView(mock: mock)
-                            .onAppear {
-                                /* CODEREVIEW:
-                                 Это можно перенести в onAppear для прогресса, который у тебя ниже
-                                 Он показывается как раз для последнего элемента в списке, поэтому
-                                 не будет излишних триггеров
-
-                                 И там не придется проверять, что за элемент грузится,
-                                 достаточно будет просто проверить на факт прогресса загрузки, чтобы
-                                 не триггерить повторно, если уже начали,
-                                 */
-                                viewModel.handleLastCell(id: mock.id)
-                            }
+                ForEach(viewModel.filteredMovies) { movie in
+                    NavigationLink(destination: MovieDetailsView(movieId: movie.kinopoiskID)) {
+                        MovieListItemView(mock: movie)
                     }
                 }
-                if viewModel.isFooterViewPresented {
+                if viewModel.shouldLoadNextPage {
                     ProgressView()
+                        .onAppear {
+                            viewModel.handleProgressIsPresented()
+                        }
                 }
             }
             .padding(.horizontal)
@@ -95,7 +86,7 @@ struct MoviesView: View {
         
     }
     
-    private var scrollHeader: some View {
+    var scrollHeader: some View {
         HStack {
             NavigationLink(destination: {
                 MoviesFilterView() { filter in
@@ -106,46 +97,37 @@ struct MoviesView: View {
                 Image(systemName: "slider.vertical.3")
                     .foregroundColor(Color.appColor)
             }
-            searhField
+            searchField
         }
     }
     
     //TODO: localize
     //TODO: move image
-    private var searhField: some View {
-        /* CODEREVIEW:
-         На логине была красивее реализована рамка - через паддинг + background. Меньше кода
-         Но это так, можешь просто этот коммент удалить :)
-         */
-        Rectangle()
-            .border(Color.appGray, width: 2)
-            .frame(height: 50)
-            .overlay {
-                HStack() {
-                    Spacer(minLength: 16)
-                    /* CODEREVIEW:
-                     Та же история с модификатором foregroundColor - нужно перенести на новую строку
-                     */
-                    TextField("",
-                              text: $searchText,
-                              prompt: Text("Keyword").foregroundColor(Color.appGray))
-                    .onChange(of: searchText, { _, newValue in
-                        viewModel.handleSearch(newValue)
-                    })
-                    .foregroundColor(Color.appWhite)
-                    
-                    Image(systemName: "magnifyingglass")
-                        .frame(width: 16)
-                        .foregroundColor(Color.appColor)
-                        .padding(.trailing, 16)
-                }
-            }
-    }
-}
-
-
-#Preview {
-    NavigationStack{
-        MoviesView()
+    var searchField: some View {
+        HStack() {
+            Spacer(minLength: 16)
+            
+            TextField("",
+                      text: $viewModel.searchRequest,
+                      prompt: Text("Keyword")
+                .foregroundColor(Color.appGray))
+            .onChange(of: viewModel.searchRequest, { _, newValue in
+                viewModel.handleSearch(newValue)
+            })
+            .foregroundColor(Color.appWhite)
+            
+            Image(systemName: "magnifyingglass")
+                .frame(width: 16)
+                .foregroundColor(Color.appColor)
+                .padding(.trailing, 16)
+        }
+        .foregroundColor(Color.blue)
+        .padding(.vertical)
+        .padding(.leading, 5)
+        .background {
+            Rectangle()
+                .border(Color.appGray, width: 2)
+                .frame(height: 50)
+        }
     }
 }

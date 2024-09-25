@@ -15,25 +15,26 @@ final class MoviesViewModel: ObservableObject {
     private var currentPage = 1
     private(set) var movies: [MovieListItemModel] = []
     @Published var filteredMovies: [MovieListItemModel] = []
-    /* CODEREVIEW:
-     Лучше переименовать на shouldLoadNextPage, по дефолту как сейчас false,
-     но сеттить в true в комплишене getMovies, если размер массива равен размеру страницы
-     */
-    @Published var isFooterViewPresented = false
-    private var searchRequest = ""
+    @Published var shouldLoadNextPage = false
+    @Published var searchRequest = ""
     
     init() {
         loadMovies()
     }
     
     func handleLastCell(id: UUID) {
-        guard movies.last?.id == id,
-              currentPage + 1 <= totalPages
-        else {
+        shouldLoadNextPage = false
+        guard currentPage + 1 <= totalPages else {
             return
         }
-        isFooterViewPresented = true
         currentPage += 1
+        loadMovies()
+    }
+    
+    func handleProgressIsPresented() {
+        guard currentPage <= totalPages else {
+            return
+        }
         loadMovies()
     }
     
@@ -43,14 +44,6 @@ final class MoviesViewModel: ObservableObject {
     }
     
     func handleSearch(_ request: String) {
-        /* CODEREVIEW:
-         Сейчас получается два источника правды - тут в свойстве searchRequest, и во вьюхе
-         в стейте searchText
-
-         Лучше оставить одно здесь, сделать его Published, а во вьюхе через биндинг к нему подвязаться
-
-         Несколько источников истины могут приводить к багам, лучше их минимизировать
-         */
         searchRequest = request
         guard !request.isEmpty else {
             filteredMovies = movies
@@ -71,7 +64,7 @@ final class MoviesViewModel: ObservableObject {
     
     func handleExitButton() {
         authDataManager.isNeedSignIn = true
-
+        
         /* CODEREVIEW:
          А точно нужно здесь сбрасывать состояние?
          У тебя же в LMCApp будет использоваться другая вьюха, и эта вью модель в целом должна
@@ -81,50 +74,35 @@ final class MoviesViewModel: ObservableObject {
         movies = []
         searchRequest = ""
     }
-
-    /* CODEREVIEW:
-     Не используется
-     */
-    func handleDismissAuthView() {
-        loadMovies()
-    }
-        
+    
     private func loadMovies() {
         repository.getMovies(filter: currentFilter, page: currentPage) { [weak self] dto in
             guard let self else {
-               return
+                return
             }
             self.totalPages = dto.totalPages
-            let newMovies = dto.items.map { dtoItem in
+            let newMovies = dto.items.map {
                 /* CODEREVIEW:
                  Отформатировать переносы
-
-                 И return здесь не обязателен, как и явный захват dtoItem,
-                 можно просто так:
-
-                 MovieListItemModel(
-                     kinopoiskID: $0.kinopoiskID,
-                     title: $0.getName,
-                     genre: $0.genres.map({$0.genre}).joined(separator: ", "),
-                     year: $0.year,
-                     country: $0.countries.map{$0.country}.joined(separator: ", "),
-                     rating: $0.ratingKinopoisk,
-                     posterUrlPreview: $0.posterURLPreview
-                 )
                  */
-                return MovieListItemModel(
-                    kinopoiskID: dtoItem.kinopoiskID,
-                    title: dtoItem.getName,
-                    genre: dtoItem.genres.map({$0.genre}).joined(separator: ", "),
-                    year: dtoItem.year,
-                    country: dtoItem.countries.map{$0.country}.joined(separator: ", "),
-                    rating: dtoItem.ratingKinopoisk,
-                    posterUrlPreview: dtoItem.posterURLPreview
-                )
+                MovieListItemModel(
+                    kinopoiskID: $0.kinopoiskID,
+                    title: $0.getName,
+                    genre: $0.genres.map({$0.genre}).joined(separator: ", "),
+                    year: $0.year,
+                    country: $0.countries.map{$0.country}.joined(separator: ", "),
+                    rating: $0.ratingKinopoisk,
+                    posterUrlPreview: $0.posterURLPreview)
             }
-            self.isFooterViewPresented = false
             self.movies.append(contentsOf: newMovies)
             self.handleSearch(searchRequest)
+            
+            guard currentPage + 1 <= totalPages else {
+                shouldLoadNextPage = false
+                return
+            }
+            shouldLoadNextPage = true
+            currentPage += 1
         }
     }
     
@@ -134,5 +112,3 @@ final class MoviesViewModel: ObservableObject {
         loadMovies()
     }
 }
-
-
