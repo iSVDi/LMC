@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct MovieDetailsView: View {
     @Environment(\.dismiss) private var dismiss
@@ -47,11 +48,10 @@ struct MovieDetailsView: View {
     
     private var backButton: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
-            //TODO: move image, implement
             Button(action: {
                 dismiss()
             }, label: {
-                Image(systemName: "chevron.backward")
+                AppImage(.backward)
                     .foregroundStyle(Color.appWhite)
             })
             
@@ -84,15 +84,12 @@ struct MovieDetailsView: View {
     var headerView: some View {
         if let imageUrl = URL(string: viewModel.details.coverURL) {
             ZStack(alignment: .bottom) {
-                AsyncImage(url: imageUrl) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                    
-                } placeholder: {
-                    ProgressView()
-                    
-                }
+                KFImage(imageUrl)
+                    .placeholder {
+                        ProgressView()
+                    }
+                    .resizable()
+                    .scaledToFit()                
                 nameHStack
                     .padding(.horizontal, horizontalPadding)
                     .padding(.bottom, 10)
@@ -138,16 +135,14 @@ struct MovieDetailsView: View {
     }
     var descriptionHStack: some View {
         HStack {
-            //TODO: localize
-            Text("Description")
+            Text(AppStrings.descriptionTitle)
                 .foregroundStyle(Color.appWhite)
                 .font(.system(size: 30))
                 .fontWeight(.bold)
             Spacer()
             if let url = URL(string: details.webUrl) {
                 Link(destination: url, label: {
-                    //TODO: move image
-                    Image(systemName: "link")
+                    AppImage(.link)
                         .foregroundStyle(Color.appColor)
                 })
             }
@@ -158,8 +153,7 @@ struct MovieDetailsView: View {
     var shotsSection: some View {
         VStack(alignment: .leading) {
             if viewModel.isNeedPresentShots {
-                //TODO: localize
-                Text("Shots")
+                Text(AppStrings.shotsTitle)
                     .foregroundStyle(Color.appWhite)
                     .font(.system(size: 30))
                     .fontWeight(.bold)
@@ -175,15 +169,10 @@ struct MovieDetailsView: View {
         ScrollView(.horizontal) {
             LazyHStack {
                 ForEach(viewModel.shotLinks, id: \.self) { link in
-                    if let shotLink = URL(string: link) {
-                        //TODO: implement caching
-                        AsyncImage(url: shotLink) { shot in
-                            shot
-                                .resizable()
-                                .scaledToFit()
-                        } placeholder: {
-                            ProgressView()
-                        }
+                    if let shotUrl = URL(string: link) {
+                        KFImage(shotUrl)
+                            .resizable()
+                            .scaledToFit()
                     }
                 }
                 .frame(width: 150, height: 150)

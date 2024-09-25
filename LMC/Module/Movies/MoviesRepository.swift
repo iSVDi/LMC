@@ -12,10 +12,9 @@ final class MoviesRepository {
     func getMovies(
         filter: MovieFilterDTO,
         page:Int,
-        complitionHandler: @escaping(MovieListDTO) -> Void
+        complitionHandler: @escaping (MovieListDTO) -> Void
     ) {
-        moviesDataProvider.request(.getMovies(filter: filter,
-                                              page: page)) { result in
+        moviesDataProvider.request(.getMovies(filter: filter, page: page)) { result in
             if case let .success(response) = result {
                 guard let movieList = try? JSONDecoder().decode(MovieListDTO.self, from: response.data) else {
                     return
@@ -26,4 +25,3 @@ final class MoviesRepository {
     }
     
 }
-

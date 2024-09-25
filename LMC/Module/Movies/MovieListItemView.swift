@@ -6,48 +6,49 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct MovieListItemView: View {
-    let mock: MovieListItemModel
+    let listItem: MovieListItemModel
     
-    init(mock: MovieListItemModel) {
-        self.mock = mock
+    init(listItem: MovieListItemModel) {
+        self.listItem = listItem
     }
     
     var body: some View {
-        ZStack {
-            Color.black
             HStack {
-                if let url = URL(string: mock.posterUrlPreview) {
-                    AsyncImage(url: url) { image in
-                        image
-                            .resizable()
-                            .scaledToFit()
-                    } placeholder: {
-                        ProgressView()
-                        
-                    }
-                    .frame(maxWidth: 100, maxHeight: 100)
+                if let url = URL(string: listItem.posterUrlPreview) {
+                    
+                    KFImage(url)
+                        .placeholder {
+                            ProgressView()
+                        }
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 100, maxHeight: 100)
                 }
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(mock.title)
+                    Text(listItem.title)
                         .multilineTextAlignment(.leading)
+                        .lineLimit(1)
                         .foregroundStyle(Color.white)
                         .fontWeight(.bold)
                         .font(.system(size: 20))
-                    Text(mock.genre)
+                    Text(listItem.genre)
                         .multilineTextAlignment(.leading)
+                        .lineLimit(2)
                         .foregroundStyle(Color.gray)
                         .fontWeight(.bold)
                         .font(.system(size: 15))
-                    Text("\(mock.year), " + mock.country)
+                    Text("\(listItem.year), " + listItem.country)
                         .multilineTextAlignment(.leading)
+                        .lineLimit(2)
                         .foregroundStyle(Color.gray)
                         .fontWeight(.bold)
                         .font(.system(size: 15))
                     HStack {
                         Spacer()
-                        if let rating = mock.rating {
+                        if let rating = listItem.rating {
                             Text("\(rating, specifier: "%.1f")")
                                 .foregroundStyle(Color.appColor)
                                 .fontWeight(.bold)
@@ -60,24 +61,26 @@ struct MovieListItemView: View {
                     
                 }
             }
-            
-        }
+            .background {
+                Color.appBlack
+            }
     }
 }
 
 struct MovieListView_Preview: PreviewProvider {
     static var previews: some View {
-        MovieListItemView(mock: MovieListItemModel(kinopoiskID: 0,
-                                                   title: "Попкульт",
-                                                   genre: "документальный",
-                                                   year: 2022,
-                                                   country: "Россия",
-                                                   rating: 9.2,
-                                                   posterUrlPreview: ""))
+        MovieListItemView(
+            listItem: MovieListItemModel(
+                kinopoiskID: 0,
+                title: "Попкульт",
+                genre: "документальный",
+                year: 2022,
+                country: "Россия",
+                rating: 9.2,
+                posterUrlPreview: ""
+            )
+        )
         .previewLayout(.fixed(width: 300, height: 120))
     }
-    
-    
 }
-
 
