@@ -16,12 +16,6 @@ final class MoviesRepository {
     ) {
         moviesDataProvider.request(.getMovies(filter: filter, page: page)) { result in
             if case let .success(response) = result {
-                /* CODEREVIEW:
-                 Настрой в Xcode лимит строки в 120 символов.
-                 И стоит тогда переносы делать, если утыкаешься в него
-
-                 Xcode -> Settings -> Text Editing -> Display -> Page guide at column -> галочка и 120
-                 */
                 guard let movieList = try? JSONDecoder().decode(MovieListDTO.self, from: response.data) else {
                     return
                 }
@@ -31,4 +25,3 @@ final class MoviesRepository {
     }
     
 }
-

@@ -71,7 +71,7 @@ private extension MoviesView {
                 scrollHeader
                 ForEach(viewModel.filteredMovies) { movie in
                     NavigationLink(destination: MovieDetailsView(movieId: movie.kinopoiskID)) {
-                        MovieListItemView(mock: movie)
+                        MovieListItemView(listItem: movie)
                     }
                 }
                 if viewModel.shouldLoadNextPage {
