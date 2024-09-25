@@ -69,8 +69,6 @@ struct MovieDetailsView: View {
                     shotsSection
                         .padding(.horizontal, horizontalPadding)
                         .padding(.top, 20)
-                    
-                    
                 }
             }
             .frame(height: geometry.size.height)
@@ -78,25 +76,21 @@ struct MovieDetailsView: View {
         }
     }
     
-    
-    
-    @ViewBuilder
     var headerView: some View {
-        if let imageUrl = URL(string: viewModel.details.coverURL) {
-            ZStack(alignment: .bottom) {
+        ZStack(alignment: .bottom) {
+            if let imageUrl = URL(string: viewModel.details.coverURL) {
                 KFImage(imageUrl)
                     .placeholder {
                         ProgressView()
                     }
                     .resizable()
-                    .scaledToFit()                
-                nameHStack
-                    .padding(.horizontal, horizontalPadding)
-                    .padding(.bottom, 10)
+                    .scaledToFit()
+            } else {
+                Color.appBlack
             }
-            
-        } else {
-            Color.appBlack
+            nameHStack
+                .padding(.horizontal, horizontalPadding)
+                .padding(.bottom, 10)
         }
     }
     
@@ -158,9 +152,10 @@ struct MovieDetailsView: View {
                     .font(.system(size: 30))
                     .fontWeight(.bold)
                 shotsScrollView
-                
-            } else {
+            } else if viewModel.isNeedPresentShotsProgressView {
                 ProgressView()
+            } else {
+                EmptyView()
             }
         }
     }

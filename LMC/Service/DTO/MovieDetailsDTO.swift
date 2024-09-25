@@ -31,7 +31,11 @@ struct MovieDetailsDTO: Codable {
     }
     
     func getName() -> String {
-        return nameOriginal ?? nameEn ?? nameRu ?? ""
+        let names = [nameOriginal, nameEn, nameRu]
+            .compactMap {$0}
+            .filter {!$0.isEmpty}
+        return names.first ?? ""
+        
     }
     
     func getYearTitle() -> String {
