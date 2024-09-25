@@ -42,8 +42,7 @@ private extension MoviesView {
     
     var navigationTitle: some ToolbarContent {
         ToolbarItem(placement: .principal) {
-            //TODO: localize
-            Text("KinoPoisk")
+            Text(AppStrings.kinopoiskTitle)
                 .foregroundStyle(Color.appColor)
         }
     }
@@ -96,14 +95,13 @@ private extension MoviesView {
         }
     }
     
-    //TODO: localize
     var searchField: some View {
         HStack() {
             Spacer(minLength: 16)
             
             TextField("",
                       text: $viewModel.searchRequest,
-                      prompt: Text("Keyword")
+                      prompt: Text(AppStrings.searchPlaceholder)
                 .foregroundColor(Color.appGray))
             .onChange(of: viewModel.searchRequest, { _, newValue in
                 viewModel.handleSearch(newValue)

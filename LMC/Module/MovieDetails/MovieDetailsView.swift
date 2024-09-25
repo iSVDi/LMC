@@ -135,8 +135,7 @@ struct MovieDetailsView: View {
     }
     var descriptionHStack: some View {
         HStack {
-            //TODO: localize
-            Text("Description")
+            Text(AppStrings.descriptionTitle)
                 .foregroundStyle(Color.appWhite)
                 .font(.system(size: 30))
                 .fontWeight(.bold)
@@ -154,8 +153,7 @@ struct MovieDetailsView: View {
     var shotsSection: some View {
         VStack(alignment: .leading) {
             if viewModel.isNeedPresentShots {
-                //TODO: localize
-                Text("Shots")
+                Text(AppStrings.shotsTitle)
                     .foregroundStyle(Color.appWhite)
                     .font(.system(size: 30))
                     .fontWeight(.bold)

@@ -35,15 +35,15 @@ struct AuthView: View {
 
 private extension AuthView {
     var title: some View {
-        Text("KinoPoisk") //TODO: localize
+        Text(AppStrings.kinopoiskTitle)
             .foregroundStyle(Color.appColor)
             .font(.system(size: 60))
     }
     
     var textFiels: some View {
         VStack(spacing: 20) {
-            //TODO: localize
-            TextField("Login", text: $loginText, prompt: Text("Login")
+
+            TextField(AppStrings.loginTitle, text: $loginText, prompt: Text(AppStrings.loginTitle)
                 .foregroundStyle(Color.appGray))
             .textContentType(.username)
             .padding(.all, 12)
@@ -52,8 +52,8 @@ private extension AuthView {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(Color.appGray)
             }
-            //TODO: localize
-            SecureField("Password", text: $passwordText, prompt: Text("Password")
+            
+            SecureField(AppStrings.passwordTitle, text: $passwordText, prompt: Text(AppStrings.passwordTitle)
                 .foregroundStyle(Color.appGray))
             .textContentType(.password)
             .padding(.all, 12)
@@ -69,8 +69,7 @@ private extension AuthView {
         Button {
             viewModel.handleAuthButton(login: loginText, password: passwordText)
         } label: {
-            //TODO: localize
-            Text("Войти")
+            Text(AppStrings.signInTitle)
                 .foregroundStyle(Color.appWhite)
                 .padding()
                 .frame(maxWidth: .infinity)
@@ -80,8 +79,7 @@ private extension AuthView {
                 }
         }
         .alert(isPresented: $viewModel.isPresentAlert) {
-            //TODO: localize
-            Alert(title: Text("Error"),
+            Alert(title: Text(AppStrings.errorTitle),
                   message: Text(viewModel.alertMessage))
         }
     }

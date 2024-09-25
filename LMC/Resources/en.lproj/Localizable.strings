@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  LMC
+
+  Created by daniil on 25.09.2024.
+  
+*/
+"DescriptionTitle" = "Description";
+"ShotsTitle" = "Shots";
+"KinopoiskTitle" = "KinoPoisk";
+"SearchPlaceholder" = "keyword";
+"ErrorTitle" = "Error";
+"WronAuthMessage" = "Wrong login or password";
+"SignInTitle" = "Sign in";
+"LoginTitle" = "Login";
+"PasswordTitle" = "Password";
+"OkTitle" = "Ok";
+"FilterTitle" = "Filter";
+"YearTitle" = "Year";
+"RatingTitle" = "Rating";

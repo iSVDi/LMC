@@ -55,8 +55,7 @@ struct MoviesFilterView: View {
     
     private var navigationTitle: some ToolbarContent {
         ToolbarItem(placement: .principal) {
-            //TODO: localize
-            Text("Filter")
+            Text(AppStrings.filterTitle)
                 .foregroundStyle(Color.appColor)
         }
     }
@@ -65,7 +64,7 @@ struct MoviesFilterView: View {
     private var filterView: some View {
         VStack(spacing: 20) {
             Toggle(isOn: $isOnYearFilter) {
-                Text("Year")
+                Text(AppStrings.yearTitle)
                     .foregroundStyle(Color.appColor)
             }
             .onChange(of: isOnYearFilter) { _, newValue in
@@ -85,7 +84,7 @@ struct MoviesFilterView: View {
                 .pickerStyle(.wheel)
             }
             Toggle(isOn: $isOnRatingFilter) {
-                Text("Rating")
+                Text(AppStrings.ratingTitle)
                     .foregroundStyle(Color.appColor)
             }
             .onChange(of: isOnRatingFilter) { _, newValue in
