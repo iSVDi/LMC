@@ -14,7 +14,7 @@ struct MovieDetailsModel {
     let genres: String
     let years: String
     let ratingKinopoisk: Double?
-    let coverURL: String
+    let coverURL: URL?
     let webUrl: String
     
     init() {
@@ -24,11 +24,20 @@ struct MovieDetailsModel {
         genres = ""
         years = ""
         ratingKinopoisk = nil
-        coverURL = ""
+        coverURL = nil
         webUrl = ""
     }
     
-    init(name: String, description: String, countries: String, genres: String, years: String, ratingKinopoisk: Double?, coverURL: String, webUrl: String) {
+    init(
+        name: String,
+        description: String,
+        countries: String,
+        genres: String,
+        years: String,
+        ratingKinopoisk: Double?,
+        coverURL: URL?,
+        webUrl: String
+    ) {
         self.name = name
         self.description = description
         self.countries = countries
