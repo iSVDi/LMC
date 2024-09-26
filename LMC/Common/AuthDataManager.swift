@@ -9,7 +9,7 @@ import Combine
 
 final class AuthDataManager {
     static let shared = AuthDataManager()
-    private let userDefaultsManager = UserDefaultsManager()
+    private let userDefaultsManager: UserDefaultsManagerProtocol = UserDefaultsManagerImpl()
     private let isNeedSignInSubject: CurrentValueSubject<Bool, Never>
     
     private init() {
@@ -80,7 +80,7 @@ final class AuthDataManager {
     }
     
     private func arePasswordsIncorrect(userPassword: String, password: String) -> String? {
-        userPassword != password ? "Logins are mismatched" : nil
+        userPassword != password ? "Passwords are mismatched" : nil
     }
     
 }
