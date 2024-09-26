@@ -8,13 +8,19 @@
 import Combine
 
 final class AuthDataManager {
-    static let shared = AuthDataManager()
-    private let userDefaultsManager: UserDefaultsManagerProtocol = UserDefaultsManagerImpl()
+    static let shared = AuthDataManager(userDefaults: UserDefaultsProtocolImpl())
+    private let userDefaults: UserDefaultsProtocol
     private let isNeedSignInSubject: CurrentValueSubject<Bool, Never>
     
-    private init() {
-        let state = userDefaultsManager.getBool(key: .isNeedSignIn)
+    private init(userDefaults: UserDefaultsProtocol ) {
+        self.userDefaults = userDefaults
+        userDefaults.register(defaults: [UserDataKeys.isNeedSignIn.rawValue: true])
+        let state = userDefaults.bool(key: .isNeedSignIn)
         isNeedSignInSubject = CurrentValueSubject<Bool, Never>(state)
+    }
+    
+    static func getMock(userDefaults: UserDefaultsProtocol) -> AuthDataManager {
+        return AuthDataManager(userDefaults: userDefaults)
     }
     
     var isNeedSignIn: Bool {
@@ -23,7 +29,7 @@ final class AuthDataManager {
         } set {
             isNeedSignInSubject.value = newValue
             isNeedSignInSubject.send(newValue)
-            userDefaultsManager.setBool(value: newValue, key: .isNeedSignIn)
+            userDefaults.setValue(newValue, key: .isNeedSignIn)
         }
     }
     
@@ -37,10 +43,10 @@ final class AuthDataManager {
         errorHandler: @escaping (_ message: String) -> Void
     ) {
         
-        guard let userLogin = userDefaultsManager.getString(key: .login),
-              let userPassword = userDefaultsManager.getString(key: .password) else {
-            userDefaultsManager.setString(value: login, key: .login)
-            userDefaultsManager.setString(value: password, key: .password)
+        guard let userLogin = userDefaults.string(key: .login),
+              let userPassword = userDefaults.string(key: .password) else {
+            userDefaults.setValue(login, key: .login)
+            userDefaults.setValue(password, key: .password)
             isNeedSignIn = false
             return
         }

@@ -12,13 +12,14 @@
 		A53D97D92CA14BA800418923 /* MovieShotSourceListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CC0012C92C03800BC1298 /* MovieShotSourceListDTO.swift */; };
 		A53D97DA2CA14BA800418923 /* MovieDetailsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFFB2C92BC7900BC1298 /* MovieDetailsDTO.swift */; };
 		A53D97DB2CA14BA800418923 /* GenreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFFF2C92BD8B00BC1298 /* GenreDTO.swift */; };
-		A53D97DD2CA14C3200418923 /* UserDefaultsManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFE42C91C57B00BC1298 /* UserDefaultsManagerImpl.swift */; };
+		A53D97DD2CA14C3200418923 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36CBFE42C91C57B00BC1298 /* UserDefaultsManager.swift */; };
 		A53D97E02CA14FFA00418923 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53D97DF2CA14FFA00418923 /* AuthViewModel.swift */; };
 		A55214862CA2827F00A11669 /* AuthDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55214852CA2827F00A11669 /* AuthDataManager.swift */; };
 		A55214892CA285B200A11669 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55214882CA285B200A11669 /* AppViewModel.swift */; };
 		A5522AC42CA409CB00D08E8A /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = A5522AC32CA409CB00D08E8A /* swiftgen.yml */; };
 		A5522AEB2CA442BD00D08E8A /* AuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5522AEA2CA442BD00D08E8A /* AuthTests.swift */; };
 		A5522AF22CA53EBB00D08E8A /* MockUserDefaultsManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5522AF12CA53EBB00D08E8A /* MockUserDefaultsManagerImpl.swift */; };
+		A5522AF42CA552BE00D08E8A /* UserDefaultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5522AF32CA552BE00D08E8A /* UserDefaultsProtocol.swift */; };
 		A59B3C712CA3FBFA00D0B47D /* AppImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B3C702CA3FBFA00D0B47D /* AppImage.swift */; };
 		A59B3C792CA403B800D0B47D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59B3C772CA403B800D0B47D /* Localizable.strings */; };
 		A59B3C802CA405FD00D0B47D /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B3C7F2CA405FD00D0B47D /* AppStrings.swift */; };
@@ -62,6 +63,7 @@
 		A5522AE82CA442BC00D08E8A /* LMCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LMCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5522AEA2CA442BD00D08E8A /* AuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTests.swift; sourceTree = "<group>"; };
 		A5522AF12CA53EBB00D08E8A /* MockUserDefaultsManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaultsManagerImpl.swift; sourceTree = "<group>"; };
+		A5522AF32CA552BE00D08E8A /* UserDefaultsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocol.swift; sourceTree = "<group>"; };
 		A59B3C702CA3FBFA00D0B47D /* AppImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImage.swift; sourceTree = "<group>"; };
 		A59B3C782CA403B800D0B47D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A59B3C7A2CA403E400D0B47D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -85,7 +87,7 @@
 		A5C444CC2C9D8C8000A66449 /* MovieDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsModel.swift; sourceTree = "<group>"; };
 		A5C444D02CA1304F00A66449 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		DDC749D995B66FA6FC62BD9A /* Pods_LMC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LMC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F36CBFE42C91C57B00BC1298 /* UserDefaultsManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManagerImpl.swift; sourceTree = "<group>"; };
+		F36CBFE42C91C57B00BC1298 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		F36CBFF62C92A9CD00BC1298 /* MoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesService.swift; sourceTree = "<group>"; };
 		F36CBFFB2C92BC7900BC1298 /* MovieDetailsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsDTO.swift; sourceTree = "<group>"; };
 		F36CBFFD2C92BD8100BC1298 /* CountryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDTO.swift; sourceTree = "<group>"; };
@@ -212,7 +214,8 @@
 		A5C444A22C9C598700A66449 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				F36CBFE42C91C57B00BC1298 /* UserDefaultsManagerImpl.swift */,
+				A5522AF32CA552BE00D08E8A /* UserDefaultsProtocol.swift */,
+				F36CBFE42C91C57B00BC1298 /* UserDefaultsManager.swift */,
 				A5C444A32C9C599900A66449 /* AppColors.swift */,
 				A55214852CA2827F00A11669 /* AuthDataManager.swift */,
 			);
@@ -470,6 +473,7 @@
 				A55214862CA2827F00A11669 /* AuthDataManager.swift in Sources */,
 				A53D97D82CA14BA800418923 /* CountryDTO.swift in Sources */,
 				A5C444AC2C9D450400A66449 /* MoviesService.swift in Sources */,
+				A5522AF42CA552BE00D08E8A /* UserDefaultsProtocol.swift in Sources */,
 				A5C444A02C9C4D6A00A66449 /* MovieListItemView.swift in Sources */,
 				A5C444CA2C9D893C00A66449 /* MovieDetailsRepository.swift in Sources */,
 				A5C444CD2C9D8C8000A66449 /* MovieDetailsModel.swift in Sources */,
@@ -484,7 +488,7 @@
 				A53D97DB2CA14BA800418923 /* GenreDTO.swift in Sources */,
 				A5C444732C9C3CBA00A66449 /* LMCApp.swift in Sources */,
 				A5C4449E2C9C483F00A66449 /* MovieListItemModel.swift in Sources */,
-				A53D97DD2CA14C3200418923 /* UserDefaultsManagerImpl.swift in Sources */,
+				A53D97DD2CA14C3200418923 /* UserDefaultsManager.swift in Sources */,
 				A53D97E02CA14FFA00418923 /* AuthViewModel.swift in Sources */,
 				A53D97DA2CA14BA800418923 /* MovieDetailsDTO.swift in Sources */,
 				A5C444D12CA1304F00A66449 /* AuthView.swift in Sources */,
