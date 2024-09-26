@@ -28,7 +28,16 @@ struct MovieDetailsModel {
         webUrl = ""
     }
     
-    init(name: String, description: String, countries: String, genres: String, years: String, ratingKinopoisk: Double?, coverURL: URL?, webUrl: String) {
+    init(
+        name: String,
+        description: String,
+        countries: String,
+        genres: String,
+        years: String,
+        ratingKinopoisk: Double?,
+        coverURL: URL?,
+        webUrl: String
+    ) {
         self.name = name
         self.description = description
         self.countries = countries

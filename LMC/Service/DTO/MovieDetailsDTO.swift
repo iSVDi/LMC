@@ -57,22 +57,22 @@ struct MovieDetailsDTO: Codable {
     
     func getImageURL() -> URL? {
         guard let stringURL = coverURL ?? posterURL,
-                !stringURL.isEmpty,
-              let url = URL(string: stringURL) else {
+              !stringURL.isEmpty else {
             return nil
         }
-        return url
+        return URL(string: stringURL)
     }
     
     func getModel() -> MovieDetailsModel {
-        return MovieDetailsModel(name: getName(),
-                                    description: description ?? "",
-                                    countries: countries.map{ $0.country }.joined(separator: ", "),
-                                    genres: genres.map{ $0.genre }.joined(separator: ", "),
-                                    years: getYearTitle(),
-                                    ratingKinopoisk: ratingKinopoisk,
-                                    coverURL: getImageURL(),
-                                    webUrl: webUrl ?? ""
+        return MovieDetailsModel(
+            name: getName(),
+            description: description ?? "",
+            countries: countries.map{ $0.country }.joined(separator: ", "),
+            genres: genres.map{ $0.genre }.joined(separator: ", "),
+            years: getYearTitle(),
+            ratingKinopoisk: ratingKinopoisk,
+            coverURL: getImageURL(),
+            webUrl: webUrl ?? ""
         )
     }
     
