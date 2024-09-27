@@ -12,9 +12,7 @@ final class MovieDetailsViewModel: ObservableObject {
     @Published private(set) var details = MovieDetailsModel()
     @Published private(set) var shotLinks: [String] = []
     @Published private(set) var isNeedPresentDetails = false
-    @Published private(set) var isNeedPresentShots = false
-    
-    
+
     
     func loadDetails(movieId: Int) {
         repository.getMovieDetail(movieID: movieId) { [weak self] detailsDto in
@@ -24,10 +22,7 @@ final class MovieDetailsViewModel: ObservableObject {
         
         repository.getShots(movieId: movieId) { [weak self] shotLinks in
                 self?.shotLinks = shotLinks
-                self?.isNeedPresentShots = true
         }
     }
     
 }
-
-

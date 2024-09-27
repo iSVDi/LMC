@@ -59,44 +59,34 @@ struct MovieDetailsView: View {
     }
     
     var mainView: some View {
-        GeometryReader { geometry in
             ScrollView {
                 VStack {
                     headerView
-                        .frame(width: geometry.size.width, height: geometry.size.width)
+                        .aspectRatio(1, contentMode: .fill)
                     detailsView
                         .padding(.horizontal, horizontalPadding)
                     shotsSection
                         .padding(.horizontal, horizontalPadding)
                         .padding(.top, 20)
-                    
-                    
                 }
             }
-            .frame(height: geometry.size.height)
-            
-        }
     }
     
-    
-    
-    @ViewBuilder
     var headerView: some View {
-        if let imageUrl = URL(string: viewModel.details.coverURL) {
-            ZStack(alignment: .bottom) {
+        ZStack(alignment: .bottom) {
+            if let imageUrl = viewModel.details.coverURL {
                 KFImage(imageUrl)
                     .placeholder {
                         ProgressView()
                     }
                     .resizable()
-                    .scaledToFit()                
-                nameHStack
-                    .padding(.horizontal, horizontalPadding)
-                    .padding(.bottom, 10)
+                    .scaledToFit()
+            } else {
+                Color.appBlack
             }
-            
-        } else {
-            Color.appBlack
+            nameHStack
+                .padding(.horizontal, horizontalPadding)
+                .padding(.bottom, 10)
         }
     }
     
@@ -118,7 +108,8 @@ struct MovieDetailsView: View {
     var detailsView: some View {
         VStack(alignment: .leading, spacing: 5) {
             descriptionHStack
-            Text(details.description)
+            Text(details.description.isEmpty ? AppStrings.noDescription : details.description)
+                .opacity(details.description.isEmpty ? 0.5 : 1)
                 .foregroundStyle(Color.appWhite)
                 .font(.system(size: 17))
                 .fontWeight(.semibold)
@@ -152,15 +143,14 @@ struct MovieDetailsView: View {
     
     var shotsSection: some View {
         VStack(alignment: .leading) {
-            if viewModel.isNeedPresentShots {
+            if !viewModel.shotLinks.isEmpty {
                 Text(AppStrings.shotsTitle)
                     .foregroundStyle(Color.appWhite)
                     .font(.system(size: 30))
                     .fontWeight(.bold)
                 shotsScrollView
-                
             } else {
-                ProgressView()
+                EmptyView()
             }
         }
     }
@@ -185,16 +175,12 @@ struct MovieDetailsView: View {
         .frame(height: 100)
     }
     
-    
-    
-    
     private func getRatingText(rating: Double?) -> String {
         guard let rating else {
             return ""
         }
         return String(format: "%.1f", rating)
     }
-    
     
 }
 

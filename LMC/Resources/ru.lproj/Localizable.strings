@@ -19,3 +19,4 @@
 "RatingTitle" = "Рейтинг";
 "WrongLoginTitle" = "Неверный логин";
 "WrongPasswordTitle" = "Неверный пароль";
+"NoDescription" = "Нет описания";

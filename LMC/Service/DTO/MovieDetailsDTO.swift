@@ -20,6 +20,7 @@ struct MovieDetailsDTO: Codable {
     private let year: Int?
     let ratingKinopoisk: Double?
     let coverURL: String?
+    let posterURL: String?
     let webUrl: String?
     
     
@@ -28,10 +29,15 @@ struct MovieDetailsDTO: Codable {
         case nameOriginal, nameRu, nameEn
         case description, countries, genres, startYear, endYear, year, ratingKinopoisk, webUrl
         case coverURL = "coverUrl"
+        case posterURL = "posterUrl"
     }
     
     func getName() -> String {
-        return nameOriginal ?? nameEn ?? nameRu ?? ""
+        let names = [nameOriginal, nameEn, nameRu]
+            .compactMap { $0 }
+            .filter { !$0.isEmpty }
+        return names.first ?? ""
+        
     }
     
     func getYearTitle() -> String {
@@ -49,18 +55,25 @@ struct MovieDetailsDTO: Codable {
         return ""
     }
     
+    func getImageURL() -> URL? {
+        guard let stringURL = coverURL ?? posterURL,
+              !stringURL.isEmpty else {
+            return nil
+        }
+        return URL(string: stringURL)
+    }
+    
     func getModel() -> MovieDetailsModel {
-        let res = MovieDetailsModel(name: getName(),
-                                    description: description ?? "",
-                                    countries: countries.map{$0.country}.joined(separator: ", "),
-                                    genres: genres.map{$0.genre}.joined(separator: ", "),
-                                    years: getYearTitle(),
-                                    ratingKinopoisk: ratingKinopoisk,
-                                    coverURL: coverURL ?? "",
-                                    webUrl: webUrl ?? "")
-        
-        return res
+        return MovieDetailsModel(
+            name: getName(),
+            description: description ?? "",
+            countries: countries.map{ $0.country }.joined(separator: ", "),
+            genres: genres.map{ $0.genre }.joined(separator: ", "),
+            years: getYearTitle(),
+            ratingKinopoisk: ratingKinopoisk,
+            coverURL: getImageURL(),
+            webUrl: webUrl ?? ""
+        )
     }
     
 }
-
