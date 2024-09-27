@@ -10,7 +10,6 @@
 "KinopoiskTitle" = "KinoPoisk";
 "SearchPlaceholder" = "keyword";
 "ErrorTitle" = "Error";
-"WronAuthMessage" = "Wrong login or password";
 "SignInTitle" = "Sign in";
 "LoginTitle" = "Login";
 "PasswordTitle" = "Password";
@@ -18,3 +17,5 @@
 "FilterTitle" = "Filter";
 "YearTitle" = "Year";
 "RatingTitle" = "Rating";
+"WrongLoginTitle" = "Wrong login";
+"WrongPasswordTitle" = "Wrong password";

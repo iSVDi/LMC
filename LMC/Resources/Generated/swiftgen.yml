@@ -1,6 +1,6 @@
 strings:
     inputs:
-     - ../ru.lproj
+     - ../en.lproj
     outputs:
      - templateName: structured-swift5
        output: AppStrings.swift

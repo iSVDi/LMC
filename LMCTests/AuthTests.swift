@@ -9,44 +9,70 @@ import XCTest
 @testable import LMC
 
 final class AuthTests: XCTestCase {
-    private var userDefaults: UserDefaultsProtocol = MockUserDefaultsManagerImpl()
-    private lazy var mockAuthDataManager = AuthDataManager.getMock(userDefaults: userDefaults)
-    private let login = "test_login"
-    private let password = "test_Password"
+    private var mockAuthDataManager: AuthDataManager!
+    private var login: String!
+    private var password: String!
+    private var wrongLogin: String!
+    private var wrongPassword: String!
     
-    func testIsNeedLoginIsTrueDefault() {
-        userDefaults.register(defaults: [UserDataKeys.isNeedSignIn.rawValue: true])
-        XCTAssertTrue(userDefaults.bool(key: UserDataKeys.isNeedSignIn))
+    override func setUp() {
+        super.setUp()
+        mockAuthDataManager = AuthDataManager.getInstance(userDefaults: MockUserDefaultsManagerImpl())
+        login = "test_login"
+        password = "test_Password"
+        wrongLogin = "asdasd"
+        wrongPassword = "asdasd"
     }
     
-    func testEnterLogin()  {
-        userDefaults.setValue(login, key: UserDataKeys.login)
-        XCTAssertNotNil(userDefaults.string(key: UserDataKeys.login), "Login should be not nil")
+    func testIsNeedSignIn() {
+        XCTAssertTrue(mockAuthDataManager.isNeedSignIn)
+        mockAuthDataManager.auth(login: login, password: password, errorHandler: {_ in})
+        XCTAssertFalse(mockAuthDataManager.isNeedSignIn)
     }
     
-    func testEnterPassword()  {
-        userDefaults.setValue(password, key: UserDataKeys.password)
-        XCTAssertNotNil(userDefaults.string(key: UserDataKeys.password), "Password should be not nil")
-    }
-    
-    func testEnterAfterSuccessRegister() {
-        userDefaults.setValue(false, key: UserDataKeys.isNeedSignIn)
-        XCTAssertFalse(userDefaults.bool(key: UserDataKeys.isNeedSignIn))
+    func testRegister() {
+        XCTAssertTrue(mockAuthDataManager.isNeedSignIn)
+        var errorMessage = ""
+        mockAuthDataManager.auth(login: login, password: password, errorHandler: {errorMessage = $0})
+        XCTAssertFalse(mockAuthDataManager.isNeedSignIn)
+        XCTAssertTrue(errorMessage.isEmpty)
     }
     
     func testAuth() {
-        XCTAssertTrue(mockAuthDataManager.isNeedSignIn)
-        mockAuthDataManager.auth(login: login, password: password, errorHandler: {_ in})
+        testRegister()
+        mockAuthDataManager.isNeedSignIn = true
+        
+        var errorMessage = ""
+        mockAuthDataManager.auth(login: login, password: password, errorHandler: {errorMessage = $0})
         XCTAssertFalse(mockAuthDataManager.isNeedSignIn)
+        XCTAssertTrue(errorMessage.isEmpty)
     }
     
-    func testAuthWithEmptyLoginPassword() {
+    func testAuthWrongLogin() {
+        testRegister()
         var errorMessage = ""
-        XCTAssertTrue(mockAuthDataManager.isNeedSignIn)
-        mockAuthDataManager.auth(login: login, password: password, errorHandler: {_ in})
-        mockAuthDataManager.auth(login: "", password: "", errorHandler: {errorMessage = $0})
-        XCTAssertEqual(errorMessage, "Logins are mismatched. Passwords are mismatched")
+        mockAuthDataManager.auth(login: wrongLogin, password: password, errorHandler: {errorMessage = $0})
         XCTAssertFalse(mockAuthDataManager.isNeedSignIn)
+        XCTAssertEqual(errorMessage, AppStrings.wrongLoginTitle)
+        
+    }
+    
+    func testAuthWrongPassword() {
+        testRegister()
+        var errorMessage = ""
+        mockAuthDataManager.auth(login: login, password: wrongPassword, errorHandler: {errorMessage = $0})
+        XCTAssertFalse(mockAuthDataManager.isNeedSignIn)
+        XCTAssertEqual(errorMessage, AppStrings.wrongPasswordTitle)
+    }
+    
+    func testAuthEmptyLoginPassword() {
+        testRegister()
+        
+        var errorMessage = ""
+        mockAuthDataManager.auth(login: "", password: "", errorHandler: {errorMessage = $0})
+        XCTAssertFalse(mockAuthDataManager.isNeedSignIn)
+        var expectedErrorMessage = AppStrings.wrongLoginTitle + ". " + AppStrings.wrongPasswordTitle
+        XCTAssertEqual(errorMessage, expectedErrorMessage)
     }
     
 }

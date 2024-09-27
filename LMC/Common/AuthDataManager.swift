@@ -19,7 +19,7 @@ final class AuthDataManager {
         isNeedSignInSubject = CurrentValueSubject<Bool, Never>(state)
     }
     
-    static func getMock(userDefaults: UserDefaultsProtocol) -> AuthDataManager {
+    static func getInstance(userDefaults: UserDefaultsProtocol) -> AuthDataManager {
         return AuthDataManager(userDefaults: userDefaults)
     }
     
@@ -82,11 +82,11 @@ final class AuthDataManager {
     }
     
     private func areLoginsIncorrect(userLogin: String, login: String) -> String? {
-        userLogin != login ? "Logins are mismatched" : nil
+        userLogin != login ? AppStrings.wrongLoginTitle : nil
     }
     
     private func arePasswordsIncorrect(userPassword: String, password: String) -> String? {
-        userPassword != password ? "Passwords are mismatched" : nil
+        userPassword != password ? AppStrings.wrongPasswordTitle : nil
     }
     
 }
