@@ -8,18 +8,25 @@
 import SwiftUI
 
 final class AuthViewModel: ObservableObject {
-    private let authDataManager = AuthDataManager.shared
-    @Published var isPresentAlert = false
-    private(set) var alertMessage = ""
+    private var authDataManager: AuthDataManager
+    @Published var isPresentAlert: Bool
+    private(set) var alertMessage: String
+    
+    init(
+        authDataManager: AuthDataManager = AuthDataManager.shared,
+        isPresentAlert: Bool = false,
+        alertMessage: String = ""
+    ) {
+        self.authDataManager = authDataManager
+        self.isPresentAlert = isPresentAlert
+        self.alertMessage = alertMessage
+    }
     
     func handleAuthButton(login: String, password: String) {
         authDataManager.auth(login: login, password: password) { [weak self] message in
             self?.alertMessage = message
             self?.isPresentAlert.toggle()
-            
         }
     }
     
 }
-
-

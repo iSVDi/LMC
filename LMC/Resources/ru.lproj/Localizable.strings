@@ -10,7 +10,6 @@
 "KinopoiskTitle" = "KinoPoisk";
 "SearchPlaceholder" = "Ключевое слово";
 "ErrorTitle" = "Ошибка";
-"WronAuthMessage" = "Неправильный логин или пароль";
 "SignInTitle" = "Войти";
 "LoginTitle" = "Логин";
 "PasswordTitle" = "Пароль";
@@ -18,4 +17,6 @@
 "FilterTitle" = "Фильтр";
 "YearTitle" = "Год";
 "RatingTitle" = "Рейтинг";
+"WrongLoginTitle" = "Неверный логин";
+"WrongPasswordTitle" = "Неверный пароль";
 "NoDescription" = "Нет описания";
