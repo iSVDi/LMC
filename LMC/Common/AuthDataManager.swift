@@ -12,7 +12,7 @@ final class AuthDataManager {
     private let userDefaults: UserDefaultsProtocol
     private let isNeedSignInSubject: CurrentValueSubject<Bool, Never>
     
-    private init(userDefaults: UserDefaultsProtocol ) {
+    private init(userDefaults: UserDefaultsProtocol) {
         self.userDefaults = userDefaults
         userDefaults.register(defaults: [UserDataKeys.isNeedSignIn.rawValue: true])
         let state = userDefaults.bool(key: .isNeedSignIn)

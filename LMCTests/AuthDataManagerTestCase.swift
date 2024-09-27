@@ -1,6 +1,6 @@
 //
-//  AuthTests.swift
-//  AuthTests
+//  AuthDataManagerTestCase.swift
+//  LMCUITests
 //
 //  Created by daniil on 25.09.2024.
 //
@@ -8,7 +8,7 @@
 import XCTest
 @testable import LMC
 
-final class AuthTests: XCTestCase {
+final class AuthDataManagerTestCase: XCTestCase {
     private var mockAuthDataManager: AuthDataManager!
     private var login: String!
     private var password: String!

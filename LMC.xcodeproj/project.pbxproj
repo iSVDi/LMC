@@ -16,12 +16,13 @@
 		A55214862CA2827F00A11669 /* AuthDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55214852CA2827F00A11669 /* AuthDataManager.swift */; };
 		A55214892CA285B200A11669 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55214882CA285B200A11669 /* AppViewModel.swift */; };
 		A5522AC42CA409CB00D08E8A /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = A5522AC32CA409CB00D08E8A /* swiftgen.yml */; };
-		A5522AEB2CA442BD00D08E8A /* AuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5522AEA2CA442BD00D08E8A /* AuthTests.swift */; };
+		A5522AEB2CA442BD00D08E8A /* AuthDataManagerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5522AEA2CA442BD00D08E8A /* AuthDataManagerTestCase.swift */; };
 		A5522AF22CA53EBB00D08E8A /* MockUserDefaultsManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5522AF12CA53EBB00D08E8A /* MockUserDefaultsManagerImpl.swift */; };
 		A5522AF42CA552BE00D08E8A /* UserDefaultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5522AF32CA552BE00D08E8A /* UserDefaultsProtocol.swift */; };
 		A59B3C712CA3FBFA00D0B47D /* AppImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B3C702CA3FBFA00D0B47D /* AppImage.swift */; };
 		A59B3C792CA403B800D0B47D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59B3C772CA403B800D0B47D /* Localizable.strings */; };
 		A59EC8A42CA69308005588C4 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59EC8A32CA69308005588C4 /* AppStrings.swift */; };
+		A59EC8A62CA694B9005588C4 /* AuthViewModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59EC8A52CA694B9005588C4 /* AuthViewModelTestCase.swift */; };
 		A5C444732C9C3CBA00A66449 /* LMCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C444722C9C3CBA00A66449 /* LMCApp.swift */; };
 		A5C444752C9C3CBA00A66449 /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C444742C9C3CBA00A66449 /* MoviesView.swift */; };
 		A5C444772C9C3CBC00A66449 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C444762C9C3CBC00A66449 /* Assets.xcassets */; };
@@ -60,13 +61,14 @@
 		A55214882CA285B200A11669 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		A5522AC32CA409CB00D08E8A /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		A5522AE82CA442BC00D08E8A /* LMCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LMCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5522AEA2CA442BD00D08E8A /* AuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTests.swift; sourceTree = "<group>"; };
+		A5522AEA2CA442BD00D08E8A /* AuthDataManagerTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataManagerTestCase.swift; sourceTree = "<group>"; };
 		A5522AF12CA53EBB00D08E8A /* MockUserDefaultsManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaultsManagerImpl.swift; sourceTree = "<group>"; };
 		A5522AF32CA552BE00D08E8A /* UserDefaultsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocol.swift; sourceTree = "<group>"; };
 		A59B3C702CA3FBFA00D0B47D /* AppImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImage.swift; sourceTree = "<group>"; };
 		A59B3C782CA403B800D0B47D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A59B3C7A2CA403E400D0B47D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A59EC8A32CA69308005588C4 /* AppStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
+		A59EC8A52CA694B9005588C4 /* AuthViewModelTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTestCase.swift; sourceTree = "<group>"; };
 		A5C444702C9C3CBA00A66449 /* LMC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LMC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C444722C9C3CBA00A66449 /* LMCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMCApp.swift; sourceTree = "<group>"; };
 		A5C444742C9C3CBA00A66449 /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
@@ -136,8 +138,9 @@
 		A5522AE92CA442BD00D08E8A /* LMCTests */ = {
 			isa = PBXGroup;
 			children = (
-				A5522AEA2CA442BD00D08E8A /* AuthTests.swift */,
-				A5522AF12CA53EBB00D08E8A /* MockUserDefaultsManagerImpl.swift */,
+				A59EC8A72CA6951B005588C4 /* Mock */,
+				A5522AEA2CA442BD00D08E8A /* AuthDataManagerTestCase.swift */,
+				A59EC8A52CA694B9005588C4 /* AuthViewModelTestCase.swift */,
 			);
 			path = LMCTests;
 			sourceTree = "<group>";
@@ -175,6 +178,14 @@
 				A5522AC32CA409CB00D08E8A /* swiftgen.yml */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		A59EC8A72CA6951B005588C4 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				A5522AF12CA53EBB00D08E8A /* MockUserDefaultsManagerImpl.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		A5C444712C9C3CBA00A66449 /* LMC */ = {
@@ -454,8 +465,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A59EC8A62CA694B9005588C4 /* AuthViewModelTestCase.swift in Sources */,
 				A5522AF22CA53EBB00D08E8A /* MockUserDefaultsManagerImpl.swift in Sources */,
-				A5522AEB2CA442BD00D08E8A /* AuthTests.swift in Sources */,
+				A5522AEB2CA442BD00D08E8A /* AuthDataManagerTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
